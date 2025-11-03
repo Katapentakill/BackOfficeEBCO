@@ -1,0 +1,7 @@
+Contextos de React para el módulo Dashboard
+
+Archivos típicos:
+- DashboardContext.tsx    - Contexto para estado del dashboard
+- DashboardProvider.tsx   - Proveedor del contexto
+
+El Provider se integra en la página app/dashboard/page.tsx envolviendo el contenido.

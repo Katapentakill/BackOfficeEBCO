@@ -1,0 +1,13 @@
+Servicios del módulo Auth
+
+authService.ts:
+- login(credentials)        - Envía credenciales al backend
+- register(userData)        - Registra nuevo usuario
+- logout()                  - Cierra sesión
+- getProfile()              - Obtiene datos del usuario actual
+- refreshToken()            - Refresca JWT
+- getStoredToken()          - Lee token de localStorage
+- setToken(token)           - Guarda token en localStorage
+- clearToken()              - Elimina token
+
+Todos usan el cliente HTTP de lib/api

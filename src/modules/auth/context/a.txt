@@ -1,0 +1,13 @@
+Contextos de React para autenticación
+
+Archivos típicos:
+- AuthContext.tsx        - Contexto para estado de autenticación
+- AuthProvider.tsx       - Proveedor del contexto
+
+Este Provider es especial: se envuelve en app/layout.tsx porque es global
+para toda la aplicación (no solo para una página).
+
+El AuthProvider maneja:
+- Estado de usuario logueado
+- Tokens JWT
+- Funciones login/logout

@@ -1,1 +1,15 @@
-Rutas de autenticación - Ruta opcional para páginas de login/register
+Rutas de Autenticación
+
+Usa Route Groups: (auth) para mantener estas rutas sin mostrar "(auth)" en la URL.
+
+Rutas:
+- /login    → src/app/(auth)/login/page.tsx
+- /register → src/app/(auth)/register/page.tsx
+
+Los componentes LoginForm y RegisterForm vienen de:
+src/modules/auth/components/
+
+El AuthProvider que las envuelve está en:
+src/modules/auth/context/AuthProvider.tsx
+
+Se integra en app/layout.tsx globalmente.

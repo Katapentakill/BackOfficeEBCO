@@ -37,20 +37,33 @@ frontend/
 │   │
 │   └── modules/                    # Módulos específicos por área de negocio
 │       ├── logistica/              # Módulo Logística
-│       │   ├── components/         # Componentes específicos de Logística
-│       │   ├── hooks/              # Hooks personalizados (useLogistica, etc.)
-│       │   ├── services/           # Servicios y llamadas API
-│       │   └── types/              # Interfaces y tipos TypeScript
-│       ├── productos/              # Módulo Productos y Soportes
-│       │   ├── components/         # Componentes específicos de Productos
+│       │   ├── components/         # Componentes específicos
+│       │   ├── context/            # Contextos de React (Provider local)
 │       │   ├── hooks/              # Hooks personalizados
 │       │   ├── services/           # Servicios y llamadas API
-│       │   └── types/              # Interfaces y tipos TypeScript
-│       └── analisis/               # Módulo Análisis de Datos
-│           ├── components/         # Componentes específicos de Análisis
-│           ├── hooks/              # Hooks personalizados
-│           ├── services/           # Servicios y llamadas API
-│           └── types/              # Interfaces y tipos TypeScript
+│       │   ├── types/              # Interfaces y tipos
+│       │   └── utils/              # Funciones auxiliares
+│       ├── productos/              # Módulo Productos y Soportes
+│       │   ├── components/         # Componentes específicos
+│       │   ├── context/            # Contextos de React
+│       │   ├── hooks/              # Hooks personalizados
+│       │   ├── services/           # Servicios y llamadas API
+│       │   ├── types/              # Interfaces y tipos
+│       │   └── utils/              # Funciones auxiliares
+│       ├── analisis/               # Módulo Análisis de Datos
+│       │   ├── components/         # Componentes específicos
+│       │   ├── context/            # Contextos de React
+│       │   ├── hooks/              # Hooks personalizados
+│       │   ├── services/           # Servicios y llamadas API
+│       │   ├── types/              # Interfaces y tipos
+│       │   └── utils/              # Funciones auxiliares
+│       └── auth/                   # Módulo Autenticación (Global)
+│           ├── components/         # LoginForm, RegisterForm
+│           ├── context/            # AuthProvider (se usa en layout.tsx)
+│           ├── hooks/              # useAuth, useLogin
+│           ├── services/           # authService
+│           ├── types/              # User, LoginCredentials
+│           └── utils/              # Funciones auxiliares
 │
 ├── tailwind.config.ts              # Configuración de Tailwind CSS
 ├── tsconfig.json                   # Configuración de TypeScript

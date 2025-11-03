@@ -1,1 +1,18 @@
 Directorio raíz de la aplicación
+
+NOTA IMPORTANTE SOBRE PROVIDERS:
+
+Los Providers de Context NO van en una carpeta "providers/" separada.
+
+Ubicación correcta:
+- Providers LOCALES → src/modules/[nombre]/context/
+  Ejemplo: src/modules/logistica/context/LogisticaProvider.tsx
+  Se usan en: app/logistica/page.tsx
+
+- Providers GLOBALES → src/modules/[nombre]/context/ (pero se usan en app/layout.tsx)
+  Ejemplo: src/modules/auth/context/AuthProvider.tsx
+  Se usan en: app/layout.tsx (envolviendo toda la app)
+
+Cada módulo tiene su propia carpeta "context/" donde define sus Providers.
+
+Ver FLUJO_DESARROLLO.md para ejemplos completos.

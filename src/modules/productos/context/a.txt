@@ -1,0 +1,7 @@
+Contextos de React para el módulo Productos
+
+Archivos típicos:
+- ProductosContext.tsx    - Contexto para estado de productos
+- ProductosProvider.tsx   - Proveedor del contexto
+
+El Provider se integra en la página app/productos/page.tsx envolviendo el contenido.

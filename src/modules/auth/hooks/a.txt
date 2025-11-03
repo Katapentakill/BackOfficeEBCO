@@ -1,0 +1,8 @@
+Hooks personalizados del módulo Auth
+
+Ejemplos:
+- useAuth.ts           - Acceso al contexto de autenticación
+- useLogin.ts          - Lógica de login (form submission)
+- useRegister.ts       - Lógica de registro
+- useLogout.ts         - Lógica de logout
+- useProtectedRoute.ts - Proteger rutas que requieren autenticación

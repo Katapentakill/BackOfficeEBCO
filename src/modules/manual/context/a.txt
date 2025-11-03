@@ -1,0 +1,7 @@
+Contextos de React para el módulo Manual
+
+Archivos típicos:
+- ManualContext.tsx       - Contexto para estado del manual
+- ManualProvider.tsx      - Proveedor del contexto
+
+El Provider se integra en la página app/manual/page.tsx envolviendo el contenido.

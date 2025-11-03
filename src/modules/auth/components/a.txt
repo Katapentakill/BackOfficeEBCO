@@ -1,0 +1,7 @@
+Componentes del módulo Auth
+
+- LoginForm.tsx         - Formulario de login (ya implementado como placeholder)
+- RegisterForm.tsx      - Formulario de registro (TODO: implementar)
+- ProtectedRoute.tsx    - Componente para proteger rutas (si lo necesitas)
+- LogoutButton.tsx      - Botón de logout (reutilizable)
+- index.ts              - Exporta componentes públicos

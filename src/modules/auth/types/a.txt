@@ -1,0 +1,30 @@
+Tipos e interfaces del módulo Auth
+
+Típicamente en index.ts:
+
+export interface User {
+  id: string;
+  email: string;
+  nombre: string;
+  rol: string;
+  createdAt: Date;
+}
+
+export interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+export interface AuthState {
+  user: User | null;
+  token: string | null;
+  isLoading: boolean;
+  error: string | null;
+  isAuthenticated: boolean;
+}
+
+export interface AuthContextType {
+  authState: AuthState;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
+}

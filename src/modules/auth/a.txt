@@ -1,0 +1,19 @@
+Módulo Autenticación - Gestión de login y seguridad
+
+Este es un módulo GLOBAL - su AuthProvider se integra en app/layout.tsx
+
+Responsabilidades:
+- Autenticación y autorización de usuarios
+- Gestión de tokens JWT
+- Estados de sesión global
+- Protección de rutas
+
+Contenido:
+- components/    LoginForm, RegisterForm, etc.
+- context/       AuthProvider (se usa en layout.tsx)
+- hooks/         useAuth, useLogin, useRegister, etc.
+- services/      authService (llamadas API)
+- types/         User, LoginCredentials, AuthState, etc.
+- utils/         Funciones auxiliares (validateEmail, etc.)
+
+Ver FLUJO_DESARROLLO.md para implementación completa.

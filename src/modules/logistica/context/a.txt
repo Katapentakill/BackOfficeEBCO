@@ -1,0 +1,12 @@
+Contextos de React para el módulo Logística
+
+Archivos típicos:
+- LogisticaContext.tsx    - Contexto para estado de logística
+- LogisticaProvider.tsx   - Proveedor del contexto
+
+El Provider se integra en la página app/logistica/page.tsx envolviendo el contenido.
+
+Ejemplo:
+<LogisticaProvider>
+  {/* Contenido de la página */}
+</LogisticaProvider>

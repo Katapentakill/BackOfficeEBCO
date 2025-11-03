@@ -1,0 +1,7 @@
+Funciones auxiliares del módulo Auth
+
+Ejemplos:
+- validateEmail.ts      - Valida formato de email
+- validatePassword.ts   - Valida requisitos de contraseña
+- formatUser.ts         - Formatea datos del usuario
+- tokenUtils.ts         - Decodifica JWT, verifica expiración, etc.

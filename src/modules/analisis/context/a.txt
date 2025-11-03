@@ -1,0 +1,7 @@
+Contextos de React para el módulo Análisis de Datos
+
+Archivos típicos:
+- AnalisisContext.tsx    - Contexto para estado de análisis
+- AnalisisProvider.tsx   - Proveedor del contexto
+
+El Provider se integra en la página app/analisis/page.tsx envolviendo el contenido.

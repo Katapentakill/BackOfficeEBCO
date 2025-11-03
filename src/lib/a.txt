@@ -1,0 +1,27 @@
+CARPETA: src/lib - Configuración de Backend e Interfaces API
+
+RESPONSABILIDAD:
+- Configuración de URL del backend (variables de entorno)
+- Interfaces y tipos de respuesta del backend
+- Cliente HTTP reutilizable (fetch wrapper, axios, etc.)
+- Funciones auxiliares para comunicación con API
+- Manejo centralizado de errores
+
+NO contiene lógica de negocio, solo configuración compartida.
+
+ARCHIVOS TÍPICOS:
+- api.ts               - Cliente HTTP configurado
+- config.ts            - Variables de entorno (API_URL, etc.)
+- types.ts             - Interfaces de respuesta compartidas
+- errors.ts            - Manejo de errores API
+- constants.ts         - Constantes de la aplicación
+
+EJEMPLO DE USO EN SERVICIOS:
+
+  // modules/logistica/services/logisticaService.ts
+  import { apiClient } from "@/lib/api";
+  import type { LogisticaResponse } from "@/lib/types";
+
+  export async function getLogisticaData(): Promise<LogisticaResponse> {
+    return apiClient.get("/api/logistica");
+  }

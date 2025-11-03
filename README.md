@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Back Office EBCO - Frontend
 
-## Getting Started
+Sistema de gestión operacional para proyectos de construcción. Frontend moderno construido con **Next.js 16**, **Tailwind CSS v4** y **React 19**.
 
-First, run the development server:
+---
+
+## Inicio Rápido
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Documentación Principal
 
-## Learn More
+- **[ARQUITECTURA.md](./ARQUITECTURA.md)** - Estructura, carpetas y convenciones
+- **[FLUJO_DESARROLLO.md](./FLUJO_DESARROLLO.md)** - Cómo agregar funcionalidades (con ejemplo Login)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Estructura Resumida
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/           # Páginas y rutas (App Router)
+├── components/    # UI global (Sidebar, Footer, Cards, Tabs)
+├── modules/       # Lógica por área (logistica, productos, analisis, auth, etc.)
+├── lib/           # Config de Backend, tipos compartidos, cliente HTTP
+└── providers/     # Context Providers globales (Auth, Theme)
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Características
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+✅ Autenticación con Context Provider
+✅ Diseño Responsive (Tailwind CSS v4)
+✅ Componentes reutilizables
+✅ Separación clara de responsabilidades
+✅ TypeScript en todas partes
+✅ Estructura escalable y mantenible
+
+---
+
+## Comandos
+
+```bash
+npm run dev       # Desarrollo
+npm run build     # Producción
+npm run start     # Ejecutar build
+npm run lint      # Linting
+```
+
+---
+
+## Variables de Entorno
+
+`.env.local`:
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3001
+```
+
+---
+
+## Paleta de Colores
+
+- `brand-red` #D90429 (Rojo principal)
+- `brand-dark` #212121 (Fondo oscuro)
+- `brand-bg-light` #F4F4F4 (Fondo página)
+
+---
+
+## Próximos Pasos
+
+1. Leer [ARQUITECTURA.md](./ARQUITECTURA.md) para entender la estructura
+2. Leer [FLUJO_DESARROLLO.md](./FLUJO_DESARROLLO.md) para saber cómo desarrollar
+3. Crear nuevas funcionalidades siguiendo el flujo
+
+---
+
+Todos los derechos reservados © 2025 EBCO
