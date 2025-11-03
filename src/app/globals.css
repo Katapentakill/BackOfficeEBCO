@@ -1,13 +1,6 @@
 @import "tailwindcss";
 
-@theme {
-  --color-brand-red: #D90429;
-  --color-brand-dark: #212121;
-  --color-brand-text-dark: #333333;
-  --color-brand-text-light: #FFFFFF;
-  --color-brand-bg-light: #F4F4F4;
-  --color-brand-bg-white: #FFFFFF;
-}
+
 
 @layer base {
   * {
