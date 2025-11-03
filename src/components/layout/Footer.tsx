@@ -68,7 +68,15 @@ export default function Footer() {
 
       {/* Copyright Section */}
       <div className="bg-brand-bg-light text-brand-text-dark py-6 px-8 text-center text-sm border-t border-gray-300">
-        <p>© 2025 Sistema de Back Office EBCO - Todos los derechos reservados</p>
+        <div className="flex items-center justify-center gap-3">
+          <img
+            src="/logo-ebco.png"
+            alt="EBCO"
+            className="w-6 h-6 object-contain"
+            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+          />
+          <p>© 2025 Sistema de Back Office EBCO - Todos los derechos reservados</p>
+        </div>
       </div>
     </footer>
   );
