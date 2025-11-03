@@ -17,7 +17,7 @@ export default function InfoCard({
   icon,
   title,
   description,
-  buttonText = "Ver más",
+  buttonText,
   buttonLink = "#",
   badge,
 }: InfoCardProps) {
@@ -45,17 +45,19 @@ export default function InfoCard({
         {description}
       </p>
 
-      {/* Button */}
-      <Link href={buttonLink}>
-        <button className="w-full btn btn-primary flex items-center justify-center space-x-2">
-          <span>{buttonText}</span>
-          {buttonText.toLowerCase().includes("descargar") ? (
-            <MdDownload size={18} />
-          ) : (
-            <MdArrowForward size={18} />
-          )}
-        </button>
-      </Link>
+      {/* Button - Only show if buttonText is provided */}
+      {buttonText && (
+        <Link href={buttonLink || "#"}>
+          <button className="w-full btn btn-primary flex items-center justify-center space-x-2">
+            <span>{buttonText}</span>
+            {buttonText.toLowerCase().includes("descargar") ? (
+              <MdDownload size={18} />
+            ) : (
+              <MdArrowForward size={18} />
+            )}
+          </button>
+        </Link>
+      )}
     </div>
   );
 }

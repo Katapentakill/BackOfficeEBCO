@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { 
   MdBook, 
   MdInfoOutline, 
@@ -18,61 +19,244 @@ import InfoCard from "@/components/ui/InfoCard";
 import Link from "next/link";
 
 export default function Home() {
-  // KPIs de Construcción
-  const constructionKpis = [
+  const [selectedObra, setSelectedObra] = useState(0);
+  // KPIs por Obra/Proyecto
+  const obras = [
     {
-      title: "Avance Físico",
-      value: "68.5%",
-      subtitle: "vs 70% planificado",
-      trend: "down",
-      color: "#f59e0b",
-      icon: <MdTrendingUp className="w-6 h-6" />,
-      bgColor: "#fef3c7"
+      name: "DS-49 Santa Marta",
+      kpis: [
+        {
+          title: "Avance Físico",
+          value: "75%",
+          subtitle: "vs 78% planificado",
+          trend: "down",
+          color: "#f59e0b",
+          icon: <MdTrendingUp className="w-6 h-6" />,
+          bgColor: "#fef3c7"
+        },
+        {
+          title: "Presupuesto Ejecutado",
+          value: "$34.8M",
+          subtitle: "de $45.2M total",
+          trend: "on-track",
+          color: "#16a34a",
+          icon: <MdAttachMoney className="w-6 h-6" />,
+          bgColor: "#dcfce7"
+        },
+        {
+          title: "CPI (Costo)",
+          value: "1.08",
+          subtitle: "> 1.0 = bajo presupuesto",
+          trend: "up",
+          color: "#16a34a",
+          icon: <MdAssessment className="w-6 h-6" />,
+          bgColor: "#dcfce7"
+        },
+        {
+          title: "SPI (Plazo)",
+          value: "0.96",
+          subtitle: "< 1.0 = atrasos",
+          trend: "down",
+          color: "#f59e0b",
+          icon: <MdSchedule className="w-6 h-6" />,
+          bgColor: "#fef3c7"
+        },
+        {
+          title: "Días de Retraso",
+          value: "-8",
+          subtitle: "8 días atrasado",
+          trend: "down",
+          color: "#ef4444",
+          icon: <MdWarning className="w-6 h-6" />,
+          bgColor: "#fee2e2"
+        },
+        {
+          title: "Mano de Obra",
+          value: "42",
+          subtitle: "de 40 planificados",
+          trend: "up",
+          color: "#16a34a",
+          icon: <MdPerson className="w-6 h-6" />,
+          bgColor: "#dcfce7"
+        }
+      ]
     },
     {
-      title: "Presupuesto Ejecutado",
-      value: "$124.5M",
-      subtitle: "de $180M total",
-      trend: "on-track",
-      color: "#16a34a",
-      icon: <MdAttachMoney className="w-6 h-6" />,
-      bgColor: "#dcfce7"
+      name: "Conjunto Las Palmas",
+      kpis: [
+        {
+          title: "Avance Físico",
+          value: "95%",
+          subtitle: "vs 95% planificado",
+          trend: "on-track",
+          color: "#16a34a",
+          icon: <MdTrendingUp className="w-6 h-6" />,
+          bgColor: "#dcfce7"
+        },
+        {
+          title: "Presupuesto Ejecutado",
+          value: "$31.1M",
+          subtitle: "de $32.8M total",
+          trend: "on-track",
+          color: "#16a34a",
+          icon: <MdAttachMoney className="w-6 h-6" />,
+          bgColor: "#dcfce7"
+        },
+        {
+          title: "CPI (Costo)",
+          value: "1.02",
+          subtitle: "> 1.0 = bajo presupuesto",
+          trend: "up",
+          color: "#16a34a",
+          icon: <MdAssessment className="w-6 h-6" />,
+          bgColor: "#dcfce7"
+        },
+        {
+          title: "SPI (Plazo)",
+          value: "1.00",
+          subtitle: "En tiempo",
+          trend: "on-track",
+          color: "#16a34a",
+          icon: <MdSchedule className="w-6 h-6" />,
+          bgColor: "#dcfce7"
+        },
+        {
+          title: "Días de Retraso",
+          value: "0",
+          subtitle: "A tiempo",
+          trend: "on-track",
+          color: "#16a34a",
+          icon: <MdCheckCircle className="w-6 h-6" />,
+          bgColor: "#dcfce7"
+        },
+        {
+          title: "Mano de Obra",
+          value: "38",
+          subtitle: "de 35 planificados",
+          trend: "up",
+          color: "#16a34a",
+          icon: <MdPerson className="w-6 h-6" />,
+          bgColor: "#dcfce7"
+        }
+      ]
     },
     {
-      title: "CPI (Costo)",
-      value: "1.05",
-      subtitle: "> 1.0 = bajo presupuesto",
-      trend: "up",
-      color: "#16a34a",
-      icon: <MdAssessment className="w-6 h-6" />,
-      bgColor: "#dcfce7"
+      name: "Torre Central",
+      kpis: [
+        {
+          title: "Avance Físico",
+          value: "42%",
+          subtitle: "vs 45% planificado",
+          trend: "down",
+          color: "#f59e0b",
+          icon: <MdTrendingUp className="w-6 h-6" />,
+          bgColor: "#fef3c7"
+        },
+        {
+          title: "Presupuesto Ejecutado",
+          value: "$37.6M",
+          subtitle: "de $89.5M total",
+          trend: "on-track",
+          color: "#16a34a",
+          icon: <MdAttachMoney className="w-6 h-6" />,
+          bgColor: "#dcfce7"
+        },
+        {
+          title: "CPI (Costo)",
+          value: "0.98",
+          subtitle: "< 1.0 = sobre presupuesto",
+          trend: "down",
+          color: "#ef4444",
+          icon: <MdAssessment className="w-6 h-6" />,
+          bgColor: "#fee2e2"
+        },
+        {
+          title: "SPI (Plazo)",
+          value: "0.93",
+          subtitle: "< 1.0 = atrasos",
+          trend: "down",
+          color: "#f59e0b",
+          icon: <MdSchedule className="w-6 h-6" />,
+          bgColor: "#fef3c7"
+        },
+        {
+          title: "Días de Retraso",
+          value: "-15",
+          subtitle: "15 días atrasado",
+          trend: "down",
+          color: "#ef4444",
+          icon: <MdWarning className="w-6 h-6" />,
+          bgColor: "#fee2e2"
+        },
+        {
+          title: "Mano de Obra",
+          value: "48",
+          subtitle: "de 50 planificados",
+          trend: "down",
+          color: "#f59e0b",
+          icon: <MdPerson className="w-6 h-6" />,
+          bgColor: "#fef3c7"
+        }
+      ]
     },
     {
-      title: "SPI (Plazo)",
-      value: "0.92",
-      subtitle: "< 1.0 = atrasos",
-      trend: "down",
-      color: "#f59e0b",
-      icon: <MdSchedule className="w-6 h-6" />,
-      bgColor: "#fef3c7"
-    },
-    {
-      title: "Días de Retraso",
-      value: "-12",
-      subtitle: "12 días atrasado",
-      trend: "down",
-      color: "#ef4444",
-      icon: <MdWarning className="w-6 h-6" />,
-      bgColor: "#fee2e2"
-    },
-    {
-      title: "Mano de Obra",
-      value: "156",
-      subtitle: "de 150 planificados",
-      trend: "up",
-      color: "#16a34a",
-      icon: <MdPerson className="w-6 h-6" />,
-      bgColor: "#dcfce7"
+      name: "Residencial Norte",
+      kpis: [
+        {
+          title: "Avance Físico",
+          value: "28%",
+          subtitle: "vs 30% planificado",
+          trend: "down",
+          color: "#f59e0b",
+          icon: <MdTrendingUp className="w-6 h-6" />,
+          bgColor: "#fef3c7"
+        },
+        {
+          title: "Presupuesto Ejecutado",
+          value: "$7.9M",
+          subtitle: "de $28.3M total",
+          trend: "on-track",
+          color: "#16a34a",
+          icon: <MdAttachMoney className="w-6 h-6" />,
+          bgColor: "#dcfce7"
+        },
+        {
+          title: "CPI (Costo)",
+          value: "1.10",
+          subtitle: "> 1.0 = bajo presupuesto",
+          trend: "up",
+          color: "#16a34a",
+          icon: <MdAssessment className="w-6 h-6" />,
+          bgColor: "#dcfce7"
+        },
+        {
+          title: "SPI (Plazo)",
+          value: "0.93",
+          subtitle: "< 1.0 = atrasos",
+          trend: "down",
+          color: "#f59e0b",
+          icon: <MdSchedule className="w-6 h-6" />,
+          bgColor: "#fef3c7"
+        },
+        {
+          title: "Días de Retraso",
+          value: "-6",
+          subtitle: "6 días atrasado",
+          trend: "down",
+          color: "#ef4444",
+          icon: <MdWarning className="w-6 h-6" />,
+          bgColor: "#fee2e2"
+        },
+        {
+          title: "Mano de Obra",
+          value: "28",
+          subtitle: "de 25 planificados",
+          trend: "up",
+          color: "#16a34a",
+          icon: <MdPerson className="w-6 h-6" />,
+          bgColor: "#dcfce7"
+        }
+      ]
     }
   ];
 
@@ -111,64 +295,238 @@ export default function Home() {
     }
   ];
 
+  // Calcular estadísticas resumidas
+  const totalProjects = projects.length;
+  const totalBudget = projects.reduce((sum, p) => sum + parseFloat(p.budget.replace('$', '').replace('M', '')), 0);
+  const avgProgress = Math.round(projects.reduce((sum, p) => sum + p.progress, 0) / projects.length);
+
   return (
-    <div className="p-8">
-      {/* Hero Section */}
-      <section className="mb-12">
-        <h1 className="text-3xl font-bold text-brand-red mb-3">
-          Dashboard de Proyectos
-        </h1>
-        <p className="text-lg text-brand-text-dark mb-4 font-medium">
-          Monitoreo en tiempo real del desarrollo de proyectos de construcción
-        </p>
-        <p className="text-sm text-brand-text-dark leading-relaxed max-w-3xl text-muted">
-          Bienvenido al Manual Operacional del Back Office, una herramienta diseñada para acompañar
-          y facilitar el trabajo diario en nuestras obras.
-        </p>
+    <div className="min-h-screen p-8">
+      {/* Hero Section con gradiente y diseño mejorado */}
+      <section className="relative mb-12 overflow-hidden rounded-2xl" style={{
+        background: "linear-gradient(135deg, #E30613 0%, #B00912 100%)"
+      }}>
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+        </div>
+        <div className="relative p-12 md:p-16">
+          <div className="max-w-4xl">
+            <div className="inline-block mb-4">
+              <span className="text-white/90 text-sm font-semibold px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm">
+                🏗️ Sistema de Gestión de Obras
+              </span>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+              Back Office
+            </h1>
+            <p className="text-xl text-white/95 mb-6 font-medium max-w-2xl">
+              Monitoreo en tiempo real del desarrollo de proyectos de construcción
+            </p>
+            <p className="text-base text-white/80 leading-relaxed max-w-3xl mb-8">
+              Bienvenido al Manual Operacional del Back Office, una herramienta diseñada para acompañar
+              y facilitar el trabajo diario en nuestras obras.
+            </p>
+            
+            {/* Estadísticas rápidas en hero */}
+            <div className="grid grid-cols-3 gap-4 mt-8">
+              <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                <p className="text-white/70 text-xs font-medium mb-1">Proyectos Activos</p>
+                <p className="text-3xl font-bold text-white">{totalProjects}</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                <p className="text-white/70 text-xs font-medium mb-1">Presupuesto Total</p>
+                <p className="text-3xl font-bold text-white">${totalBudget.toFixed(1)}M</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                <p className="text-white/70 text-xs font-medium mb-1">Avance Promedio</p>
+                <p className="text-3xl font-bold text-white">{avgProgress}%</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* KPIs de Construcción Section */}
+      {/* Quick Actions mejorado */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold ink mb-6">Indicadores Clave (KPIs)</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {constructionKpis.map((kpi, index) => (
-            <div
-              key={index}
-              className="rounded-lg border p-5 bg-white border-[var(--color-brand-line)]"
-            >
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-sm font-semibold ink">{kpi.title}</p>
-                <div 
-                  className="w-10 h-10 rounded flex items-center justify-center"
-                  style={{ background: kpi.bgColor, color: kpi.color }}
-                >
-                  {kpi.icon}
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-2xl font-bold ink mb-1">Acceso Rápido</h2>
+            <p className="text-sm muted">Navega rápidamente a las secciones principales</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <Link href="/manual" className="group">
+            <div className="bg-white border-2 rounded-xl p-6 text-center transition-all hover:shadow-xl hover:-translate-y-1 hover:border-brand-red cursor-pointer" style={{ borderColor: "var(--color-brand-red)" }}>
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all group-hover:scale-110" style={{ background: "linear-gradient(135deg, #E30613 0%, #B00912 100%)" }}>
+                <MdBook className="w-8 h-8 text-white" />
+              </div>
+              <p className="font-bold ink text-sm">Manual Operacional</p>
+            </div>
+          </Link>
+          <Link href="/logistica" className="group">
+            <div className="bg-white border rounded-xl p-6 text-center transition-all hover:shadow-xl hover:-translate-y-1 hover:border-brand-red cursor-pointer" style={{ borderColor: "var(--color-brand-line)" }}>
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all group-hover:scale-110 bg-blue-50">
+                <MdSchedule className="w-8 h-8" style={{ color: "#3b82f6" }} />
+              </div>
+              <p className="font-bold ink text-sm">Área Logística</p>
+            </div>
+          </Link>
+          <Link href="/productos" className="group">
+            <div className="bg-white border rounded-xl p-6 text-center transition-all hover:shadow-xl hover:-translate-y-1 hover:border-brand-red cursor-pointer" style={{ borderColor: "var(--color-brand-line)" }}>
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all group-hover:scale-110 bg-green-50">
+                <MdBuild className="w-8 h-8" style={{ color: "#16a34a" }} />
+              </div>
+              <p className="font-bold ink text-sm">Productos y Soportes</p>
+            </div>
+          </Link>
+          <Link href="/analisis" className="group">
+            <div className="bg-white border rounded-xl p-6 text-center transition-all hover:shadow-xl hover:-translate-y-1 hover:border-brand-red cursor-pointer" style={{ borderColor: "var(--color-brand-line)" }}>
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all group-hover:scale-110 bg-purple-50">
+                <MdAssessment className="w-8 h-8" style={{ color: "#9333ea" }} />
+              </div>
+              <p className="font-bold ink text-sm">Análisis de Datos</p>
+            </div>
+          </Link>
+          <Link href="/organigrama" className="group">
+            <div className="bg-white border rounded-xl p-6 text-center transition-all hover:shadow-xl hover:-translate-y-1 hover:border-brand-red cursor-pointer" style={{ borderColor: "var(--color-brand-line)" }}>
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all group-hover:scale-110 bg-orange-50">
+                <MdInfoOutline className="w-8 h-8" style={{ color: "#f59e0b" }} />
+              </div>
+              <p className="font-bold ink text-sm">Organigrama</p>
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      {/* Organizational Structure Section */}
+      <section className="mb-12 bg-brand-dark text-brand-text-light rounded-lg p-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Left Column */}
+          <div>
+            <h2 className="text-2xl font-bold mb-4">
+              ESTRUCTURA ORGANIZACIONAL<br />BACK OFFICE
+            </h2>
+            <p className="text-sm leading-relaxed mb-6 italic">
+              "Somos el motor silencioso que organiza, conecta y potencia, para que cada proyecto
+              avance con eficiencia, calidad y visión de futuro."
+            </p>
+            <Link href="/organigrama">
+              <button className="btn btn-primary">
+                VER ORGANIGRAMA COMPLETO
+              </button>
+            </Link>
+          </div>
+
+          {/* Right Column - Organizational Chart with Lines */}
+          <div className="flex items-center justify-center">
+            <div className="w-full max-w-md relative">
+              {/* Coordinator */}
+              <div className="mb-6 text-center relative z-10">
+                <div className="bg-brand-red px-4 py-2 rounded-lg inline-block font-bold">
+                  COORDINADOR
                 </div>
               </div>
-              <p className="text-3xl font-extrabold mb-1" style={{ color: kpi.color }}>
-                {kpi.value}
-              </p>
-              <p className="text-xs muted">{kpi.subtitle}</p>
-              {kpi.trend === "down" && (
-                <div className="mt-3 flex items-center gap-1">
-                  <MdTrendingDown className="w-4 h-4" style={{ color: "#ef4444" }} />
-                  <span className="text-xs" style={{ color: "#ef4444" }}>Requiere atención</span>
+
+              {/* Connecting Lines */}
+              <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-1 h-32" style={{background:"var(--color-brand-red)",opacity:0.3}}></div>
+
+              {/* Areas */}
+              <div className="grid grid-cols-1 gap-3 text-center relative z-10 mt-2">
+                <div className="bg-brand-bg-light px-4 py-3 rounded-lg border" style={{borderColor:"var(--color-brand-red)",borderWidth:"2px"}}>
+                  <p className="font-bold text-brand-red">LOGÍSTICA</p>
+                  <p className="text-xs mt-1 text-brand-text-dark">Materiales • Arriendos</p>
                 </div>
-              )}
-              {kpi.trend === "up" && (
-                <div className="mt-3 flex items-center gap-1">
-                  <MdTrendingUp className="w-4 h-4" style={{ color: "#16a34a" }} />
-                  <span className="text-xs" style={{ color: "#16a34a" }}>En rango objetivo</span>
+                <div className="bg-brand-bg-light px-4 py-3 rounded-lg border" style={{borderColor:"var(--color-brand-red)",borderWidth:"2px"}}>
+                  <p className="font-bold text-brand-red">PRODUCTOS Y SERVICIOS</p>
+                  <p className="text-xs mt-1 text-brand-text-dark">Subcontratos • Materiales EE.TT</p>
                 </div>
-              )}
-              {kpi.trend === "on-track" && (
-                <div className="mt-3 flex items-center gap-1">
-                  <MdCheckCircle className="w-4 h-4" style={{ color: "#16a34a" }} />
-                  <span className="text-xs" style={{ color: "#16a34a" }}>Según plan</span>
+                <div className="bg-brand-bg-light px-4 py-3 rounded-lg border" style={{borderColor:"var(--color-brand-red)",borderWidth:"2px"}}>
+                  <p className="font-bold text-brand-red">ANÁLISIS DE DATOS</p>
+                  <p className="text-xs mt-1 text-brand-text-dark">Costos • Programa y Avance</p>
                 </div>
-              )}
+              </div>
             </div>
-          ))}
+          </div>
+        </div>
+      </section>
+
+      {/* KPIs por Obra Section */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold ink mb-6">Indicadores Clave por Obra (KPIs)</h2>
+        
+        {/* Barra horizontal de selección de obras */}
+        <div className="mb-6 overflow-x-auto">
+          <div className="flex gap-2 border-b pb-2" style={{ borderColor: "var(--color-brand-line)" }}>
+            {obras.map((obra, index) => (
+              <button
+                key={index}
+                onClick={() => setSelectedObra(index)}
+                className={`px-6 py-3 rounded-t-lg font-semibold text-sm transition-all whitespace-nowrap ${
+                  selectedObra === index
+                    ? "bg-brand text-white shadow-md"
+                    : "bg-white text-gray-600 hover:bg-gray-50 border-b-2 border-transparent"
+                }`}
+                style={{
+                  borderBottomColor: selectedObra === index ? "var(--color-brand-red)" : "transparent",
+                  borderBottomWidth: selectedObra === index ? "3px" : "0px"
+                }}
+              >
+                {obra.name}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* KPIs de la obra seleccionada */}
+        <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {obras[selectedObra].kpis.map((kpi, kpiIndex) => (
+              <div
+                key={kpiIndex}
+                className="relative rounded-xl border p-6 bg-white border-[var(--color-brand-line)] transition-all hover:shadow-xl hover:-translate-y-1 overflow-hidden group"
+              >
+                {/* Gradiente sutil en hover */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity" style={{
+                  background: `linear-gradient(135deg, ${kpi.color} 0%, transparent 100%)`
+                }}></div>
+                
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold ink">{kpi.title}</p>
+                    <div 
+                      className="w-12 h-12 rounded-xl flex items-center justify-center shadow-md transition-transform group-hover:scale-110"
+                      style={{ background: kpi.bgColor, color: kpi.color }}
+                    >
+                      {kpi.icon}
+                    </div>
+                  </div>
+                  <p className="text-4xl font-extrabold mb-2 transition-all group-hover:scale-105" style={{ color: kpi.color }}>
+                    {kpi.value}
+                  </p>
+                  <p className="text-xs muted mb-4">{kpi.subtitle}</p>
+                  {kpi.trend === "down" && (
+                    <div className="mt-3 flex items-center gap-1">
+                      <MdTrendingDown className="w-4 h-4" style={{ color: "#ef4444" }} />
+                      <span className="text-xs" style={{ color: "#ef4444" }}>Requiere atención</span>
+                    </div>
+                  )}
+                  {kpi.trend === "up" && (
+                    <div className="mt-3 flex items-center gap-1">
+                      <MdTrendingUp className="w-4 h-4" style={{ color: "#16a34a" }} />
+                      <span className="text-xs" style={{ color: "#16a34a" }}>En rango objetivo</span>
+                    </div>
+                  )}
+                  {kpi.trend === "on-track" && (
+                    <div className="mt-3 flex items-center gap-1">
+                      <MdCheckCircle className="w-4 h-4" style={{ color: "#16a34a" }} />
+                      <span className="text-xs" style={{ color: "#16a34a" }}>Según plan</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -281,80 +639,6 @@ export default function Home() {
             <MdSchedule className="w-8 h-8 mx-auto mb-2" style={{ color: "#f59e0b" }} />
             <p className="text-2xl font-extrabold ink">8</p>
             <p className="text-xs muted">En Revisión</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Quick Actions */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold ink mb-4">Acceso Rápido</h2>
-        <div className="flex flex-wrap gap-3">
-          <Link href="/manual">
-            <button className="btn btn-primary">Manual Operacional</button>
-          </Link>
-          <Link href="/logistica">
-            <button className="btn btn-outline">Área Logística</button>
-          </Link>
-          <Link href="/productos">
-            <button className="btn btn-outline">Productos y Soportes</button>
-          </Link>
-          <Link href="/analisis">
-            <button className="btn btn-outline">Análisis de Datos</button>
-          </Link>
-          <Link href="/organigrama">
-            <button className="btn btn-outline">Organigrama</button>
-          </Link>
-        </div>
-      </section>
-
-      {/* Organizational Structure Section */}
-      <section className="mb-12 bg-brand-dark text-brand-text-light rounded-lg p-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Left Column */}
-          <div>
-            <h2 className="text-2xl font-bold mb-4">
-              ESTRUCTURA ORGANIZACIONAL<br />BACK OFFICE
-            </h2>
-            <p className="text-sm leading-relaxed mb-6 italic">
-              "Somos el motor silencioso que organiza, conecta y potencia, para que cada proyecto
-              avance con eficiencia, calidad y visión de futuro."
-            </p>
-            <Link href="/organigrama">
-              <button className="btn btn-primary">
-                VER ORGANIGRAMA COMPLETO
-              </button>
-            </Link>
-          </div>
-
-          {/* Right Column - Organizational Chart with Lines */}
-          <div className="flex items-center justify-center">
-            <div className="w-full max-w-md relative">
-              {/* Coordinator */}
-              <div className="mb-6 text-center relative z-10">
-                <div className="bg-brand-red px-4 py-2 rounded-lg inline-block font-bold">
-                  COORDINADOR
-                </div>
-              </div>
-
-              {/* Connecting Lines */}
-              <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-1 h-32" style={{background:"var(--color-brand-red)",opacity:0.3}}></div>
-
-              {/* Areas */}
-              <div className="grid grid-cols-1 gap-3 text-center relative z-10 mt-2">
-                <div className="bg-brand-bg-light px-4 py-3 rounded-lg border" style={{borderColor:"var(--color-brand-red)",borderWidth:"2px"}}>
-                  <p className="font-bold text-brand-red">LOGÍSTICA</p>
-                  <p className="text-xs mt-1 text-brand-text-dark">Materiales • Arriendos</p>
-                </div>
-                <div className="bg-brand-bg-light px-4 py-3 rounded-lg border" style={{borderColor:"var(--color-brand-red)",borderWidth:"2px"}}>
-                  <p className="font-bold text-brand-red">PRODUCTOS Y SERVICIOS</p>
-                  <p className="text-xs mt-1 text-brand-text-dark">Subcontratos • Materiales EE.TT</p>
-                </div>
-                <div className="bg-brand-bg-light px-4 py-3 rounded-lg border" style={{borderColor:"var(--color-brand-red)",borderWidth:"2px"}}>
-                  <p className="font-bold text-brand-red">ANÁLISIS DE DATOS</p>
-                  <p className="text-xs mt-1 text-brand-text-dark">Costos • Programa y Avance</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
