@@ -1,0 +1,2 @@
+Servicios y llamadas API del módulo Análisis de Datos
+Ejemplo: analisisService.ts con funciones para obtener datos financieros y de programación

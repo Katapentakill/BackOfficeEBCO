@@ -1,0 +1,2 @@
+Funciones utilitarias del módulo Manual
+Ejemplo: parseMarkdown, formatDocumentation, etc.

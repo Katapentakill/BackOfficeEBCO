@@ -1,0 +1,1 @@
+Componentes de estructura global: Sidebar, Footer, Header. Se usan en el layout principal.

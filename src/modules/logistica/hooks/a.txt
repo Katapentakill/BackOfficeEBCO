@@ -1,0 +1,2 @@
+Hooks personalizados del módulo Logística
+Ejemplo: useLogisticaData, useDeliverables, etc.

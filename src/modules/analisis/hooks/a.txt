@@ -1,0 +1,2 @@
+Hooks personalizados del módulo Análisis de Datos
+Ejemplo: useAnalisisData, useControlCostos, useProgramaAvances, etc.

@@ -1,0 +1,2 @@
+Funciones utilitarias del módulo Análisis
+Ejemplo: calculateMetrics, formatCharts, etc.

@@ -1,0 +1,2 @@
+Módulo Manual - Documentación y guías operacionales
+Contiene toda la lógica, componentes y servicios específicos del manual

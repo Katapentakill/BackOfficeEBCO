@@ -1,0 +1,2 @@
+Tipos y interfaces de TypeScript específicas del módulo Dashboard
+Ejemplo: Metric, Activity, ChartData, etc.

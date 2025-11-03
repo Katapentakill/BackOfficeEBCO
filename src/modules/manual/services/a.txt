@@ -1,0 +1,2 @@
+Servicios y llamadas API del módulo Manual
+Ejemplo: manualService.ts con funciones para obtener documentación

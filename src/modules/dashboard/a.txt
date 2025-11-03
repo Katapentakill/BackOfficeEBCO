@@ -1,0 +1,2 @@
+Módulo Dashboard - Panel principal con métricas y resúmenes
+Contiene toda la lógica, componentes y servicios específicos del dashboard

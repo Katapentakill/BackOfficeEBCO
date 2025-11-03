@@ -1,0 +1,1 @@
+Páginas y rutas de la aplicación. Cada página tiene su propia carpeta con page.tsx

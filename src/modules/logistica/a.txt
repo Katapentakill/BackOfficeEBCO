@@ -1,0 +1,2 @@
+Módulo Logística - Gestión de materiales y servicios de arriendo
+Contiene toda la lógica, componentes y servicios específicos del área de Logística

@@ -1,0 +1,2 @@
+Componentes específicos del módulo Análisis de Datos
+Ejemplo: AnalisisHeader, ControlCostosCard, ProgramaAvancesCard, GraficosAnalisis, etc.

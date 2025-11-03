@@ -1,0 +1,2 @@
+Módulo Análisis de Datos - Control de costos y programación
+Contiene toda la lógica, componentes y servicios específicos del área de Análisis de Datos

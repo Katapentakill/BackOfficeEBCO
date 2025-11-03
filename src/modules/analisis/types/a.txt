@@ -1,0 +1,2 @@
+Tipos y interfaces de TypeScript específicas del módulo Análisis de Datos
+Ejemplo: Costo, Programa, Avance, Garantia, etc.

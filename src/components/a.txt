@@ -1,0 +1,1 @@
+Componentes reutilizables organizados por tipo: layout (componentes de estructura) y ui (componentes de interfaz)

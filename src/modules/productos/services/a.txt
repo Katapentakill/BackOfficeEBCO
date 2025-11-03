@@ -1,0 +1,2 @@
+Servicios y llamadas API del módulo Productos
+Ejemplo: productosService.ts con funciones para gestionar subcontratos y materiales

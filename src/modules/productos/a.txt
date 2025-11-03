@@ -1,0 +1,2 @@
+Módulo Productos y Soportes - Gestión de subcontratos y especificaciones técnicas
+Contiene toda la lógica, componentes y servicios específicos del área de Productos

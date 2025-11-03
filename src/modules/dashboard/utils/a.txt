@@ -1,0 +1,2 @@
+Funciones utilitarias del módulo Dashboard
+Ejemplo: formatMetrics, calculateTotals, etc.

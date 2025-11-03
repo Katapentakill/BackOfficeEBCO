@@ -1,0 +1,2 @@
+Tipos y interfaces de TypeScript específicas del módulo Productos
+Ejemplo: Subcontrato, Material, Especificacion, etc.

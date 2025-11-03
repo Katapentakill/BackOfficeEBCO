@@ -1,0 +1,2 @@
+Tipos y interfaces de TypeScript específicas del módulo Manual
+Ejemplo: Documentation, Guide, Section, etc.

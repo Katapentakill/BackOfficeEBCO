@@ -1,0 +1,2 @@
+Servicios y llamadas API del módulo Dashboard
+Ejemplo: dashboardService.ts con funciones para obtener métricas y datos

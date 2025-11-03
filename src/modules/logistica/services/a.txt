@@ -1,0 +1,2 @@
+Servicios y llamadas API del módulo Logística
+Ejemplo: logisticaService.ts con funciones para obtener datos, crear, actualizar, etc.

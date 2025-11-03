@@ -1,0 +1,1 @@
+Módulos específicos alineados con las áreas de la aplicación. Cada módulo contiene la lógica, servicios y componentes específicos de un área.

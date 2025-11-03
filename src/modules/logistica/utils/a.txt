@@ -1,0 +1,2 @@
+Funciones utilitarias del módulo Logística
+Ejemplo: calculateInventory, formatDeliveries, etc.
