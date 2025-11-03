@@ -11,7 +11,7 @@ export default function ManualPage() {
       </div>
 
       {/* Introduction */}
-      <section className="mb-12 bg-brand-bg-white p-8 rounded-lg shadow-md">
+      <section className="mb-12 bg-brand-bg-white p-8 rounded-lg shadow-md border" style={{ borderColor: "var(--color-brand-line)" }}>
         <h2 className="text-2xl font-bold text-brand-red mb-4">Bienvenida</h2>
         <p className="text-brand-text-dark leading-relaxed">
           Este manual operacional contiene toda la información necesaria para entender la estructura,
@@ -49,7 +49,7 @@ export default function ManualPage() {
       </section>
 
       {/* Key Concepts */}
-      <section className="mb-12 bg-brand-bg-white p-8 rounded-lg shadow-md">
+      <section className="mb-12 bg-brand-bg-white p-8 rounded-lg shadow-md border" style={{ borderColor: "var(--color-brand-line)" }}>
         <h2 className="text-2xl font-bold text-brand-red mb-6">Conceptos Clave</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="border-l-4 border-brand-red pl-4">
@@ -124,10 +124,12 @@ export default function ManualPage() {
         <p className="text-brand-text-dark mb-6">
           Obtén una versión PDF del manual para consulta offline
         </p>
-        <button className="bg-brand-red text-brand-text-light px-8 py-3 rounded-md font-bold hover:opacity-90 transition-opacity inline-flex items-center space-x-2">
-          <span>Descargar PDF</span>
-          <MdDownload size={20} />
-        </button>
+        <div className="flex items-center justify-center gap-3">
+          <button className="btn btn-primary">
+            <span className="flex items-center gap-2"><span>Descargar PDF</span><MdDownload size={20} /></span>
+          </button>
+          <button className="btn btn-outline">Ver en línea</button>
+        </div>
       </section>
     </div>
   );

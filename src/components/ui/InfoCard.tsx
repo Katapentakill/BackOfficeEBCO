@@ -22,7 +22,7 @@ export default function InfoCard({
   badge,
 }: InfoCardProps) {
   return (
-    <div className="bg-brand-bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+    <div className="bg-brand-bg-white rounded-lg shadow-md p-6 border hover:shadow-lg transition-shadow" style={{ borderColor: "var(--color-brand-line)" }}>
       {/* Icon */}
       {icon && (
         <div className="text-brand-red text-4xl mb-4">
@@ -35,7 +35,7 @@ export default function InfoCard({
 
       {/* Badge */}
       {badge && (
-        <div className="inline-block mb-3 px-3 py-1 rounded-full bg-brand-red text-brand-text-light text-xs font-semibold">
+        <div className="chip mb-3 bg-brand text-brand-text-light">
           {badge}
         </div>
       )}
@@ -47,7 +47,7 @@ export default function InfoCard({
 
       {/* Button */}
       <Link href={buttonLink}>
-        <button className="w-full bg-brand-red text-brand-text-light py-2 px-4 rounded-md font-semibold hover:opacity-90 transition-opacity flex items-center justify-center space-x-2">
+        <button className="w-full btn btn-primary flex items-center justify-center space-x-2">
           <span>{buttonText}</span>
           {buttonText.toLowerCase().includes("descargar") ? (
             <MdDownload size={18} />

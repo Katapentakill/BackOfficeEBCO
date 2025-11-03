@@ -64,7 +64,7 @@ export default function OrganigramaPage() {
             "Somos el motor silencioso que organiza, conecta y potencia, para que cada proyecto
             avance con eficiencia, calidad y visión de futuro."
           </p>
-          <button className="bg-brand-red text-brand-text-light px-8 py-3 rounded-md font-bold hover:opacity-90 transition-opacity flex items-center space-x-2">
+          <button className="btn btn-primary flex items-center space-x-2">
             <span>VER PERFIL COMPLETO</span>
             <MdExpandMore size={20} />
           </button>
@@ -123,7 +123,7 @@ export default function OrganigramaPage() {
         {organizationalStructure.subUnits?.map((area) => (
           <button
             key={area.name}
-            className="bg-brand-red hover:bg-red-700 text-brand-text-light font-bold py-4 px-6 rounded-lg transition-colors text-lg"
+            className="btn btn-primary text-lg"
           >
             VER PERFIL - {area.name.toUpperCase()}
           </button>

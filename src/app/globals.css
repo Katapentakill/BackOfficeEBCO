@@ -1,12 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-red: #D90429;
-  --color-brand-dark: #212121;
-  --color-brand-text-dark: #333333;
-  --color-brand-text-light: #FFFFFF;
-  --color-brand-bg-light: #F4F4F4;
-  --color-brand-bg-white: #FFFFFF;
+  /* EBCO Design Tokens */
+  --color-brand-red: #E30613;          /* Rojo EBCO */
+  --color-brand-red-700: #D10A15;      /* Hover/active */
+  --color-brand-dark: #171717;         /* Ink */
+  --color-brand-text-dark: #171717;    /* Texto principal */
+  --color-brand-text-muted: #475569;   /* Texto secundario */
+  --color-brand-text-light: #FFFFFF;   /* Texto claro */
+  --color-brand-bg-light: #F8FAFC;     /* Tile/Fondo */
+  --color-brand-bg-white: #FFFFFF;     /* Blanco */
+  --color-brand-gray: #A7A9AC;         /* Gris EBCO */
+  --color-brand-line: #E5E7EB;         /* Bordes */
 }
 
 @layer base {
@@ -37,4 +42,22 @@
   button {
     cursor: pointer;
   }
+}
+
+/* EBCO Utilities & Components */
+@layer components {
+  .btn { @apply inline-flex items-center justify-center px-5 py-3 rounded-lg font-semibold transition-colors; }
+  .btn-primary { background: var(--color-brand-red); color: var(--color-brand-text-light); }
+  .btn-primary:hover { background: var(--color-brand-red-700); }
+  .btn-outline { border: 2px solid var(--color-brand-red); color: var(--color-brand-red); background: #ffffff; }
+  .btn-outline:hover { background: #fff5f5; }
+  .chip { @apply px-2.5 py-1 rounded-full text-xs font-semibold; }
+}
+
+@layer utilities {
+  .ink { color: var(--color-brand-text-dark); }
+  .muted { color: var(--color-brand-text-muted); }
+  .tile { background: var(--color-brand-bg-light); }
+  .bg-brand { background: var(--color-brand-red); }
+  .bd-brand { border-color: var(--color-brand-red); }
 }

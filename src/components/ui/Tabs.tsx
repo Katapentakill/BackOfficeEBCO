@@ -30,15 +30,15 @@ export default function Tabs({ title, tabs }: TabsProps) {
       <h2 className="text-2xl font-bold text-brand-red mb-6">{title}</h2>
 
       {/* Tab Buttons */}
-      <div className="flex flex-wrap gap-2 mb-6 border-b border-gray-300">
+      <div className="flex flex-wrap gap-2 mb-6 border-b" style={{ borderColor: "var(--color-brand-line)" }}>
         {tabs.map((tab, index) => (
           <button
             key={index}
             onClick={() => setActiveTab(index)}
-            className={`px-4 py-3 font-semibold transition-colors border-b-2 ${
+            className={`btn ${
               activeTab === index
-                ? "bg-brand-red text-brand-text-light border-brand-red"
-                : "bg-brand-bg-white text-brand-text-dark border-transparent hover:bg-brand-bg-light"
+                ? "btn-primary"
+                : "bg-brand-bg-white text-brand-text-dark hover:bg-brand-bg-light"
             }`}
           >
             {tab.label}
@@ -52,14 +52,15 @@ export default function Tabs({ title, tabs }: TabsProps) {
           {tabs[activeTab].items.map((item, index) => (
             <li
               key={index}
-              className="flex items-center justify-between p-4 border-b border-gray-200 last:border-b-0 hover:bg-brand-bg-light transition-colors"
+              className="flex items-center justify-between p-4 last:border-b-0 hover:bg-brand-bg-light transition-colors border-b"
+              style={{ borderColor: "var(--color-brand-line)" }}
             >
               <div className="flex-1">
                 <p className="text-sm font-semibold text-brand-text-dark">
                   {item.name}
                 </p>
                 {item.badge && (
-                  <span className="inline-block mt-2 px-3 py-1 rounded-full bg-brand-red text-brand-text-light text-xs font-semibold">
+                  <span className="chip mt-2 bg-brand text-brand-text-light">
                     {item.badge}
                   </span>
                 )}
@@ -69,7 +70,7 @@ export default function Tabs({ title, tabs }: TabsProps) {
                   href={item.downloadLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ml-4 flex items-center space-x-2 text-brand-red font-semibold hover:text-brand-red hover:underline text-sm"
+                  className="ml-4 flex items-center space-x-2 text-brand-red font-semibold hover:underline text-sm"
                 >
                   <span>Descargar</span>
                   <MdDownload size={18} />
