@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { 
   MdBook, 
   MdInfoOutline, 
@@ -13,15 +13,68 @@ import {
   MdAssessment,
   MdWarning,
   MdBuild,
-  MdDoneAll
+  MdDoneAll,
+  MdAdd,
+  MdEdit,
+  MdClose,
+  MdDelete,
+  MdSettings,
+  MdLogout
 } from "react-icons/md";
 import InfoCard from "@/components/ui/InfoCard";
 import Link from "next/link";
 
 export default function Home() {
   const [selectedObra, setSelectedObra] = useState(0);
+  const [showProjectModal, setShowProjectModal] = useState(false);
+  const [showKPIModal, setShowKPIModal] = useState(false);
+  const [editingProject, setEditingProject] = useState<number | null>(null);
+  const [editingKPI, setEditingKPI] = useState<{ obraIndex: number; kpiIndex: number } | null>(null);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement | null>(null);
+  const currentUser = {
+    name: "Nombre Apellido",
+    role: "Admin"
+  };
+  const userInitials = currentUser.name
+    .split(" ")
+    .map((part) => part[0])
+    .filter(Boolean)
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+  
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setIsUserMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+   
+  // Estados para formularios
+  const [projectForm, setProjectForm] = useState({
+    name: "",
+    progress: 0,
+    budget: "",
+    status: "En curso",
+    daysLeft: 0
+  });
+  
+  const [kpiForm, setKpiForm] = useState({
+    obraIndex: 0,
+    title: "",
+    value: "",
+    subtitle: "",
+    trend: "on-track" as "up" | "down" | "on-track"
+  });
+  
   // KPIs por Obra/Proyecto
-  const obras = [
+  const [obras, setObras] = useState([
     {
       name: "DS-49 Santa Marta",
       kpis: [
@@ -258,9 +311,9 @@ export default function Home() {
         }
       ]
     }
-  ];
+  ]);
 
-  const projects = [
+  const [projects, setProjects] = useState([
     {
       name: "DS-49 Santa Marta",
       progress: 75,
@@ -293,8 +346,127 @@ export default function Home() {
       statusColor: "#3b82f6",
       daysLeft: 320
     }
-  ];
+  ]);
 
+  // Funciones para manejar proyectos
+  const handleSaveProject = () => {
+    if (!projectForm.name || !projectForm.budget) {
+      alert("Por favor completa todos los campos obligatorios");
+      return;
+    }
+    
+    const statusColors: { [key: string]: string } = {
+      "En curso": "#E30613",
+      "Finalizando": "#16a34a",
+      "Inicio": "#3b82f6"
+    };
+    
+    const newProject = {
+      name: projectForm.name,
+      progress: projectForm.progress,
+      budget: projectForm.budget,
+      status: projectForm.status,
+      statusColor: statusColors[projectForm.status] || "#E30613",
+      daysLeft: projectForm.daysLeft
+    };
+    
+    if (editingProject !== null) {
+      // Estamos editando un proyecto existente
+      const oldProjectName = projects[editingProject].name;
+      
+      setProjects(prev => prev.map((p, i) => i === editingProject ? newProject : p));
+      
+      // Actualizar también en obras si existe, manteniendo los KPIs existentes
+      setObras(prev => prev.map(obra => 
+        obra.name === oldProjectName 
+          ? { ...obra, name: newProject.name } // Solo actualizamos el nombre, mantenemos los KPIs
+          : obra
+      ));
+    } else {
+      // Estamos creando un nuevo proyecto
+      setProjects(prev => [...prev, newProject]);
+      
+      // Crear automáticamente una entrada en obras para el nuevo proyecto con KPIs vacíos
+      setObras(prev => {
+        // Verificar si ya existe una obra con ese nombre (no debería, pero por seguridad)
+        const exists = prev.some(obra => obra.name === newProject.name);
+        if (exists) {
+          return prev;
+        }
+        const newObras = [...prev, {
+          name: newProject.name,
+          kpis: []
+        }];
+        // Seleccionar automáticamente el nuevo proyecto en la barra de obras
+        const newIndex = newObras.length - 1;
+        setSelectedObra(newIndex);
+        return newObras;
+      });
+    }
+    
+    setProjectForm({ name: "", progress: 0, budget: "", status: "En curso", daysLeft: 0 });
+    setShowProjectModal(false);
+    setEditingProject(null);
+  };
+  
+  // Funciones para manejar KPIs
+  const handleSaveKPI = () => {
+    if (!kpiForm.title || !kpiForm.value) {
+      alert("Por favor completa todos los campos obligatorios");
+      return;
+    }
+    
+    const trendColors: { [key: string]: { color: string; bgColor: string } } = {
+      "up": { color: "#16a34a", bgColor: "#dcfce7" },
+      "down": { color: "#ef4444", bgColor: "#fee2e2" },
+      "on-track": { color: "#16a34a", bgColor: "#dcfce7" }
+    };
+    
+    const iconMap: { [key: string]: React.ReactNode } = {
+      "Avance Físico": <MdTrendingUp className="w-6 h-6" />,
+      "Presupuesto Ejecutado": <MdAttachMoney className="w-6 h-6" />,
+      "CPI (Costo)": <MdAssessment className="w-6 h-6" />,
+      "SPI (Plazo)": <MdSchedule className="w-6 h-6" />,
+      "Días de Retraso": <MdWarning className="w-6 h-6" />,
+      "Mano de Obra": <MdPerson className="w-6 h-6" />
+    };
+    
+    const colors = trendColors[kpiForm.trend] || trendColors["on-track"];
+    
+    const newKPI = {
+      title: kpiForm.title,
+      value: kpiForm.value,
+      subtitle: kpiForm.subtitle,
+      trend: kpiForm.trend,
+      color: colors.color,
+      icon: iconMap[kpiForm.title] || <MdCheckCircle className="w-6 h-6" />,
+      bgColor: colors.bgColor
+    };
+    
+    if (editingKPI !== null) {
+      setObras(prev => prev.map((obra, oIndex) => 
+        oIndex === editingKPI.obraIndex 
+          ? {
+              ...obra,
+              kpis: obra.kpis.map((kpi, kIndex) => 
+                kIndex === editingKPI.kpiIndex ? newKPI : kpi
+              )
+            }
+          : obra
+      ));
+    } else {
+      setObras(prev => prev.map((obra, index) => 
+        index === kpiForm.obraIndex 
+          ? { ...obra, kpis: [...obra.kpis, newKPI] }
+          : obra
+      ));
+    }
+    
+    setKpiForm({ obraIndex: 0, title: "", value: "", subtitle: "", trend: "on-track" });
+    setShowKPIModal(false);
+    setEditingKPI(null);
+  };
+  
   // Calcular estadísticas resumidas
   const totalProjects = projects.length;
   const totalBudget = projects.reduce((sum, p) => sum + parseFloat(p.budget.replace('$', '').replace('M', '')), 0);
@@ -302,6 +474,67 @@ export default function Home() {
 
   return (
     <div className="min-h-screen p-8">
+      <div className="flex justify-end mb-6">
+        <div ref={userMenuRef} className="relative">
+          <button
+            type="button"
+            onClick={() => setIsUserMenuOpen((prev) => !prev)}
+            className="flex items-center gap-3 px-4 py-2 rounded-full bg-white border shadow-sm hover:shadow-md transition-shadow"
+            style={{ borderColor: "var(--color-brand-line)" }}
+          >
+            <div
+              className="w-10 h-10 rounded-full text-white flex items-center justify-center text-sm font-semibold"
+              style={{ background: "var(--color-brand-red)" }}
+            >
+              {userInitials || "NA"}
+            </div>
+            <div className="flex flex-col items-start">
+              <span className="text-sm font-semibold text-brand-text-dark">{currentUser.name}</span>
+              <span className="text-xs text-gray-500">{currentUser.role}</span>
+            </div>
+          </button>
+
+          {isUserMenuOpen && (
+            <div className="absolute right-0 mt-3 w-52 bg-white border rounded-lg shadow-xl py-2 z-50" style={{ borderColor: "var(--color-brand-line)" }}>
+              <button
+                type="button"
+                className="w-full flex items-center gap-3 px-4 py-2 text-sm text-brand-text-dark hover:bg-gray-50 transition-colors"
+                onClick={() => {
+                  // Placeholder action
+                  setIsUserMenuOpen(false);
+                }}
+              >
+                <MdPerson className="w-5 h-5 text-gray-500" />
+                Mi Perfil
+              </button>
+              <button
+                type="button"
+                className="w-full flex items-center gap-3 px-4 py-2 text-sm text-brand-text-dark hover:bg-gray-50 transition-colors"
+                onClick={() => {
+                  // Placeholder action
+                  setIsUserMenuOpen(false);
+                }}
+              >
+                <MdSettings className="w-5 h-5 text-gray-500" />
+                Configuración
+              </button>
+              <div className="my-2 border-t" style={{ borderColor: "var(--color-brand-line)" }}></div>
+              <button
+                type="button"
+                className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                onClick={() => {
+                  // Placeholder action
+                  setIsUserMenuOpen(false);
+                }}
+              >
+                <MdLogout className="w-5 h-5" />
+                Cerrar Sesión
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
       {/* Hero Section con gradiente y diseño mejorado */}
       <section className="relative mb-12 overflow-hidden rounded-2xl" style={{
         background: "linear-gradient(135deg, #E30613 0%, #B00912 100%)"
@@ -312,14 +545,18 @@ export default function Home() {
         </div>
         <div className="relative p-12 md:p-16">
           <div className="max-w-4xl">
-            <div className="inline-block mb-4">
-              <span className="text-white/90 text-sm font-semibold px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm">
-                🏗️ Sistema de Gestión de Obras
-              </span>
+            <div className="flex items-center gap-4 mb-4">
+              <img
+                src="/Logo.png"
+                alt="EBCO Logo"
+                className="w-16 h-16 md:w-20 md:h-20 object-contain flex-shrink-0"
+                style={{ imageRendering: "high-quality" }}
+                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+              />
+              <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+                Back Office
+              </h1>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
-              Back Office
-            </h1>
             <p className="text-xl text-white/95 mb-6 font-medium max-w-2xl">
               Monitoreo en tiempo real del desarrollo de proyectos de construcción
             </p>
@@ -335,12 +572,12 @@ export default function Home() {
                 <p className="text-3xl font-bold text-white">{totalProjects}</p>
               </div>
               <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
-                <p className="text-white/70 text-xs font-medium mb-1">Presupuesto Total</p>
+                <p className="text-white/70 text-xs font-medium mb-1">Venta Total</p>
                 <p className="text-3xl font-bold text-white">${totalBudget.toFixed(1)}M</p>
               </div>
               <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
-                <p className="text-white/70 text-xs font-medium mb-1">Avance Promedio</p>
-                <p className="text-3xl font-bold text-white">{avgProgress}%</p>
+                <p className="text-white/70 text-xs font-medium mb-1">Metros Cuadrados Construidos</p>
+                <p className="text-3xl font-bold text-white">45,230 m²</p>
               </div>
             </div>
           </div>
@@ -400,245 +637,37 @@ export default function Home() {
       </section>
 
       {/* Organizational Structure Section */}
-      <section className="mb-12 bg-brand-dark text-brand-text-light rounded-lg p-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <section className="mb-16 bg-white border-2 rounded-lg p-12 md:p-16 shadow-lg" style={{ borderColor: "var(--color-brand-red)" }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
           {/* Left Column */}
-          <div>
-            <h2 className="text-2xl font-bold mb-4">
-              ESTRUCTURA ORGANIZACIONAL<br />BACK OFFICE
-            </h2>
-            <p className="text-sm leading-relaxed mb-6 italic">
+          <div className="space-y-6">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-red mb-6 leading-tight">
+                ESTRUCTURA<br />ORGANIZACIONAL
+              </h2>
+              <div className="h-1 w-20 bg-brand-red mb-6"></div>
+            </div>
+            <p className="text-base md:text-lg leading-relaxed text-brand-text-dark italic font-bold">
               "Somos el motor silencioso que organiza, conecta y potencia, para que cada proyecto
               avance con eficiencia, calidad y visión de futuro."
             </p>
-            <Link href="/organigrama">
-              <button className="btn btn-primary">
-                VER ORGANIGRAMA COMPLETO
-              </button>
-            </Link>
-          </div>
-
-          {/* Right Column - Organizational Chart with Lines */}
-          <div className="flex items-center justify-center">
-            <div className="w-full max-w-md relative">
-              {/* Coordinator */}
-              <div className="mb-6 text-center relative z-10">
-                <div className="bg-brand-red px-4 py-2 rounded-lg inline-block font-bold">
-                  COORDINADOR
-                </div>
-              </div>
-
-              {/* Connecting Lines */}
-              <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-1 h-32" style={{background:"var(--color-brand-red)",opacity:0.3}}></div>
-
-              {/* Areas */}
-              <div className="grid grid-cols-1 gap-3 text-center relative z-10 mt-2">
-                <div className="bg-brand-bg-light px-4 py-3 rounded-lg border" style={{borderColor:"var(--color-brand-red)",borderWidth:"2px"}}>
-                  <p className="font-bold text-brand-red">LOGÍSTICA</p>
-                  <p className="text-xs mt-1 text-brand-text-dark">Materiales • Arriendos</p>
-                </div>
-                <div className="bg-brand-bg-light px-4 py-3 rounded-lg border" style={{borderColor:"var(--color-brand-red)",borderWidth:"2px"}}>
-                  <p className="font-bold text-brand-red">PRODUCTOS Y SERVICIOS</p>
-                  <p className="text-xs mt-1 text-brand-text-dark">Subcontratos • Materiales EE.TT</p>
-                </div>
-                <div className="bg-brand-bg-light px-4 py-3 rounded-lg border" style={{borderColor:"var(--color-brand-red)",borderWidth:"2px"}}>
-                  <p className="font-bold text-brand-red">ANÁLISIS DE DATOS</p>
-                  <p className="text-xs mt-1 text-brand-text-dark">Costos • Programa y Avance</p>
-                </div>
-              </div>
+            <div className="pt-4 flex justify-center md:justify-start">
+              <Link href="/organigrama">
+                <button className="btn btn-primary px-8 py-3 text-base">
+                  Ver más
+                </button>
+              </Link>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* KPIs por Obra Section */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold ink mb-6">Indicadores Clave por Obra (KPIs)</h2>
-        
-        {/* Barra horizontal de selección de obras */}
-        <div className="mb-6 overflow-x-auto">
-          <div className="flex gap-2 border-b pb-2" style={{ borderColor: "var(--color-brand-line)" }}>
-            {obras.map((obra, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedObra(index)}
-                className={`px-6 py-3 rounded-t-lg font-semibold text-sm transition-all whitespace-nowrap ${
-                  selectedObra === index
-                    ? "bg-brand text-white shadow-md"
-                    : "bg-white text-gray-600 hover:bg-gray-50 border-b-2 border-transparent"
-                }`}
-                style={{
-                  borderBottomColor: selectedObra === index ? "var(--color-brand-red)" : "transparent",
-                  borderBottomWidth: selectedObra === index ? "3px" : "0px"
-                }}
-              >
-                {obra.name}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* KPIs de la obra seleccionada */}
-        <div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {obras[selectedObra].kpis.map((kpi, kpiIndex) => (
-              <div
-                key={kpiIndex}
-                className="relative rounded-xl border p-6 bg-white border-[var(--color-brand-line)] transition-all hover:shadow-xl hover:-translate-y-1 overflow-hidden group"
-              >
-                {/* Gradiente sutil en hover */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity" style={{
-                  background: `linear-gradient(135deg, ${kpi.color} 0%, transparent 100%)`
-                }}></div>
-                
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-4">
-                    <p className="text-sm font-semibold ink">{kpi.title}</p>
-                    <div 
-                      className="w-12 h-12 rounded-xl flex items-center justify-center shadow-md transition-transform group-hover:scale-110"
-                      style={{ background: kpi.bgColor, color: kpi.color }}
-                    >
-                      {kpi.icon}
-                    </div>
-                  </div>
-                  <p className="text-4xl font-extrabold mb-2 transition-all group-hover:scale-105" style={{ color: kpi.color }}>
-                    {kpi.value}
-                  </p>
-                  <p className="text-xs muted mb-4">{kpi.subtitle}</p>
-                  {kpi.trend === "down" && (
-                    <div className="mt-3 flex items-center gap-1">
-                      <MdTrendingDown className="w-4 h-4" style={{ color: "#ef4444" }} />
-                      <span className="text-xs" style={{ color: "#ef4444" }}>Requiere atención</span>
-                    </div>
-                  )}
-                  {kpi.trend === "up" && (
-                    <div className="mt-3 flex items-center gap-1">
-                      <MdTrendingUp className="w-4 h-4" style={{ color: "#16a34a" }} />
-                      <span className="text-xs" style={{ color: "#16a34a" }}>En rango objetivo</span>
-                    </div>
-                  )}
-                  {kpi.trend === "on-track" && (
-                    <div className="mt-3 flex items-center gap-1">
-                      <MdCheckCircle className="w-4 h-4" style={{ color: "#16a34a" }} />
-                      <span className="text-xs" style={{ color: "#16a34a" }}>Según plan</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Table */}
-      <section className="mb-12">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold ink">Proyectos Activos</h2>
-          <Link href="/analisis">
-            <button className="btn btn-outline text-sm">Ver Análisis Completo</button>
-          </Link>
-        </div>
-        
-        <div className="bg-white border rounded-lg overflow-hidden" style={{ borderColor: "var(--color-brand-line)" }}>
-          <table className="w-full">
-            <thead>
-              <tr className="bg-[#fafafa] border-b" style={{ borderColor: "var(--color-brand-line)" }}>
-                <th className="text-left px-4 py-3 text-sm font-semibold ink">Proyecto</th>
-                <th className="text-left px-4 py-3 text-sm font-semibold ink">Avance</th>
-                <th className="text-left px-4 py-3 text-sm font-semibold ink">Presupuesto</th>
-                <th className="text-left px-4 py-3 text-sm font-semibold ink">Estado</th>
-                <th className="text-left px-4 py-3 text-sm font-semibold ink">Días Restantes</th>
-                <th className="text-center px-4 py-3 text-sm font-semibold ink">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {projects.map((project, index) => (
-                <tr
-                  key={index}
-                  className="border-b hover:bg-[#fcfcfc] transition-colors"
-                  style={{ borderColor: "var(--color-brand-line)" }}
-                >
-                  <td className="px-4 py-3">
-                    <p className="text-sm ink font-medium">{project.name}</p>
-                  </td>
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-2">
-                      <div className="flex-1 bg-gray-200 rounded-full h-2 max-w-[120px]">
-                        <div
-                          className="h-2 rounded-full"
-                          style={{
-                            width: `${project.progress}%`,
-                            background: project.progress >= 75 ? "#16a34a" : project.progress >= 50 ? "#f59e0b" : "#3b82f6"
-                          }}
-                        ></div>
-                      </div>
-                      <span className="text-xs font-semibold muted">{project.progress}%</span>
-                    </div>
-                  </td>
-                  <td className="px-4 py-3">
-                    <p className="text-sm ink font-medium">{project.budget}</p>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span
-                      className="chip"
-                      style={{
-                        background: project.status === "En curso" ? "#fee2e2" : 
-                                  project.status === "Finalizando" ? "#dcfce7" : "#dbeafe",
-                        color: project.statusColor,
-                        border: `1px solid ${project.statusColor}40`
-                      }}
-                    >
-                      {project.status}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <p className="text-sm muted">{project.daysLeft} días</p>
-                  </td>
-                  <td className="px-4 py-3">
-                    <div className="flex items-center justify-center gap-2">
-                      <button className="p-2 rounded hover:bg-[#f1f5f9]" title="Ver Detalles">
-                        <svg className="w-5 h-5" style={{ color: "#3b82f6" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                        </svg>
-                      </button>
-                      <button className="p-2 rounded hover:bg-[#fff1f2]" title="Editar">
-                        <svg className="w-5 h-5" style={{ color: "var(--color-brand-red)" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      {/* Quick Stats */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold ink mb-6">Resumen Ejecutivo</h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="rounded-lg border p-4 bg-white border-[var(--color-brand-line)] text-center">
-            <MdBuild className="w-8 h-8 mx-auto mb-2" style={{ color: "var(--color-brand-red)" }} />
-            <p className="text-2xl font-extrabold ink">4</p>
-            <p className="text-xs muted">Proyectos Activos</p>
-          </div>
-          <div className="rounded-lg border p-4 bg-white border-[var(--color-brand-line)] text-center">
-            <MdDoneAll className="w-8 h-8 mx-auto mb-2" style={{ color: "#16a34a" }} />
-            <p className="text-2xl font-extrabold ink">156</p>
-            <p className="text-xs muted">Entregables Completados</p>
-          </div>
-          <div className="rounded-lg border p-4 bg-white border-[var(--color-brand-line)] text-center">
-            <MdCheckCircle className="w-8 h-8 mx-auto mb-2" style={{ color: "#3b82f6" }} />
-            <p className="text-2xl font-extrabold ink">92%</p>
-            <p className="text-xs muted">Certificaciones Pagadas</p>
-          </div>
-          <div className="rounded-lg border p-4 bg-white border-[var(--color-brand-line)] text-center">
-            <MdSchedule className="w-8 h-8 mx-auto mb-2" style={{ color: "#f59e0b" }} />
-            <p className="text-2xl font-extrabold ink">8</p>
-            <p className="text-xs muted">En Revisión</p>
+          {/* Right Column - Organizational Chart Image */}
+          <div className="flex items-center justify-center p-8">
+            <img
+              src="/Organigrama.png"
+              alt="Organigrama Back Office EBCO"
+              className="w-full max-w-lg h-auto object-contain drop-shadow-lg"
+              style={{ imageRendering: "high-quality" }}
+            />
           </div>
         </div>
       </section>
@@ -677,6 +706,224 @@ export default function Home() {
           />
         </div>
       </section>
+
+      {/* Modal para Agregar/Editar Proyecto */}
+      {showProjectModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between mb-6 pb-4 border-b" style={{ borderColor: "var(--color-brand-line)" }}>
+              <h3 className="text-xl font-bold ink">
+                {editingProject !== null ? "Editar Proyecto" : "Agregar Nuevo Proyecto"}
+              </h3>
+              <button
+                onClick={() => {
+                  setShowProjectModal(false);
+                  setEditingProject(null);
+                  setProjectForm({ name: "", progress: 0, budget: "", status: "En curso", daysLeft: 0 });
+                }}
+                className="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100 transition-colors"
+              >
+                <MdClose size={24} />
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold ink mb-2">Nombre del Proyecto <span className="text-red-500">*</span></label>
+                <input
+                  type="text"
+                  value={projectForm.name}
+                  onChange={(e) => setProjectForm(prev => ({ ...prev, name: e.target.value }))}
+                  className="w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red-700 focus:border-transparent text-sm"
+                  style={{ borderColor: "var(--color-brand-line)" }}
+                  placeholder="Ej: DS-49 Santa Marta"
+                />
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold ink mb-2">Avance (%)</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={projectForm.progress}
+                    onChange={(e) => setProjectForm(prev => ({ ...prev, progress: parseInt(e.target.value) || 0 }))}
+                    className="w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red-700 focus:border-transparent text-sm"
+                    style={{ borderColor: "var(--color-brand-line)" }}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold ink mb-2">Días Restantes</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={projectForm.daysLeft}
+                    onChange={(e) => setProjectForm(prev => ({ ...prev, daysLeft: parseInt(e.target.value) || 0 }))}
+                    className="w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red-700 focus:border-transparent text-sm"
+                    style={{ borderColor: "var(--color-brand-line)" }}
+                  />
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-semibold ink mb-2">Presupuesto <span className="text-red-500">*</span></label>
+                <input
+                  type="text"
+                  value={projectForm.budget}
+                  onChange={(e) => setProjectForm(prev => ({ ...prev, budget: e.target.value }))}
+                  className="w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red-700 focus:border-transparent text-sm"
+                  style={{ borderColor: "var(--color-brand-line)" }}
+                  placeholder="Ej: $45.2M"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-semibold ink mb-2">Estado</label>
+                <select
+                  value={projectForm.status}
+                  onChange={(e) => setProjectForm(prev => ({ ...prev, status: e.target.value }))}
+                  className="w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red-700 focus:border-transparent text-sm"
+                  style={{ borderColor: "var(--color-brand-line)" }}
+                >
+                  <option value="En curso">En curso</option>
+                  <option value="Finalizando">Finalizando</option>
+                  <option value="Inicio">Inicio</option>
+                </select>
+              </div>
+              
+              <div className="flex gap-3 pt-4">
+                <button
+                  onClick={() => {
+                    setShowProjectModal(false);
+                    setEditingProject(null);
+                    setProjectForm({ name: "", progress: 0, budget: "", status: "En curso", daysLeft: 0 });
+                  }}
+                  className="btn btn-outline flex-1"
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={handleSaveProject}
+                  className="btn btn-primary flex-1"
+                >
+                  {editingProject !== null ? "Guardar Cambios" : "Agregar Proyecto"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal para Agregar/Editar KPI */}
+      {showKPIModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between mb-6 pb-4 border-b" style={{ borderColor: "var(--color-brand-line)" }}>
+              <h3 className="text-xl font-bold ink">
+                {editingKPI !== null ? "Editar KPI" : "Agregar Nuevo KPI"}
+              </h3>
+              <button
+                onClick={() => {
+                  setShowKPIModal(false);
+                  setEditingKPI(null);
+                  setKpiForm({ obraIndex: 0, title: "", value: "", subtitle: "", trend: "on-track" });
+                }}
+                className="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100 transition-colors"
+              >
+                <MdClose size={24} />
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold ink mb-2">Proyecto/Obra</label>
+                <select
+                  value={kpiForm.obraIndex}
+                  onChange={(e) => setKpiForm(prev => ({ ...prev, obraIndex: parseInt(e.target.value) }))}
+                  className="w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red-700 focus:border-transparent text-sm"
+                  style={{ borderColor: "var(--color-brand-line)" }}
+                  disabled={editingKPI !== null}
+                >
+                  {obras.map((obra, index) => (
+                    <option key={index} value={index}>{obra.name}</option>
+                  ))}
+                </select>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-semibold ink mb-2">Título del KPI <span className="text-red-500">*</span></label>
+                <input
+                  type="text"
+                  value={kpiForm.title}
+                  onChange={(e) => setKpiForm(prev => ({ ...prev, title: e.target.value }))}
+                  className="w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red-700 focus:border-transparent text-sm"
+                  style={{ borderColor: "var(--color-brand-line)" }}
+                  placeholder="Ej: Avance Físico, Presupuesto Ejecutado, etc."
+                />
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold ink mb-2">Valor <span className="text-red-500">*</span></label>
+                  <input
+                    type="text"
+                    value={kpiForm.value}
+                    onChange={(e) => setKpiForm(prev => ({ ...prev, value: e.target.value }))}
+                    className="w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red-700 focus:border-transparent text-sm"
+                    style={{ borderColor: "var(--color-brand-line)" }}
+                    placeholder="Ej: 75%, $34.8M, 1.08"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold ink mb-2">Tendencia</label>
+                  <select
+                    value={kpiForm.trend}
+                    onChange={(e) => setKpiForm(prev => ({ ...prev, trend: e.target.value as "up" | "down" | "on-track" }))}
+                    className="w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red-700 focus:border-transparent text-sm"
+                    style={{ borderColor: "var(--color-brand-line)" }}
+                  >
+                    <option value="up">Ascendente</option>
+                    <option value="down">Descendente</option>
+                    <option value="on-track">Según plan</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-semibold ink mb-2">Subtítulo</label>
+                <input
+                  type="text"
+                  value={kpiForm.subtitle}
+                  onChange={(e) => setKpiForm(prev => ({ ...prev, subtitle: e.target.value }))}
+                  className="w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red-700 focus:border-transparent text-sm"
+                  style={{ borderColor: "var(--color-brand-line)" }}
+                  placeholder="Ej: vs 78% planificado, de $45.2M total"
+                />
+              </div>
+              
+              <div className="flex gap-3 pt-4">
+                <button
+                  onClick={() => {
+                    setShowKPIModal(false);
+                    setEditingKPI(null);
+                    setKpiForm({ obraIndex: 0, title: "", value: "", subtitle: "", trend: "on-track" });
+                  }}
+                  className="btn btn-outline flex-1"
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={handleSaveKPI}
+                  className="btn btn-primary flex-1"
+                >
+                  {editingKPI !== null ? "Guardar Cambios" : "Agregar KPI"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

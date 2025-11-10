@@ -3,12 +3,12 @@
 ## Pasos para Publicar:
 
 ### 1. Crear cuenta en Vercel
-- Ve a: https://vercel.com
+- Ve a:
 - Regístrate con GitHub (recomendado) o email
 
 ### 2. Conectar con GitHub
 1. Ve a tu repositorio en GitHub
-2. Asegúrate de que tu código esté subido (git push)
+2. Asegúrate de que tu código esté subido (git push) https://vercel.com
 
 ### 3. Publicar en Vercel
 1. Ve a https://vercel.com/new

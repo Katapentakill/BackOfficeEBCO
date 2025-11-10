@@ -1,8 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { MdDashboard, MdLocalShipping, MdShoppingCart, MdAnalytics, MdHome, MdMenu, MdChevronLeft } from "react-icons/md";
+import {
+  MdDashboard,
+  MdLocalShipping,
+  MdShoppingCart,
+  MdAnalytics,
+  MdHome,
+  MdMenu,
+  MdChevronLeft,
+  MdOutlineBarChart,
+} from "react-icons/md";
 import { useSidebar } from "./SidebarContext";
 
 interface NavItem {
@@ -19,9 +29,23 @@ const navItems: NavItem[] = [
   { label: "ÁREA ANÁLISIS DE DATOS", href: "/analisis", icon: <MdAnalytics size={20} /> },
 ];
 
+const dashboardLinks: NavItem[] = [
+  { label: "Resumen general", href: "/dashboard/general", icon: <MdOutlineBarChart size={18} /> },
+  { label: "Logística", href: "/dashboard/logistica", icon: <MdLocalShipping size={18} /> },
+  { label: "Productos", href: "/dashboard/productos", icon: <MdShoppingCart size={18} /> },
+  { label: "Análisis", href: "/dashboard/analisis", icon: <MdAnalytics size={18} /> },
+];
+
 export default function Sidebar() {
   const pathname = usePathname();
   const { isCollapsed, setIsCollapsed } = useSidebar();
+  const [isDashboardOpen, setIsDashboardOpen] = useState(pathname.startsWith("/dashboard"));
+
+  useEffect(() => {
+    if (pathname.startsWith("/dashboard")) {
+      setIsDashboardOpen(true);
+    }
+  }, [pathname]);
 
   return (
     <aside 
@@ -31,14 +55,15 @@ export default function Sidebar() {
       style={{ borderColor: "var(--color-brand-line)" }}
     >
       {/* Logo & Toggle */}
-      <div className="p-6 border-b" style={{ borderColor: "var(--color-brand-line)" }}>
-        <div className="flex items-center justify-between gap-3">
+      <div className={`border-b ${isCollapsed ? 'p-4' : 'p-6'}`} style={{ borderColor: "var(--color-brand-line)" }}>
+        <div className={`flex items-center ${isCollapsed ? 'flex-col justify-center gap-3' : 'justify-between gap-3'}`}>
           {!isCollapsed && (
             <div className="flex items-center gap-3">
               <img
-                src="/logo-ebco.png"
+                src="/Logo.png"
                 alt="EBCO"
-                className="w-10 h-10 object-contain"
+                className="w-12 h-12 object-contain flex-shrink-0"
+                style={{ imageRendering: "high-quality" }}
                 onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
               />
               <h1 className="text-2xl font-bold text-brand-red">
@@ -48,18 +73,17 @@ export default function Sidebar() {
             </div>
           )}
           {isCollapsed && (
-            <div className="flex items-center justify-center w-full">
-              <img
-                src="/logo-ebco.png"
-                alt="EBCO"
-                className="w-10 h-10 object-contain"
-                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
-              />
-            </div>
+            <img
+              src="/Logo.png"
+              alt="EBCO"
+              className="w-12 h-12 object-contain mx-auto"
+              style={{ imageRendering: "high-quality" }}
+              onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+            />
           )}
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="p-2 rounded hover:bg-brand-bg-light hover:text-brand-text-dark transition-colors flex-shrink-0"
+            className={`p-2 rounded hover:bg-brand-bg-light hover:text-brand-text-dark transition-colors flex-shrink-0 ${isCollapsed ? 'w-full' : ''}`}
             title={isCollapsed ? "Expandir" : "Colapsar"}
           >
             {isCollapsed ? <MdMenu size={20} /> : <MdChevronLeft size={20} />}
@@ -89,6 +113,52 @@ export default function Sidebar() {
             </Link>
           );
         })}
+
+        <div className="space-y-2">
+          <button
+            type="button"
+            onClick={() => setIsDashboardOpen((prev) => !prev)}
+            className={`w-full flex items-center ${isCollapsed ? "justify-center" : "justify-between"} px-4 py-3 rounded-lg transition-colors ${
+              pathname.startsWith("/dashboard")
+                ? "bg-brand text-brand-text-light"
+                : "text-brand-text-light hover:bg-brand-bg-light hover:text-brand-text-dark"
+            }`}
+          >
+            <div className={`flex items-center ${isCollapsed ? "" : "gap-3"}`}>
+              <span className="flex-shrink-0"><MdOutlineBarChart size={20} /></span>
+              {!isCollapsed && <span className="text-sm font-medium uppercase tracking-wide">Dashboard</span>}
+            </div>
+            {!isCollapsed && (
+              <MdChevronLeft
+                size={18}
+                className={`transition-transform ${isDashboardOpen ? "-rotate-90" : "rotate-90"}`}
+              />
+            )}
+          </button>
+
+          {isDashboardOpen && (
+            <div className={`space-y-1 ${isCollapsed ? "" : "pl-6"}`}>
+              {dashboardLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`flex items-center ${isCollapsed ? "justify-center" : "gap-2"} px-4 py-2 rounded-lg text-sm transition-colors ${
+                      isActive
+                        ? "bg-[#1f2937] text-white"
+                        : "text-brand-text-light hover:bg-brand-bg-light hover:text-brand-text-dark"
+                    }`}
+                    title={isCollapsed ? link.label : undefined}
+                  >
+                    <span className="flex-shrink-0">{link.icon}</span>
+                    {!isCollapsed && <span>{link.label}</span>}
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </div>
       </nav>
 
       {/* Footer info */}

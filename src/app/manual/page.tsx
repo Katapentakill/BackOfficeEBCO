@@ -1,5 +1,8 @@
-import { MdLocalShipping, MdShoppingCart, MdAnalytics, MdDownload } from "react-icons/md";
+"use client";
+
+import { MdLocalShipping, MdShoppingCart, MdAnalytics, MdDownload, MdBook, MdSearch } from "react-icons/md";
 import InfoCard from "@/components/ui/InfoCard";
+import ProcedureManager from "@/components/ui/ProcedureManager";
 
 export default function ManualPage() {
   return (
@@ -19,6 +22,9 @@ export default function ManualPage() {
           diferentes áreas, los entregables esperados y los procedimientos operacionales clave.
         </p>
       </section>
+
+      {/* Procedure Manager */}
+      <ProcedureManager title="Procedimientos Operacionales" />
 
       {/* Main Areas */}
       <section className="mb-12">
