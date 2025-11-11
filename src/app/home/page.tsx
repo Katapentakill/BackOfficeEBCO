@@ -439,7 +439,7 @@ export default function Home() {
       subtitle: kpiForm.subtitle,
       trend: kpiForm.trend,
       color: colors.color,
-      icon: iconMap[kpiForm.title] || <MdCheckCircle className="w-6 h-6" />,
+      icon: (iconMap[kpiForm.title] || <MdCheckCircle className="w-6 h-6" />) as React.ReactElement,
       bgColor: colors.bgColor
     };
     
@@ -550,7 +550,7 @@ export default function Home() {
                 src="/Logo.png"
                 alt="EBCO Logo"
                 className="w-16 h-16 md:w-20 md:h-20 object-contain flex-shrink-0"
-                style={{ imageRendering: "high-quality" }}
+                style={{ imageRendering: "auto" as any }}
                 onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
               />
               <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">
@@ -666,7 +666,7 @@ export default function Home() {
               src="/Organigrama.png"
               alt="Organigrama Back Office EBCO"
               className="w-full max-w-lg h-auto object-contain drop-shadow-lg"
-              style={{ imageRendering: "high-quality" }}
+               style={{ imageRendering: "auto" as any }}
             />
           </div>
         </div>

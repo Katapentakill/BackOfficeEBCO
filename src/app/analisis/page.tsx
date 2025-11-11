@@ -6,11 +6,40 @@ import InfoCard from "@/components/ui/InfoCard";
 import DocumentManager from "@/components/ui/DocumentManager";
 import DeliverablesCalendar from "@/components/ui/DeliverablesCalendar";
 
+type DeliverableStatus = "Pendiente" | "Completado" | "Urgente" | "Vencido";
+
+type Deliverable = {
+  id: string;
+  name: string;
+  period: "Diario" | "Semanal" | "Quincenal" | "Mensual";
+  dueDate: string;
+  status: DeliverableStatus;
+  assignedTo: string;
+  progress: number;
+  lastCompletedDate: string;
+  isUrgent: boolean;
+  pendingReason: string;
+  requiredSignatures: string[];
+  completedSignatures: string[];
+  observations: string;
+};
+
+// Tipo compatible con DeliverablesCalendar (solo campos básicos)
+type DeliverableBasic = {
+  id: string;
+  name: string;
+  period: "Diario" | "Semanal" | "Quincenal" | "Mensual";
+  dueDate: string;
+  status: DeliverableStatus;
+  assignedTo: string;
+  progress?: number;
+};
+
 export default function AnalisisPage() {
   const [filterStatus, setFilterStatus] = useState<string | null>(null);
   const [filterDate, setFilterDate] = useState<string | null>(null);
   const [activeFormatTab, setActiveFormatTab] = useState<number>(0);
-  const [previewDeliverable, setPreviewDeliverable] = useState<any | null>(null);
+  const [previewDeliverable, setPreviewDeliverable] = useState<Deliverable | null>(null);
 
   // Helper function to format date as YYYY-MM-DD in local timezone
   const formatDateLocal = (date: Date): string => {
@@ -21,7 +50,7 @@ export default function AnalisisPage() {
   };
 
   // Entregables de Análisis de Datos
-  const [deliverables, setDeliverables] = useState([
+  const [deliverables, setDeliverables] = useState<Deliverable[]>([
     {
       id: "1",
       name: "Programa General (ISP)",
@@ -193,16 +222,39 @@ export default function AnalisisPage() {
   };
 
   // Función para crear un nuevo entregable
-  const handleCreateDeliverable = (deliverableData: Omit<typeof deliverables[0], "id"> & { lastCompletedDate?: string }) => {
+  const handleCreateDeliverable = (deliverableData: Omit<Deliverable, "id"> & { lastCompletedDate?: string }) => {
     const dueDateRaw = deliverableData.dueDate.trim().split('T')[0];
     const dueDate = subtractOneDay(dueDateRaw);
     
-    const newDeliverable = {
+    const newDeliverable: Deliverable = {
       ...deliverableData,
       dueDate: dueDate,
-      id: Date.now().toString()
+      id: Date.now().toString(),
+      // Asegurar que todos los campos requeridos estén presentes
+      progress: deliverableData.progress ?? 0,
+      lastCompletedDate: deliverableData.lastCompletedDate ?? formatDateLocal(new Date()),
+      isUrgent: deliverableData.isUrgent ?? false,
+      pendingReason: deliverableData.pendingReason ?? "",
+      requiredSignatures: deliverableData.requiredSignatures ?? [],
+      completedSignatures: deliverableData.completedSignatures ?? [],
+      observations: deliverableData.observations ?? ""
     };
     setDeliverables(prev => [...prev, newDeliverable]);
+  };
+
+  // Wrapper para onCreateDeliverable que convierte el tipo básico al completo
+  const handleCreateDeliverableWrapper = (deliverableData: Omit<DeliverableBasic, "id"> & { lastCompletedDate?: string }) => {
+    const fullData: Omit<Deliverable, "id"> & { lastCompletedDate?: string } = {
+      ...deliverableData,
+      progress: deliverableData.progress ?? 0,
+      lastCompletedDate: deliverableData.lastCompletedDate ?? formatDateLocal(new Date()),
+      isUrgent: false,
+      pendingReason: "",
+      requiredSignatures: [],
+      completedSignatures: [],
+      observations: ""
+    };
+    handleCreateDeliverable(fullData);
   };
 
   // Calcular KPIs
@@ -394,8 +446,13 @@ export default function AnalisisPage() {
           filterDate={filterDate}
           onDateSelect={setFilterDate}
           onUpdateProgress={updateDeliverableProgress}
-          onPreview={setPreviewDeliverable}
-          onCreateDeliverable={handleCreateDeliverable}
+          onPreview={(deliverable: DeliverableBasic) => {
+            const fullDeliverable = deliverables.find(d => d.id === deliverable.id);
+            if (fullDeliverable) {
+              setPreviewDeliverable(fullDeliverable);
+            }
+          }}
+          onCreateDeliverable={handleCreateDeliverableWrapper}
         />
       </div>
 

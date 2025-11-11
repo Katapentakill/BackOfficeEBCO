@@ -63,7 +63,7 @@ export default function Sidebar() {
                 src="/Logo.png"
                 alt="EBCO"
                 className="w-12 h-12 object-contain flex-shrink-0"
-                style={{ imageRendering: "high-quality" }}
+                 style={{ imageRendering: "auto" as any }}
                 onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
               />
               <h1 className="text-2xl font-bold text-brand-red">
@@ -77,7 +77,7 @@ export default function Sidebar() {
               src="/Logo.png"
               alt="EBCO"
               className="w-12 h-12 object-contain mx-auto"
-              style={{ imageRendering: "high-quality" }}
+                 style={{ imageRendering: "auto" as any }}
               onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
             />
           )}
