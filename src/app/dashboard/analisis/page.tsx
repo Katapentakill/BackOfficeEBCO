@@ -29,16 +29,18 @@ export default function DashboardAnalisisPage() {
 
   const totalCost = costBreakdown.reduce((sum, item) => sum + item.value, 0);
 
-  // Datos para la Curva S principal
+  // Datos para la Curva S principal (forma realista: lento-inicio, rápido-medio, lento-final)
   const sCurveData = [
     { week: 0, planned: 0, actual: 0, projected: 0 },
-    { week: 4, planned: 15, actual: 12, projected: 12 },
-    { week: 8, planned: 30, actual: 28, projected: 28 },
-    { week: 12, planned: 50, actual: 48, projected: 48 },
-    { week: 16, planned: 70, actual: 68, projected: 68 },
-    { week: 20, planned: 85, actual: 82, projected: 82 },
-    { week: 24, planned: 95, actual: 88, projected: 90 },
-    { week: 28, planned: 100, actual: null, projected: 95 },
+    { week: 4, planned: 5, actual: 4, projected: 4 },
+    { week: 8, planned: 12, actual: 10, projected: 10 },
+    { week: 12, planned: 25, actual: 22, projected: 22 },
+    { week: 16, planned: 45, actual: 42, projected: 42 },
+    { week: 20, planned: 68, actual: 65, projected: 65 },
+    { week: 24, planned: 85, actual: 82, projected: 83 },
+    { week: 28, planned: 95, actual: 88, projected: 90 },
+    { week: 32, planned: 99, actual: null, projected: 95 },
+    { week: 36, planned: 100, actual: null, projected: 98 },
   ];
 
   const maxValue = 100;
@@ -101,6 +103,20 @@ export default function DashboardAnalisisPage() {
       })
       .filter((point) => point !== null)
       .join(" ");
+  };
+
+  // Función para generar una Curva S realista basada en el valor final
+  const generateRealisticSCurve = (finalValue: number, numPoints: number = 6) => {
+    const points: number[] = [];
+    for (let i = 0; i < numPoints; i++) {
+      const t = i / (numPoints - 1); // 0 a 1
+      // Función sigmoide ajustada para crear forma de S
+      // Inicio lento, aceleración media, desaceleración final
+      const sigmoid = 1 / (1 + Math.exp(-12 * (t - 0.5))); // Curva S centrada
+      const value = finalValue * sigmoid;
+      points.push(Math.max(0, Math.min(finalValue, value)));
+    }
+    return points;
   };
 
   return (
@@ -406,15 +422,9 @@ export default function DashboardAnalisisPage() {
           <h3 className="text-lg font-semibold ink mb-6">Indicadores por Disciplina</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {disciplines.map((discipline, index) => {
-              // Generar datos para la minicurva S
-              const miniSCurve = [
-                { week: 0, planned: 0, actual: 0 },
-                { week: 4, planned: discipline.planned * 0.2, actual: discipline.actual * 0.2 },
-                { week: 8, planned: discipline.planned * 0.4, actual: discipline.actual * 0.4 },
-                { week: 12, planned: discipline.planned * 0.6, actual: discipline.actual * 0.6 },
-                { week: 16, planned: discipline.planned * 0.8, actual: discipline.actual * 0.8 },
-                { week: 20, planned: discipline.planned, actual: discipline.actual },
-              ];
+              // Generar datos para la minicurva S con forma realista
+              const plannedPoints = generateRealisticSCurve(discipline.planned, 6);
+              const actualPoints = generateRealisticSCurve(discipline.actual, 6);
 
               const miniHeight = 60;
               const miniMax = 100;
@@ -432,10 +442,7 @@ export default function DashboardAnalisisPage() {
                     <svg width="100%" height={miniHeight} className="overflow-visible">
                       {/* Línea programada */}
                       <polyline
-                        points={generateSCurvePoints(
-                          miniSCurve.map((d) => d.planned),
-                          miniHeight
-                        )}
+                        points={generateSCurvePoints(plannedPoints, miniHeight)}
                         fill="none"
                         stroke="#9ca3af"
                         strokeWidth="1.5"
@@ -443,10 +450,7 @@ export default function DashboardAnalisisPage() {
                       />
                       {/* Línea real */}
                       <polyline
-                        points={generateSCurvePoints(
-                          miniSCurve.map((d) => d.actual),
-                          miniHeight
-                        )}
+                        points={generateSCurvePoints(actualPoints, miniHeight)}
                         fill="none"
                         stroke="#2563eb"
                         strokeWidth="2"
