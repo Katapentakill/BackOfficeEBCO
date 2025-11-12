@@ -15,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="antialiased">
-        <ConditionalLayout>{children}</ConditionalLayout>
+        <ConditionalLayout>
+          {children}
+        </ConditionalLayout>
       </body>
     </html>
   );
