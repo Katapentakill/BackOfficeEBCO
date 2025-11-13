@@ -561,7 +561,7 @@ export default function Home() {
               Monitoreo en tiempo real del desarrollo de proyectos de construcción
             </p>
             <p className="text-base text-white/80 leading-relaxed max-w-3xl mb-8">
-              Bienvenido al Manual Operacional del Back Office, una herramienta diseñada para acompañar
+              Bienvenido al Manual de Soporte del Back Office, una herramienta diseñada para acompañar
               y facilitar el trabajo diario en nuestras obras.
             </p>
             
@@ -598,7 +598,7 @@ export default function Home() {
               <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all group-hover:scale-110" style={{ background: "linear-gradient(135deg, #E30613 0%, #B00912 100%)" }}>
                 <MdBook className="w-8 h-8 text-white" />
               </div>
-              <p className="font-bold ink text-sm">Manual Operacional</p>
+              <p className="font-bold ink text-sm">Manual de Soporte</p>
             </div>
           </Link>
           <Link href="/logistica" className="group">
@@ -663,7 +663,7 @@ export default function Home() {
           {/* Right Column - Organizational Chart Image */}
           <div className="flex items-center justify-center p-8">
             <img
-              src="/Organigrama.png"
+              src="/organigrama-backoffice.png"
               alt="Organigrama Back Office EBCO"
               className="w-full max-w-lg h-auto object-contain drop-shadow-lg"
                style={{ imageRendering: "auto" as any }}
@@ -682,7 +682,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <InfoCard
             icon={<MdBook size={40} />}
-            title="Manual Operacional"
+            title="Manual de Soporte"
             description="Acceso a la documentación completa y guías de operación del Back Office."
             buttonText="Ir a Manual"
             buttonLink="/manual"

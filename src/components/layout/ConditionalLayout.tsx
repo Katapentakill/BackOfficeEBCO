@@ -13,7 +13,7 @@ function getAreaTitle(pathname: string): string {
     "/logistica": "Logística",
     "/productos": "Productos y Soporte",
     "/analisis": "Análisis de Datos",
-    "/manual": "Manual Operacional",
+    "/manual": "Manual de Soporte",
     "/organigrama": "Organigrama",
     "/dashboard/general": "Dashboard General",
     "/dashboard/logistica": "Dashboard Logística",

@@ -23,7 +23,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { label: "INICIO", href: "/home", icon: <MdHome size={20} /> },
-  { label: "MANUAL OP. BACK OFFICE", href: "/manual", icon: <MdDashboard size={20} /> },
+  { label: "MANUAL DE SOPORTE", href: "/manual", icon: <MdDashboard size={20} /> },
   { label: "ÁREA LOGÍSTICA", href: "/logistica", icon: <MdLocalShipping size={20} /> },
   { label: "ÁREA PRODUCTOS Y SOPORTES", href: "/productos", icon: <MdShoppingCart size={20} /> },
   { label: "ÁREA ANÁLISIS DE DATOS", href: "/analisis", icon: <MdAnalytics size={20} /> },

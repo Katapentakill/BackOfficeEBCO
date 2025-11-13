@@ -9,7 +9,7 @@ export default function ManualPage() {
     <div className="p-8">
       {/* Header Banner */}
       <div className="bg-brand-red text-brand-text-light py-8 px-8 rounded-lg mb-12">
-        <h1 className="text-4xl font-bold">MANUAL OPERACIONAL</h1>
+        <h1 className="text-4xl font-bold">MANUAL DE SOPORTE</h1>
         <p className="text-lg mt-2 opacity-90">Documentación completa del Back Office</p>
       </div>
 
@@ -17,7 +17,7 @@ export default function ManualPage() {
       <section className="mb-12 bg-brand-bg-white p-8 rounded-lg shadow-md border" style={{ borderColor: "var(--color-brand-line)" }}>
         <h2 className="text-2xl font-bold text-brand-red mb-4">Bienvenida</h2>
         <p className="text-brand-text-dark leading-relaxed">
-          Este manual operacional contiene toda la información necesaria para entender la estructura,
+          Este manual de soporte contiene toda la información necesaria para entender la estructura,
           procesos y responsabilidades del Back Office. Cada sección detalla las funciones de las
           diferentes áreas, los entregables esperados y los procedimientos operacionales clave.
         </p>

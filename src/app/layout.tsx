@@ -3,7 +3,7 @@ import "./globals.css";
 import { ConditionalLayout } from "@/components/layout/ConditionalLayout";
 
 export const metadata: Metadata = {
-  title: "Manual Operacional - Back Office EBCO",
+  title: "Manual de Soporte - Back Office EBCO",
   description: "Sistema de Back Office para gestión operacional",
 };
 
