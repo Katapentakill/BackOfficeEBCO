@@ -394,7 +394,7 @@ export default function OrganigramaPage() {
       {/* Header Banner */}
       <div className="bg-brand-red text-brand-text-light py-8 px-8 rounded-lg mb-12">
         <h1 className="text-4xl font-bold">ESTRUCTURA ORGANIZACIONAL</h1>
-        <p className="text-lg mt-2 opacity-90">Back Office - Organigrama</p>
+        <p className="text-lg mt-2 opacity-90">Back Office - Funciograma</p>
       </div>
 
       {/* Introduction Section */}
@@ -412,12 +412,13 @@ export default function OrganigramaPage() {
 
       {/* Visual Organizational Chart */}
       <section className="mb-12 bg-brand-bg-white border rounded-lg p-8 shadow-md" style={{ borderColor: "var(--color-brand-line)" }}>
-        {/* Organigrama Image */}
+        {/* Funciograma Image */}
         <div className="flex justify-center">
           <img
-            src="/Organigrama.png"
-            alt="Organigrama Back Office EBCO"
+            src="/organigrama-backoffice.png"
+            alt="Funciograma Back Office EBCO"
             className="w-full max-w-[800px] h-auto rounded-lg shadow-md"
+            style={{ imageRendering: "auto" as any }}
           />
         </div>
       </section>

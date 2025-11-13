@@ -630,7 +630,7 @@ export default function Home() {
               <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all group-hover:scale-110 bg-orange-50">
                 <MdInfoOutline className="w-8 h-8" style={{ color: "#f59e0b" }} />
               </div>
-              <p className="font-bold ink text-sm">Organigrama</p>
+              <p className="font-bold ink text-sm">Funciograma</p>
             </div>
           </Link>
         </div>

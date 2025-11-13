@@ -11,13 +11,13 @@ function getAreaTitle(pathname: string): string {
   const routeMap: Record<string, string> = {
     "/home": "Back Office",
     "/logistica": "Logística",
-    "/productos": "Productos y Soporte",
+    "/productos": "Producto y Soporte",
     "/analisis": "Análisis de Datos",
     "/manual": "Manual de Soporte",
-    "/organigrama": "Organigrama",
+    "/organigrama": "Funciograma",
     "/dashboard/general": "Dashboard General",
     "/dashboard/logistica": "Dashboard Logística",
-    "/dashboard/productos": "Dashboard Productos y Servicios",
+    "/dashboard/productos": "Dashboard Productos y Soporte",
     "/dashboard/analisis": "Dashboard Análisis",
   };
 
