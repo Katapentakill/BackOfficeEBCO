@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { 
   MdBook, 
   MdInfoOutline, 
@@ -18,8 +18,6 @@ import {
   MdEdit,
   MdClose,
   MdDelete,
-  MdSettings,
-  MdLogout
 } from "react-icons/md";
 import InfoCard from "@/components/ui/InfoCard";
 import Link from "next/link";
@@ -30,31 +28,6 @@ export default function Home() {
   const [showKPIModal, setShowKPIModal] = useState(false);
   const [editingProject, setEditingProject] = useState<number | null>(null);
   const [editingKPI, setEditingKPI] = useState<{ obraIndex: number; kpiIndex: number } | null>(null);
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const userMenuRef = useRef<HTMLDivElement | null>(null);
-  const currentUser = {
-    name: "Nombre Apellido",
-    role: "Admin"
-  };
-  const userInitials = currentUser.name
-    .split(" ")
-    .map((part) => part[0])
-    .filter(Boolean)
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
-  
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
-        setIsUserMenuOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
    
   // Estados para formularios
   const [projectForm, setProjectForm] = useState({
@@ -474,66 +447,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen p-8">
-      <div className="flex justify-end mb-6">
-        <div ref={userMenuRef} className="relative">
-          <button
-            type="button"
-            onClick={() => setIsUserMenuOpen((prev) => !prev)}
-            className="flex items-center gap-3 px-4 py-2 rounded-full bg-white border shadow-sm hover:shadow-md transition-shadow"
-            style={{ borderColor: "var(--color-brand-line)" }}
-          >
-            <div
-              className="w-10 h-10 rounded-full text-white flex items-center justify-center text-sm font-semibold"
-              style={{ background: "var(--color-brand-red)" }}
-            >
-              {userInitials || "NA"}
-            </div>
-            <div className="flex flex-col items-start">
-              <span className="text-sm font-semibold text-brand-text-dark">{currentUser.name}</span>
-              <span className="text-xs text-gray-500">{currentUser.role}</span>
-            </div>
-          </button>
-
-          {isUserMenuOpen && (
-            <div className="absolute right-0 mt-3 w-52 bg-white border rounded-lg shadow-xl py-2 z-50" style={{ borderColor: "var(--color-brand-line)" }}>
-              <button
-                type="button"
-                className="w-full flex items-center gap-3 px-4 py-2 text-sm text-brand-text-dark hover:bg-gray-50 transition-colors"
-                onClick={() => {
-                  // Placeholder action
-                  setIsUserMenuOpen(false);
-                }}
-              >
-                <MdPerson className="w-5 h-5 text-gray-500" />
-                Mi Perfil
-              </button>
-              <button
-                type="button"
-                className="w-full flex items-center gap-3 px-4 py-2 text-sm text-brand-text-dark hover:bg-gray-50 transition-colors"
-                onClick={() => {
-                  // Placeholder action
-                  setIsUserMenuOpen(false);
-                }}
-              >
-                <MdSettings className="w-5 h-5 text-gray-500" />
-                Configuración
-              </button>
-              <div className="my-2 border-t" style={{ borderColor: "var(--color-brand-line)" }}></div>
-              <button
-                type="button"
-                className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
-                onClick={() => {
-                  // Placeholder action
-                  setIsUserMenuOpen(false);
-                }}
-              >
-                <MdLogout className="w-5 h-5" />
-                Cerrar Sesión
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
 
       {/* Hero Section con gradiente y diseño mejorado */}
       <section className="relative mb-12 overflow-hidden rounded-2xl" style={{
