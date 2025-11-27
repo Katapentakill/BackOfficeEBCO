@@ -276,55 +276,55 @@ export default function DashboardLogisticaPage() {
   });
 
   return (
-    <div className="space-y-10">
-      <section className="bg-white border rounded-3xl p-8 shadow-sm grid gap-6 md:grid-cols-[2fr,1.2fr]" style={{ borderColor: "var(--color-brand-line)" }}>
+    <div className="space-y-6 md:space-y-10 p-4 md:p-8">
+      <section className="bg-white border rounded-2xl md:rounded-3xl p-4 md:p-8 shadow-sm grid gap-6 md:grid-cols-[2fr,1.2fr]" style={{ borderColor: "var(--color-brand-line)" }}>
         <div className="space-y-4">
-          <span className="inline-block px-4 py-1 text-xs font-semibold uppercase tracking-wide bg-brand-red/10 text-brand-red rounded-full">
+          <span className="inline-block px-3 md:px-4 py-1 text-xs font-semibold uppercase tracking-wide bg-brand-red/10 text-brand-red rounded-full">
             Logística & Supply Chain
           </span>
-          <h1 className="text-3xl font-bold ink leading-snug">Control ejecutivo de abastecimiento y bodegas</h1>
-          <p className="text-sm text-gray-600 max-w-xl">
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold ink leading-snug">Control ejecutivo de abastecimiento y bodegas</h1>
+          <p className="text-xs md:text-sm text-gray-600 max-w-xl">
             Indicadores semanales con foco en cumplimiento de despachos, stock crítico y desempeño de proveedores clave.
           </p>
-          <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 text-xs md:text-sm text-gray-600">
             <div>
               <span className="text-xs uppercase tracking-wide text-gray-400">Entregas coordinadas</span>
-              <p className="text-lg font-semibold ink">152 (últimos 7 días)</p>
+              <p className="text-base md:text-lg font-semibold ink">152 (últimos 7 días)</p>
             </div>
             <div>
               <span className="text-xs uppercase tracking-wide text-gray-400">Uso bodegas</span>
-              <p className="text-lg font-semibold text-brand-red">71% promedio</p>
+              <p className="text-base md:text-lg font-semibold text-brand-red">71% promedio</p>
             </div>
             <div>
               <span className="text-xs uppercase tracking-wide text-gray-400">Último incidente</span>
-              <p className="text-lg font-semibold ink">15 días atrás</p>
+              <p className="text-base md:text-lg font-semibold ink">15 días atrás</p>
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-2 md:gap-3">
           {logisticsKpis.map((card) => (
-            <div key={card.label} className="rounded-2xl p-4 border bg-white" style={{ borderColor: "var(--color-brand-line)" }}>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs uppercase tracking-wide text-gray-400">{card.label}</span>
-                <span className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: card.background, color: card.color }}>
-                  <MdOutlineTrendingUp className="w-5 h-5" />
+            <div key={card.label} className="rounded-xl md:rounded-2xl p-3 md:p-4 border bg-white" style={{ borderColor: "var(--color-brand-line)" }}>
+              <div className="flex items-center justify-between mb-2 md:mb-3">
+                <span className="text-[10px] md:text-xs uppercase tracking-wide text-gray-400 leading-tight">{card.label}</span>
+                <span className="w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: card.background, color: card.color }}>
+                  <MdOutlineTrendingUp className="w-4 h-4 md:w-5 md:h-5" />
                 </span>
               </div>
-              <p className="text-2xl font-bold" style={{ color: card.color }}>{card.value}</p>
-              <p className="text-xs text-gray-600 mt-2">{card.detail}</p>
+              <p className="text-lg md:text-2xl font-bold" style={{ color: card.color }}>{card.value}</p>
+              <p className="text-[10px] md:text-xs text-gray-600 mt-1 md:mt-2 leading-tight">{card.detail}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section className="grid gap-6 lg:grid-cols-[1.2fr,1fr]">
-        <div className="bg-white border rounded-2xl p-4 space-y-3" style={{ borderColor: "var(--color-brand-line)" }}>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
-              <MdLocalShipping className="w-4 h-4 text-brand-red" /> 
+        <div className="bg-white border rounded-xl md:rounded-2xl p-3 md:p-4 space-y-3" style={{ borderColor: "var(--color-brand-line)" }}>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+            <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-gray-700">
+              <MdLocalShipping className="w-4 h-4 text-brand-red flex-shrink-0" /> 
               <span>Calendario de Despachos</span>
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 w-full sm:w-auto">
               <button
                 onClick={() => {
                   const prevMonth = new Date(currentMonth);
@@ -337,7 +337,7 @@ export default function DashboardLogisticaPage() {
               >
                 <MdChevronLeft className="w-4 h-4 text-gray-600" />
               </button>
-              <span className="text-xs text-gray-700 font-medium min-w-[120px] text-center capitalize">
+              <span className="text-xs text-gray-700 font-medium min-w-[100px] sm:min-w-[120px] text-center capitalize">
                 {currentMonth.toLocaleDateString("es-ES", { month: "long", year: "numeric" })}
               </span>
               <button
@@ -356,10 +356,10 @@ export default function DashboardLogisticaPage() {
           </div>
           
           {/* Calendario compacto */}
-          <div className="grid grid-cols-7 gap-0.5 text-[10px]">
+          <div className="grid grid-cols-7 gap-0.5 text-[9px] md:text-[10px]">
             {/* Días de la semana */}
             {["L", "M", "X", "J", "V", "S", "D"].map((day) => (
-              <div key={day} className="text-center font-semibold text-gray-400 py-1 text-xs">
+              <div key={day} className="text-center font-semibold text-gray-400 py-1 text-[10px] md:text-xs">
                 {day}
               </div>
             ))}
@@ -409,7 +409,7 @@ export default function DashboardLogisticaPage() {
                     `}
                     title={dispatch ? `${dispatch.count} despacho${dispatch.count > 1 ? "s" : ""}` : ""}
                   >
-                    <span className={`text-[11px] ${isToday ? "font-bold" : ""}`}>
+                    <span className={`text-[10px] md:text-[11px] ${isToday ? "font-bold" : ""}`}>
                       {date.getDate()}
                     </span>
                     {dispatch && (
@@ -417,7 +417,7 @@ export default function DashboardLogisticaPage() {
                         {Array.from({ length: Math.min(dispatch.count, 3) }).map((_, idx) => (
                           <div
                             key={idx}
-                            className="w-1 h-1 rounded-full"
+                            className="w-0.5 h-0.5 md:w-1 md:h-1 rounded-full"
                             style={{
                               background:
                                 dispatch.status === "completed"
@@ -431,10 +431,10 @@ export default function DashboardLogisticaPage() {
                           />
                         ))}
                         {dispatch.count > 3 && (
-                          <span className="text-[8px] text-gray-500 font-semibold">+{dispatch.count - 3}</span>
+                          <span className="text-[7px] md:text-[8px] text-gray-500 font-semibold">+{dispatch.count - 3}</span>
                         )}
                         {dispatch.status === "alert" && (
-                          <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse"></div>
+                          <div className="absolute -top-0.5 -right-0.5 w-1 h-1 md:w-1.5 md:h-1.5 bg-orange-500 rounded-full animate-pulse"></div>
                         )}
                       </div>
                     )}
@@ -497,18 +497,18 @@ export default function DashboardLogisticaPage() {
             </div>
           )}
         </div>
-        <div className="bg-white border rounded-3xl p-6 space-y-5" style={{ borderColor: "var(--color-brand-line)" }}>
-          <div className="flex items-center gap-2 text-sm font-semibold text-gray-600">
-            <MdOutlineWarningAmber className="w-5 h-5 text-amber-500" /> Alertas de inventario
+        <div className="bg-white border rounded-2xl md:rounded-3xl p-4 md:p-6 space-y-4 md:space-y-5" style={{ borderColor: "var(--color-brand-line)" }}>
+          <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-gray-600">
+            <MdOutlineWarningAmber className="w-4 h-4 md:w-5 md:h-5 text-amber-500 flex-shrink-0" /> Alertas de inventario
           </div>
           <div className="space-y-3">
             {inventoryStatus.map((item) => (
-              <div key={item.warehouse} className="border rounded-xl p-4" style={{ borderColor: "var(--color-brand-line)" }}>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-semibold ink">{item.warehouse}</span>
+              <div key={item.warehouse} className="border rounded-lg md:rounded-xl p-3 md:p-4" style={{ borderColor: "var(--color-brand-line)" }}>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                  <span className="text-xs md:text-sm font-semibold ink">{item.warehouse}</span>
                   <span className="text-xs text-gray-500">{item.capacity}% ocupación</span>
                 </div>
-                <div className="mt-3 bg-gray-200 rounded-full h-2">
+                <div className="mt-2 md:mt-3 bg-gray-200 rounded-full h-2">
                   <div className="h-2 rounded-full bg-brand-red" style={{ width: `${item.capacity}%` }}></div>
                 </div>
                 <p className="text-xs text-gray-500 mt-2">Alerta: {item.alert}</p>
@@ -519,20 +519,20 @@ export default function DashboardLogisticaPage() {
       </section>
 
       <section className="grid gap-6 lg:grid-cols-[2fr,1fr]">
-        <div className="bg-white border rounded-3xl p-6 space-y-4" style={{ borderColor: "var(--color-brand-line)" }}>
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold ink">Desempeño cadena suministro</h2>
+        <div className="bg-white border rounded-2xl md:rounded-3xl p-4 md:p-6 space-y-4" style={{ borderColor: "var(--color-brand-line)" }}>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+            <h2 className="text-lg md:text-xl font-bold ink">Desempeño cadena suministro</h2>
             <span className="text-xs text-gray-500">Ranking proveedores críticos</span>
           </div>
           <div className="space-y-3">
             {supplierMatrix.map((supplier) => (
-              <div key={supplier.supplier} className="border rounded-xl p-4 flex flex-col gap-2" style={{ borderColor: "var(--color-brand-line)" }}>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-semibold ink">{supplier.supplier}</span>
+              <div key={supplier.supplier} className="border rounded-lg md:rounded-xl p-3 md:p-4 flex flex-col gap-2" style={{ borderColor: "var(--color-brand-line)" }}>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                  <span className="text-xs md:text-sm font-semibold ink">{supplier.supplier}</span>
                   <span className="text-xs text-gray-500">Cumplimiento {supplier.compliance}</span>
                 </div>
-                <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500">
-                  <span className="flex items-center gap-1"><MdOutlineCalendarToday className="w-4 h-4" /> Próx. entrega: {supplier.next}</span>
+                <div className="flex flex-wrap items-center gap-2 md:gap-3 text-xs text-gray-500">
+                  <span className="flex items-center gap-1"><MdOutlineCalendarToday className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" /> Próx. entrega: {supplier.next}</span>
                   <span>Lead time {supplier.leadTime}</span>
                 </div>
                 <p className="text-xs text-gray-600">{supplier.comment}</p>
@@ -540,16 +540,16 @@ export default function DashboardLogisticaPage() {
             ))}
           </div>
         </div>
-        <div className="bg-white border rounded-3xl p-6 space-y-4" style={{ borderColor: "var(--color-brand-line)" }}>
-          <div className="flex items-center gap-2 text-sm font-semibold text-gray-600">
-            <MdOutlineAccessTime className="w-5 h-5 text-brand-red" /> Próximas tareas
+        <div className="bg-white border rounded-2xl md:rounded-3xl p-4 md:p-6 space-y-4" style={{ borderColor: "var(--color-brand-line)" }}>
+          <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-gray-600">
+            <MdOutlineAccessTime className="w-4 h-4 md:w-5 md:h-5 text-brand-red flex-shrink-0" /> Próximas tareas
           </div>
           <div className="space-y-3">
             {upcomingTasks.map((task) => (
-              <div key={task.task} className="border rounded-xl p-4" style={{ borderColor: "var(--color-brand-line)" }}>
-                <p className="text-sm font-semibold ink">{task.task}</p>
-                <div className="flex items-center gap-2 text-xs text-gray-500 mt-2">
-                  <MdOutlineCalendarToday className="w-4 h-4" /> {task.date}
+              <div key={task.task} className="border rounded-lg md:rounded-xl p-3 md:p-4" style={{ borderColor: "var(--color-brand-line)" }}>
+                <p className="text-xs md:text-sm font-semibold ink">{task.task}</p>
+                <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500 mt-2">
+                  <span className="flex items-center gap-1"><MdOutlineCalendarToday className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" /> {task.date}</span>
                   <span>Responsable: {task.owner}</span>
                 </div>
               </div>
@@ -559,56 +559,56 @@ export default function DashboardLogisticaPage() {
       </section>
 
       {/* Inventario Valorizado */}
-      <section className="bg-white border rounded-lg shadow-sm p-6" style={{ borderColor: "var(--color-brand-line)" }}>
-        <div className="flex items-center justify-between mb-6">
+      <section className="bg-white border rounded-lg shadow-sm p-4 md:p-6" style={{ borderColor: "var(--color-brand-line)" }}>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4 md:mb-6">
           <div>
-            <h2 className="text-xl md:text-2xl font-bold ink mb-2">Inventario Valorizado</h2>
-            <p className="text-sm text-gray-600">Valoración al {valorizedInventory.valuationDate}</p>
+            <h2 className="text-lg md:text-xl lg:text-2xl font-bold ink mb-2">Inventario Valorizado</h2>
+            <p className="text-xs md:text-sm text-gray-600">Valoración al {valorizedInventory.valuationDate}</p>
           </div>
-          <button className="px-4 py-2 bg-brand-red text-white rounded-lg hover:bg-brand transition-colors flex items-center gap-2 text-sm font-semibold">
-            <MdOutlineFileDownload className="w-5 h-5" />
+          <button className="px-3 md:px-4 py-2 bg-brand-red text-white rounded-lg hover:bg-brand transition-colors flex items-center gap-2 text-xs md:text-sm font-semibold w-full sm:w-auto">
+            <MdOutlineFileDownload className="w-4 h-4 md:w-5 md:h-5" />
             Exportar Reporte
           </button>
         </div>
 
         {/* KPIs de Inventario */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-blue-50 border-l-4 rounded-lg p-4" style={{ borderLeftColor: "#2563eb" }}>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mb-4 md:mb-6">
+          <div className="bg-blue-50 border-l-4 rounded-lg p-3 md:p-4" style={{ borderLeftColor: "#2563eb" }}>
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs text-gray-600">Valor Total Inventario</span>
-              <MdAttachMoney className="w-5 h-5 text-blue-600" />
+              <MdAttachMoney className="w-4 h-4 md:w-5 md:h-5 text-blue-600 flex-shrink-0" />
             </div>
-            <p className="text-3xl font-bold text-blue-600">${valorizedInventory.total}M</p>
+            <p className="text-2xl md:text-3xl font-bold text-blue-600">${valorizedInventory.total}M</p>
             <p className="text-xs text-gray-500 mt-1">591 ítems totales</p>
           </div>
-          <div className="bg-green-50 border-l-4 rounded-lg p-4" style={{ borderLeftColor: "#16a34a" }}>
+          <div className="bg-green-50 border-l-4 rounded-lg p-3 md:p-4" style={{ borderLeftColor: "#16a34a" }}>
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs text-gray-600">Categorías Activas</span>
-              <MdCategory className="w-5 h-5 text-green-600" />
+              <MdCategory className="w-4 h-4 md:w-5 md:h-5 text-green-600 flex-shrink-0" />
             </div>
-            <p className="text-3xl font-bold text-green-600">{valorizedInventory.byCategory.length}</p>
+            <p className="text-2xl md:text-3xl font-bold text-green-600">{valorizedInventory.byCategory.length}</p>
             <p className="text-xs text-gray-500 mt-1">Categorías con stock</p>
           </div>
-          <div className="bg-purple-50 border-l-4 rounded-lg p-4" style={{ borderLeftColor: "#8b5cf6" }}>
+          <div className="bg-purple-50 border-l-4 rounded-lg p-3 md:p-4" style={{ borderLeftColor: "#8b5cf6" }}>
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs text-gray-600">Bodegas Activas</span>
-              <MdWarehouse className="w-5 h-5 text-purple-600" />
+              <MdWarehouse className="w-4 h-4 md:w-5 md:h-5 text-purple-600 flex-shrink-0" />
             </div>
-            <p className="text-3xl font-bold text-purple-600">{valorizedInventory.byWarehouse.length}</p>
+            <p className="text-2xl md:text-3xl font-bold text-purple-600">{valorizedInventory.byWarehouse.length}</p>
             <p className="text-xs text-gray-500 mt-1">Ubicaciones operativas</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-4 md:mb-6">
           {/* Desglose por Categoría */}
           <div>
-            <h3 className="text-lg font-semibold ink mb-4">Valor por Categoría</h3>
+            <h3 className="text-base md:text-lg font-semibold ink mb-3 md:mb-4">Valor por Categoría</h3>
             <div className="space-y-3">
               {valorizedInventory.byCategory.map((cat, index) => (
                 <div key={index} className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs md:text-sm">
                     <span className="font-semibold text-gray-800">{cat.category}</span>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 md:gap-3">
                       <span className="text-gray-600">{cat.items} ítems</span>
                       <span className="font-bold text-gray-900">${cat.value}M</span>
                     </div>
@@ -630,13 +630,13 @@ export default function DashboardLogisticaPage() {
 
           {/* Desglose por Bodega */}
           <div>
-            <h3 className="text-lg font-semibold ink mb-4">Valor por Bodega</h3>
+            <h3 className="text-base md:text-lg font-semibold ink mb-3 md:mb-4">Valor por Bodega</h3>
             <div className="space-y-3">
               {valorizedInventory.byWarehouse.map((wh, index) => (
                 <div key={index} className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs md:text-sm">
                     <span className="font-semibold text-gray-800">{wh.warehouse}</span>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 md:gap-3">
                       <span className="text-gray-600">{wh.items} ítems</span>
                       <span className="font-bold text-gray-900">${wh.value}M</span>
                     </div>
@@ -659,9 +659,9 @@ export default function DashboardLogisticaPage() {
 
         {/* Tabla de Ítems Principales */}
         <div>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold ink">Ítems de Mayor Valor</h3>
-            <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+            <h3 className="text-base md:text-lg font-semibold ink">Ítems de Mayor Valor</h3>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
               <select
                 value={selectedCategory || ""}
                 onChange={(e) => setSelectedCategory(e.target.value || null)}
@@ -686,83 +686,88 @@ export default function DashboardLogisticaPage() {
               </select>
             </div>
           </div>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b" style={{ borderColor: "var(--color-brand-line)" }}>
-                  <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Código</th>
-                  <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Descripción</th>
-                  <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Categoría</th>
-                  <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Bodega</th>
-                  <th className="text-right py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Cantidad</th>
-                  <th className="text-right py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Valor Unit.</th>
-                  <th className="text-right py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Valor Total</th>
-                  <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Última Actualización</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredItems.map((item, index) => (
-                  <tr key={index} className="border-b hover:bg-gray-50 transition-colors" style={{ borderColor: "var(--color-brand-line)" }}>
-                    <td className="py-3 px-4">
-                      <span className="text-sm font-semibold text-gray-900">{item.code}</span>
-                    </td>
-                    <td className="py-3 px-4">
-                      <span className="text-sm text-gray-700">{item.description}</span>
-                    </td>
-                    <td className="py-3 px-4">
-                      <span className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-700">{item.category}</span>
-                    </td>
-                    <td className="py-3 px-4">
-                      <span className="text-sm text-gray-700">{item.warehouse}</span>
-                    </td>
-                    <td className="py-3 px-4 text-right">
-                      <span className="text-sm font-semibold text-gray-900">{item.quantity.toLocaleString()} {item.unit}</span>
-                    </td>
-                    <td className="py-3 px-4 text-right">
-                      <span className="text-sm text-gray-700">
-                        {item.unitValue >= 1000000 
-                          ? `$${(item.unitValue / 1000000).toFixed(2)}M`
-                          : item.unitValue >= 1000
-                          ? `$${(item.unitValue / 1000).toFixed(0)}K`
-                          : `$${item.unitValue.toLocaleString()}`
-                        }
-                      </span>
-                    </td>
-                    <td className="py-3 px-4 text-right">
-                      <span className="text-sm font-bold text-gray-900">
-                        {item.totalValue >= 1 
-                          ? `$${item.totalValue.toFixed(2)}M`
-                          : `$${(item.totalValue * 1000).toFixed(0)}K`
-                        }
-                      </span>
-                    </td>
-                    <td className="py-3 px-4">
-                      <span className="text-xs text-gray-500">{item.lastUpdate}</span>
-                    </td>
+          <div className="overflow-x-auto -mx-4 md:mx-0">
+            <div className="inline-block min-w-full align-middle px-4 md:px-0">
+              <table className="min-w-full">
+                <thead>
+                  <tr className="border-b" style={{ borderColor: "var(--color-brand-line)" }}>
+                    <th className="text-left py-2 md:py-3 px-2 md:px-4 text-[10px] md:text-xs font-semibold text-gray-600 uppercase">Código</th>
+                    <th className="text-left py-2 md:py-3 px-2 md:px-4 text-[10px] md:text-xs font-semibold text-gray-600 uppercase">Descripción</th>
+                    <th className="text-left py-2 md:py-3 px-2 md:px-4 text-[10px] md:text-xs font-semibold text-gray-600 uppercase hidden sm:table-cell">Categoría</th>
+                    <th className="text-left py-2 md:py-3 px-2 md:px-4 text-[10px] md:text-xs font-semibold text-gray-600 uppercase hidden md:table-cell">Bodega</th>
+                    <th className="text-right py-2 md:py-3 px-2 md:px-4 text-[10px] md:text-xs font-semibold text-gray-600 uppercase">Cantidad</th>
+                    <th className="text-right py-2 md:py-3 px-2 md:px-4 text-[10px] md:text-xs font-semibold text-gray-600 uppercase hidden lg:table-cell">Valor Unit.</th>
+                    <th className="text-right py-2 md:py-3 px-2 md:px-4 text-[10px] md:text-xs font-semibold text-gray-600 uppercase">Valor Total</th>
+                    <th className="text-left py-2 md:py-3 px-2 md:px-4 text-[10px] md:text-xs font-semibold text-gray-600 uppercase hidden xl:table-cell">Última Actualización</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {filteredItems.map((item, index) => (
+                    <tr key={index} className="border-b hover:bg-gray-50 transition-colors" style={{ borderColor: "var(--color-brand-line)" }}>
+                      <td className="py-2 md:py-3 px-2 md:px-4">
+                        <span className="text-xs md:text-sm font-semibold text-gray-900">{item.code}</span>
+                      </td>
+                      <td className="py-2 md:py-3 px-2 md:px-4">
+                        <span className="text-xs md:text-sm text-gray-700">{item.description}</span>
+                        <div className="sm:hidden mt-1">
+                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-gray-100 text-gray-700">{item.category}</span>
+                        </div>
+                      </td>
+                      <td className="py-2 md:py-3 px-2 md:px-4 hidden sm:table-cell">
+                        <span className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-700">{item.category}</span>
+                      </td>
+                      <td className="py-2 md:py-3 px-2 md:px-4 hidden md:table-cell">
+                        <span className="text-xs md:text-sm text-gray-700">{item.warehouse}</span>
+                      </td>
+                      <td className="py-2 md:py-3 px-2 md:px-4 text-right">
+                        <span className="text-xs md:text-sm font-semibold text-gray-900">{item.quantity.toLocaleString()} {item.unit}</span>
+                      </td>
+                      <td className="py-2 md:py-3 px-2 md:px-4 text-right hidden lg:table-cell">
+                        <span className="text-xs md:text-sm text-gray-700">
+                          {item.unitValue >= 1000000 
+                            ? `$${(item.unitValue / 1000000).toFixed(2)}M`
+                            : item.unitValue >= 1000
+                            ? `$${(item.unitValue / 1000).toFixed(0)}K`
+                            : `$${item.unitValue.toLocaleString()}`
+                          }
+                        </span>
+                      </td>
+                      <td className="py-2 md:py-3 px-2 md:px-4 text-right">
+                        <span className="text-xs md:text-sm font-bold text-gray-900">
+                          {item.totalValue >= 1 
+                            ? `$${item.totalValue.toFixed(2)}M`
+                            : `$${(item.totalValue * 1000).toFixed(0)}K`
+                          }
+                        </span>
+                      </td>
+                      <td className="py-2 md:py-3 px-2 md:px-4 hidden xl:table-cell">
+                        <span className="text-xs text-gray-500">{item.lastUpdate}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white border rounded-3xl p-6 space-y-4" style={{ borderColor: "var(--color-brand-line)" }}>
-        <div className="flex items-center gap-2 text-sm font-semibold text-gray-600">
-          <MdAssignmentTurnedIn className="w-5 h-5 text-brand-red" /> Reportes disponibles para gerencia
+      <section className="bg-white border rounded-2xl md:rounded-3xl p-4 md:p-6 space-y-4" style={{ borderColor: "var(--color-brand-line)" }}>
+        <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-gray-600">
+          <MdAssignmentTurnedIn className="w-4 h-4 md:w-5 md:h-5 text-brand-red flex-shrink-0" /> Reportes disponibles para gerencia
         </div>
         <div className="grid gap-3 md:grid-cols-3">
           {logisticsReports.map((report) => (
             <button
               key={report.title}
-              className="border rounded-xl p-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+              className="border rounded-lg md:rounded-xl p-3 md:p-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
               style={{ borderColor: "var(--color-brand-line)" }}
             >
-              <div>
-                <p className="text-sm font-semibold ink">{report.title}</p>
-                <p className="text-xs text-gray-500">Equipo responsable: {report.owner}</p>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs md:text-sm font-semibold ink">{report.title}</p>
+                <p className="text-[10px] md:text-xs text-gray-500">Equipo responsable: {report.owner}</p>
               </div>
-              <MdOutlineFileDownload className="w-5 h-5 text-brand-red" />
+              <MdOutlineFileDownload className="w-4 h-4 md:w-5 md:h-5 text-brand-red flex-shrink-0 ml-2" />
             </button>
           ))}
         </div>

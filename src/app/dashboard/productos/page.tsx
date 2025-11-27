@@ -319,15 +319,15 @@ export default function DashboardProductosPage() {
   const ageAlerts = projectData.ageAlerts;
 
   return (
-    <div className="space-y-10">
-      <section className="bg-white border rounded-3xl p-8 shadow-sm grid gap-6 md:grid-cols-[2fr,1.2fr]" style={{ borderColor: "var(--color-brand-line)" }}>
+    <div className="space-y-6 md:space-y-10 p-4 md:p-8">
+      <section className="bg-white border rounded-2xl md:rounded-3xl p-4 md:p-8 shadow-sm grid gap-6 md:grid-cols-[2fr,1.2fr]" style={{ borderColor: "var(--color-brand-line)" }}>
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <span className="inline-block px-4 py-1 text-xs font-semibold uppercase tracking-wide bg-brand-red/10 text-brand-red rounded-full">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <span className="inline-block px-3 md:px-4 py-1 text-xs font-semibold uppercase tracking-wide bg-brand-red/10 text-brand-red rounded-full">
               Productos & Subcontratos
             </span>
             {/* Selector de Proyecto */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 md:gap-3 w-full sm:w-auto">
               <label htmlFor="project-select-products" className="text-xs font-semibold text-gray-600 whitespace-nowrap">
                 Proyecto:
               </label>
@@ -335,7 +335,7 @@ export default function DashboardProductosPage() {
                 id="project-select-products"
                 value={selectedProject}
                 onChange={(e) => setSelectedProject(e.target.value)}
-                className="px-3 py-1.5 border rounded-lg bg-white text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brand-red focus:border-transparent"
+                className="px-3 py-1.5 border rounded-lg bg-white text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brand-red focus:border-transparent flex-1 sm:flex-none"
                 style={{ borderColor: "var(--color-brand-line)" }}
               >
                 {Object.entries(projectsData).map(([key, project]) => (
@@ -346,20 +346,20 @@ export default function DashboardProductosPage() {
               </select>
             </div>
           </div>
-          <h1 className="text-3xl font-bold ink leading-snug">Monitoreo ejecutivo de contratación y EE.TT.</h1>
-          <p className="text-sm text-gray-600 max-w-xl">
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold ink leading-snug">Monitoreo ejecutivo de contratación y EE.TT.</h1>
+          <p className="text-xs md:text-sm text-gray-600 max-w-xl">
             Estado del pipeline de subcontratos, solicitudes de especificaciones técnicas y entregables clave para gerencia.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-2 md:gap-3">
           {/* 1. Salud de Contratos */}
-          <div className="rounded-2xl p-4 border bg-white" style={{ borderColor: "var(--color-brand-line)" }}>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs uppercase tracking-wide text-gray-400">Salud de Contratos</span>
-              <MdOutlineHandshake className="w-5 h-5 text-brand-red" />
+          <div className="rounded-xl md:rounded-2xl p-3 md:p-4 border bg-white" style={{ borderColor: "var(--color-brand-line)" }}>
+            <div className="flex items-center justify-between mb-2 md:mb-3">
+              <span className="text-[10px] md:text-xs uppercase tracking-wide text-gray-400 leading-tight">Salud de Contratos</span>
+              <MdOutlineHandshake className="w-4 h-4 md:w-5 md:h-5 text-brand-red flex-shrink-0" />
             </div>
-            <div className="flex items-center gap-3 mb-2">
-              <div className="relative w-16 h-16">
+            <div className="flex items-center gap-2 md:gap-3 mb-2">
+              <div className="relative w-12 h-12 md:w-16 md:h-16 flex-shrink-0">
                 <svg viewBox="0 0 100 100" className="transform -rotate-90">
                   {/* En Riesgo */}
                   <circle
@@ -396,34 +396,34 @@ export default function DashboardProductosPage() {
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-xs font-bold text-gray-700">{contractHealthData.total}</span>
+                  <span className="text-[10px] md:text-xs font-bold text-gray-700">{contractHealthData.total}</span>
                 </div>
               </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="w-2 h-2 rounded-full bg-red-500"></div>
-                  <span className="text-xs text-gray-600">En Riesgo: <span className="font-semibold text-red-600">{contractHealthData.atRisk}</span></span>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5 md:gap-2 mb-1">
+                  <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-red-500 flex-shrink-0"></div>
+                  <span className="text-[10px] md:text-xs text-gray-600">En Riesgo: <span className="font-semibold text-red-600">{contractHealthData.atRisk}</span></span>
                 </div>
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="w-2 h-2 rounded-full bg-amber-500"></div>
-                  <span className="text-xs text-gray-600">Observación: <span className="font-semibold text-amber-600">{contractHealthData.underObservation}</span></span>
+                <div className="flex items-center gap-1.5 md:gap-2 mb-1">
+                  <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-amber-500 flex-shrink-0"></div>
+                  <span className="text-[10px] md:text-xs text-gray-600">Observación: <span className="font-semibold text-amber-600">{contractHealthData.underObservation}</span></span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                  <span className="text-xs text-gray-600">En Línea: <span className="font-semibold text-green-600">{contractHealthData.onTrack}</span></span>
+                <div className="flex items-center gap-1.5 md:gap-2">
+                  <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-green-500 flex-shrink-0"></div>
+                  <span className="text-[10px] md:text-xs text-gray-600">En Línea: <span className="font-semibold text-green-600">{contractHealthData.onTrack}</span></span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* 2. Flujo de Pagos */}
-          <div className="rounded-2xl p-4 border bg-white" style={{ borderColor: "var(--color-brand-line)" }}>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs uppercase tracking-wide text-gray-400">Flujo de Pagos (Últimos 30d)</span>
-              <MdOutlineBarChart className="w-5 h-5 text-blue-600" />
+          <div className="rounded-xl md:rounded-2xl p-3 md:p-4 border bg-white" style={{ borderColor: "var(--color-brand-line)" }}>
+            <div className="flex items-center justify-between mb-2 md:mb-3">
+              <span className="text-[10px] md:text-xs uppercase tracking-wide text-gray-400 leading-tight">Flujo de Pagos (Últimos 30d)</span>
+              <MdOutlineBarChart className="w-4 h-4 md:w-5 md:h-5 text-blue-600 flex-shrink-0" />
             </div>
-            <p className="text-2xl font-bold text-blue-600 mb-1">${paymentFlowData.totalPaid}M</p>
-            <p className="text-xs text-gray-600 mb-3">${paymentFlowData.inValidation}M en validación</p>
+            <p className="text-lg md:text-2xl font-bold text-blue-600 mb-1">${paymentFlowData.totalPaid}M</p>
+            <p className="text-[10px] md:text-xs text-gray-600 mb-2 md:mb-3">${paymentFlowData.inValidation}M en validación</p>
             {/* Sparkline */}
             <div className="h-8 flex items-end gap-1">
               {paymentFlowData.data.map((value, idx) => {
@@ -442,29 +442,29 @@ export default function DashboardProductosPage() {
           </div>
 
           {/* 3. Eficiencia de Licitación */}
-          <div className="rounded-2xl p-4 border bg-white" style={{ borderColor: "var(--color-brand-line)" }}>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs uppercase tracking-wide text-gray-400">Eficiencia de Licitación</span>
-              <MdOutlineTimeline className="w-5 h-5 text-purple-600" />
+          <div className="rounded-xl md:rounded-2xl p-3 md:p-4 border bg-white" style={{ borderColor: "var(--color-brand-line)" }}>
+            <div className="flex items-center justify-between mb-2 md:mb-3">
+              <span className="text-[10px] md:text-xs uppercase tracking-wide text-gray-400 leading-tight">Eficiencia de Licitación</span>
+              <MdOutlineTimeline className="w-4 h-4 md:w-5 md:h-5 text-purple-600 flex-shrink-0" />
             </div>
-            <p className="text-2xl font-bold text-purple-600 mb-1">{biddingEfficiency.rate}%</p>
-            <p className="text-xs text-gray-600 mb-2">Tasa de adjudicación</p>
-            <p className="text-xs text-gray-500">Ciclo promedio: <span className="font-semibold">{biddingEfficiency.avgCycle} días</span></p>
-            <p className="text-xs text-gray-400 mt-1">({biddingEfficiency.awarded} de {biddingEfficiency.totalProposals} adjudicadas)</p>
+            <p className="text-lg md:text-2xl font-bold text-purple-600 mb-1">{biddingEfficiency.rate}%</p>
+            <p className="text-[10px] md:text-xs text-gray-600 mb-2">Tasa de adjudicación</p>
+            <p className="text-[10px] md:text-xs text-gray-500">Ciclo promedio: <span className="font-semibold">{biddingEfficiency.avgCycle} días</span></p>
+            <p className="text-[10px] md:text-xs text-gray-400 mt-1">({biddingEfficiency.awarded} de {biddingEfficiency.totalProposals} adjudicadas)</p>
           </div>
 
           {/* 4. Alertas de Antigüedad */}
-          <div className="rounded-2xl p-4 border bg-white relative" style={{ borderColor: "var(--color-brand-line)" }}>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs uppercase tracking-wide text-gray-400">Alertas de Antigüedad</span>
-              <MdWarning className="w-5 h-5 text-red-600" />
+          <div className="rounded-xl md:rounded-2xl p-3 md:p-4 border bg-white relative" style={{ borderColor: "var(--color-brand-line)" }}>
+            <div className="flex items-center justify-between mb-2 md:mb-3">
+              <span className="text-[10px] md:text-xs uppercase tracking-wide text-gray-400 leading-tight">Alertas de Antigüedad</span>
+              <MdWarning className="w-4 h-4 md:w-5 md:h-5 text-red-600 flex-shrink-0" />
             </div>
             <button
               onClick={() => setSelectedAlertDetails(!selectedAlertDetails)}
               className="w-full text-left"
             >
-              <p className="text-2xl font-bold text-red-600 mb-1">{ageAlerts.count}</p>
-              <p className="text-xs text-gray-600">Procesos con &gt; 10 días sin movimiento</p>
+              <p className="text-lg md:text-2xl font-bold text-red-600 mb-1">{ageAlerts.count}</p>
+              <p className="text-[10px] md:text-xs text-gray-600 leading-tight">Procesos con &gt; 10 días sin movimiento</p>
             </button>
             {selectedAlertDetails && (
               <div className="absolute top-full left-0 right-0 mt-2 bg-white border rounded-lg shadow-lg p-3 z-10" style={{ borderColor: "var(--color-brand-line)" }}>
@@ -484,12 +484,12 @@ export default function DashboardProductosPage() {
       </section>
 
       {/* Módulo 1: Estado Licitaciones */}
-      <section className="bg-white border rounded-lg shadow-sm p-6" style={{ borderColor: "var(--color-brand-line)" }}>
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl md:text-2xl font-bold ink">Estado Licitaciones</h2>
+      <section className="bg-white border rounded-lg shadow-sm p-4 md:p-6" style={{ borderColor: "var(--color-brand-line)" }}>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4 md:mb-6">
+          <h2 className="text-lg md:text-xl lg:text-2xl font-bold ink">Estado Licitaciones</h2>
           <span className="text-xs text-gray-500">Estado al 21 feb</span>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
           {projectData.funnelData.map((stage, index) => {
             const maxCount = projectData.funnelData[0].count;
             const widthPercent = (stage.count / maxCount) * 100;
@@ -515,122 +515,134 @@ export default function DashboardProductosPage() {
       </section>
 
       {/* Módulo 2: Monitor de Salud de Contratos */}
-      <section className="bg-white border rounded-lg shadow-sm p-6" style={{ borderColor: "var(--color-brand-line)" }}>
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl md:text-2xl font-bold ink">Monitor de Salud de Contratos</h2>
+      <section className="bg-white border rounded-lg shadow-sm p-4 md:p-6" style={{ borderColor: "var(--color-brand-line)" }}>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4 md:mb-6">
+          <h2 className="text-lg md:text-xl lg:text-2xl font-bold ink">Monitor de Salud de Contratos</h2>
           <span className="text-xs text-gray-500">Actualizado hoy</span>
         </div>
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b" style={{ borderColor: "var(--color-brand-line)" }}>
-                <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Subcontrato</th>
-                <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Estado</th>
-                <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Avance Físico</th>
-                <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Desvío (Retraso)</th>
-                <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Alertas</th>
-              </tr>
-            </thead>
-            <tbody>
-              {projectData.contractHealthTable.map((contract, index) => (
-                <tr key={index} className="border-b hover:bg-gray-50 transition-colors" style={{ borderColor: "var(--color-brand-line)" }}>
-                  <td className="py-4 px-4">
-                    <span className="text-sm font-semibold ink">{contract.subcontract}</span>
-                  </td>
-                  <td className="py-4 px-4">
-                    <span className={`text-xs px-2 py-1 rounded-full font-medium ${
-                      contract.status === "Activo" ? "bg-green-100 text-green-700" :
-                      contract.status === "En Cierre" ? "bg-yellow-100 text-yellow-700" :
-                      contract.status === "Cerrado" ? "bg-gray-100 text-gray-700" :
-                      "bg-blue-100 text-blue-700"
-                    }`}>
-                      {contract.status}
-                    </span>
-                  </td>
-                  <td className="py-4 px-4">
-                    <div className="flex items-center gap-2">
-                      <div className="flex-1 bg-gray-200 rounded-full h-2 max-w-[120px]">
-                        <div
-                          className="h-2 rounded-full transition-all"
-                          style={{ width: `${contract.progress}%`, background: contract.status === "Cerrado" ? "#16a34a" : "#2563eb" }}
-                        ></div>
-                      </div>
-                      <span className="text-xs font-semibold text-gray-700">{contract.progress}%</span>
-                    </div>
-                  </td>
-                  <td className="py-4 px-4">
-                    <div className="flex items-center gap-1">
-                      {contract.deviation.days > 0 && <MdOutlineTrendingUp className="w-4 h-4" style={{ color: contract.deviation.color }} />}
-                      {contract.deviation.days < 0 && <MdOutlineTrendingDown className="w-4 h-4" style={{ color: contract.deviation.color }} />}
-                      <span className="text-xs font-semibold" style={{ color: contract.deviation.color }}>
-                        {contract.deviation.days > 0 ? `+${contract.deviation.days}` : contract.deviation.days} días
-                      </span>
-                    </div>
-                  </td>
-                  <td className="py-4 px-4">
-                    <div className="relative">
-                      {contract.alerts.count > 0 ? (
-                        <button
-                          onClick={() => setSelectedAlert(selectedAlert === index ? null : index)}
-                          className="flex items-center gap-1 text-xs font-semibold hover:opacity-80 transition-opacity"
-                          style={{ color: contract.alerts.type === "critical" ? "#ef4444" : "#f59e0b" }}
-                        >
-                          {contract.alerts.type === "critical" ? (
-                            <MdError className="w-4 h-4" />
-                          ) : (
-                            <MdWarning className="w-4 h-4" />
-                          )}
-                          {contract.alerts.count} {contract.alerts.count === 1 ? "Alerta" : "Alertas"}
-                        </button>
-                      ) : (
-                        <div className="flex items-center gap-1 text-xs font-semibold text-green-600">
-                          <MdCheckCircle className="w-4 h-4" />
-                          OK
-                        </div>
-                      )}
-                      {selectedAlert === index && contract.alerts.details && (
-                        <div className="absolute left-0 top-6 z-10 bg-white border rounded-lg shadow-lg p-3 min-w-[250px]" style={{ borderColor: "var(--color-brand-line)" }}>
-                          <p className="text-xs font-semibold mb-2 text-gray-700">Detalles de alertas:</p>
-                          <ul className="space-y-1">
-                            {contract.alerts.details.map((detail, idx) => (
-                              <li key={idx} className="text-xs text-gray-600 flex items-start gap-1">
-                                <span className="text-red-500 mt-0.5">•</span>
-                                {detail}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  </td>
+        <div className="overflow-x-auto -mx-4 md:mx-0">
+          <div className="inline-block min-w-full align-middle px-4 md:px-0">
+            <table className="min-w-full">
+              <thead>
+                <tr className="border-b" style={{ borderColor: "var(--color-brand-line)" }}>
+                  <th className="text-left py-2 md:py-3 px-2 md:px-4 text-[10px] md:text-xs font-semibold text-gray-600 uppercase">Subcontrato</th>
+                  <th className="text-left py-2 md:py-3 px-2 md:px-4 text-[10px] md:text-xs font-semibold text-gray-600 uppercase hidden sm:table-cell">Estado</th>
+                  <th className="text-left py-2 md:py-3 px-2 md:px-4 text-[10px] md:text-xs font-semibold text-gray-600 uppercase">Avance Físico</th>
+                  <th className="text-left py-2 md:py-3 px-2 md:px-4 text-[10px] md:text-xs font-semibold text-gray-600 uppercase hidden md:table-cell">Desvío (Retraso)</th>
+                  <th className="text-left py-2 md:py-3 px-2 md:px-4 text-[10px] md:text-xs font-semibold text-gray-600 uppercase">Alertas</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {projectData.contractHealthTable.map((contract, index) => (
+                  <tr key={index} className="border-b hover:bg-gray-50 transition-colors" style={{ borderColor: "var(--color-brand-line)" }}>
+                    <td className="py-3 md:py-4 px-2 md:px-4">
+                      <span className="text-xs md:text-sm font-semibold ink">{contract.subcontract}</span>
+                      <div className="sm:hidden mt-1">
+                        <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${
+                          contract.status === "Activo" ? "bg-green-100 text-green-700" :
+                          contract.status === "En Cierre" ? "bg-yellow-100 text-yellow-700" :
+                          contract.status === "Cerrado" ? "bg-gray-100 text-gray-700" :
+                          "bg-blue-100 text-blue-700"
+                        }`}>
+                          {contract.status}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="py-3 md:py-4 px-2 md:px-4 hidden sm:table-cell">
+                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${
+                        contract.status === "Activo" ? "bg-green-100 text-green-700" :
+                        contract.status === "En Cierre" ? "bg-yellow-100 text-yellow-700" :
+                        contract.status === "Cerrado" ? "bg-gray-100 text-gray-700" :
+                        "bg-blue-100 text-blue-700"
+                      }`}>
+                        {contract.status}
+                      </span>
+                    </td>
+                    <td className="py-3 md:py-4 px-2 md:px-4">
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1 bg-gray-200 rounded-full h-2 max-w-[100px] md:max-w-[120px]">
+                          <div
+                            className="h-2 rounded-full transition-all"
+                            style={{ width: `${contract.progress}%`, background: contract.status === "Cerrado" ? "#16a34a" : "#2563eb" }}
+                          ></div>
+                        </div>
+                        <span className="text-xs font-semibold text-gray-700">{contract.progress}%</span>
+                      </div>
+                    </td>
+                    <td className="py-3 md:py-4 px-2 md:px-4 hidden md:table-cell">
+                      <div className="flex items-center gap-1">
+                        {contract.deviation.days > 0 && <MdOutlineTrendingUp className="w-3 h-3 md:w-4 md:h-4" style={{ color: contract.deviation.color }} />}
+                        {contract.deviation.days < 0 && <MdOutlineTrendingDown className="w-3 h-3 md:w-4 md:h-4" style={{ color: contract.deviation.color }} />}
+                        <span className="text-xs font-semibold" style={{ color: contract.deviation.color }}>
+                          {contract.deviation.days > 0 ? `+${contract.deviation.days}` : contract.deviation.days} días
+                        </span>
+                      </div>
+                    </td>
+                    <td className="py-3 md:py-4 px-2 md:px-4">
+                      <div className="relative">
+                        {contract.alerts.count > 0 ? (
+                          <button
+                            onClick={() => setSelectedAlert(selectedAlert === index ? null : index)}
+                            className="flex items-center gap-1 text-xs font-semibold hover:opacity-80 transition-opacity"
+                            style={{ color: contract.alerts.type === "critical" ? "#ef4444" : "#f59e0b" }}
+                          >
+                            {contract.alerts.type === "critical" ? (
+                              <MdError className="w-3 h-3 md:w-4 md:h-4" />
+                            ) : (
+                              <MdWarning className="w-3 h-3 md:w-4 md:h-4" />
+                            )}
+                            {contract.alerts.count} {contract.alerts.count === 1 ? "Alerta" : "Alertas"}
+                          </button>
+                        ) : (
+                          <div className="flex items-center gap-1 text-xs font-semibold text-green-600">
+                            <MdCheckCircle className="w-3 h-3 md:w-4 md:h-4" />
+                            OK
+                          </div>
+                        )}
+                        {selectedAlert === index && contract.alerts.details && (
+                          <div className="absolute left-0 top-6 z-10 bg-white border rounded-lg shadow-lg p-3 min-w-[200px] md:min-w-[250px]" style={{ borderColor: "var(--color-brand-line)" }}>
+                            <p className="text-xs font-semibold mb-2 text-gray-700">Detalles de alertas:</p>
+                            <ul className="space-y-1">
+                              {contract.alerts.details.map((detail, idx) => (
+                                <li key={idx} className="text-xs text-gray-600 flex items-start gap-1">
+                                  <span className="text-red-500 mt-0.5">•</span>
+                                  {detail}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
       {/* Módulo 3: Control de Pagos y Cierre */}
-      <section className="bg-white border rounded-lg shadow-sm p-6" style={{ borderColor: "var(--color-brand-line)" }}>
-        <h2 className="text-xl md:text-2xl font-bold ink mb-6">Control de Pagos y Cierre</h2>
+      <section className="bg-white border rounded-lg shadow-sm p-4 md:p-6" style={{ borderColor: "var(--color-brand-line)" }}>
+        <h2 className="text-lg md:text-xl lg:text-2xl font-bold ink mb-4 md:mb-6">Control de Pagos y Cierre</h2>
         
         {/* KPIs de Pagos */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-blue-50 border-l-4 rounded-lg p-4" style={{ borderLeftColor: "#2563eb" }}>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-4 md:mb-6">
+          <div className="bg-blue-50 border-l-4 rounded-lg p-3 md:p-4" style={{ borderLeftColor: "#2563eb" }}>
             <p className="text-xs text-gray-600 mb-1">Total Aprobado (Cubicaciones)</p>
-            <p className="text-2xl font-bold ink">${projectData.paymentData.totalApproved}M</p>
+            <p className="text-xl md:text-2xl font-bold ink">${projectData.paymentData.totalApproved}M</p>
           </div>
-          <div className="bg-gray-50 border-l-4 rounded-lg p-4" style={{ borderLeftColor: "#6b7280" }}>
+          <div className="bg-gray-50 border-l-4 rounded-lg p-3 md:p-4" style={{ borderLeftColor: "#6b7280" }}>
             <p className="text-xs text-gray-600 mb-1">Contratado</p>
-            <p className="text-2xl font-bold text-gray-700">${projectData.paymentData.contracted}M</p>
+            <p className="text-xl md:text-2xl font-bold text-gray-700">${projectData.paymentData.contracted}M</p>
           </div>
-          <div className="bg-yellow-50 border-l-4 rounded-lg p-4" style={{ borderLeftColor: "#f59e0b" }}>
+          <div className="bg-yellow-50 border-l-4 rounded-lg p-3 md:p-4" style={{ borderLeftColor: "#f59e0b" }}>
             <p className="text-xs text-gray-600 mb-1">Facturado</p>
-            <p className="text-2xl font-bold" style={{ color: "#f59e0b" }}>${projectData.paymentData.invoiced}M</p>
+            <p className="text-xl md:text-2xl font-bold" style={{ color: "#f59e0b" }}>${projectData.paymentData.invoiced}M</p>
           </div>
-          <div className="bg-green-50 border-l-4 rounded-lg p-4" style={{ borderLeftColor: "#16a34a" }}>
+          <div className="bg-green-50 border-l-4 rounded-lg p-3 md:p-4" style={{ borderLeftColor: "#16a34a" }}>
             <p className="text-xs text-gray-600 mb-1">Pagado</p>
-            <p className="text-2xl font-bold text-green-600">${projectData.paymentData.paid}M</p>
+            <p className="text-xl md:text-2xl font-bold text-green-600">${projectData.paymentData.paid}M</p>
           </div>
         </div>
 
@@ -661,12 +673,12 @@ export default function DashboardProductosPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
           {/* Lista de Validación de Pagos */}
           <div>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-base font-semibold ink">Validación de Pagos</h3>
-              <span className="text-xs text-gray-500 bg-yellow-100 px-2 py-1 rounded-full">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
+              <h3 className="text-sm md:text-base font-semibold ink">Validación de Pagos</h3>
+              <span className="text-xs text-gray-500 bg-yellow-100 px-2 py-1 rounded-full whitespace-nowrap">
                 {projectData.paymentData.inReview.count} en revisión (${projectData.paymentData.inReview.amount}M)
               </span>
             </div>
@@ -674,11 +686,11 @@ export default function DashboardProductosPage() {
               {projectData.paymentValidation.map((payment, index) => (
                 <div
                   key={index}
-                  className="border rounded-lg p-3 flex items-center justify-between"
+                  className="border rounded-lg p-3 flex items-center justify-between gap-2"
                   style={{ borderColor: "var(--color-brand-line)" }}
                 >
-                  <div className="flex-1">
-                    <p className="text-sm font-semibold ink">{payment.ep}</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs md:text-sm font-semibold ink">{payment.ep}</p>
                     <p className="text-xs text-gray-600">{payment.contract}</p>
                     <p className={`text-xs mt-1 font-medium ${
                       payment.type === "approved" ? "text-green-600" :
@@ -688,10 +700,10 @@ export default function DashboardProductosPage() {
                       {payment.status}
                     </p>
                   </div>
-                  <div>
-                    {payment.type === "approved" && <MdCheckCircle className="w-5 h-5 text-green-600" />}
-                    {payment.type === "disputed" && <MdError className="w-5 h-5 text-red-600" />}
-                    {payment.type === "review" && <MdInfo className="w-5 h-5 text-yellow-600" />}
+                  <div className="flex-shrink-0">
+                    {payment.type === "approved" && <MdCheckCircle className="w-4 h-4 md:w-5 md:h-5 text-green-600" />}
+                    {payment.type === "disputed" && <MdError className="w-4 h-4 md:w-5 md:h-5 text-red-600" />}
+                    {payment.type === "review" && <MdInfo className="w-4 h-4 md:w-5 md:h-5 text-yellow-600" />}
                   </div>
                 </div>
               ))}
@@ -700,27 +712,27 @@ export default function DashboardProductosPage() {
 
           {/* Procesos de Cierre */}
           <div>
-            <h3 className="text-base font-semibold ink mb-4">Procesos de Cierre</h3>
+            <h3 className="text-sm md:text-base font-semibold ink mb-4">Procesos de Cierre</h3>
             <div className="space-y-2">
               {projectData.closureProcesses.map((process, index) => (
                 <div
                   key={index}
-                  className="border rounded-lg p-3 flex items-center justify-between"
+                  className="border rounded-lg p-3 flex items-center justify-between gap-2"
                   style={{ borderColor: "var(--color-brand-line)" }}
                 >
-                  <div className="flex-1">
-                    <p className="text-sm font-semibold ink">{process.contract}</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs md:text-sm font-semibold ink">{process.contract}</p>
                     <p className={`text-xs mt-1 font-medium ${
                       process.type === "closed" ? "text-green-600" : "text-yellow-600"
                     }`}>
                       {process.status}
                     </p>
                   </div>
-                  <div>
+                  <div className="flex-shrink-0">
                     {process.type === "closed" ? (
-                      <MdCheckCircle className="w-5 h-5 text-green-600" />
+                      <MdCheckCircle className="w-4 h-4 md:w-5 md:h-5 text-green-600" />
                     ) : (
-                      <MdOutlineTimeline className="w-5 h-5 text-yellow-600" />
+                      <MdOutlineTimeline className="w-4 h-4 md:w-5 md:h-5 text-yellow-600" />
                     )}
                   </div>
                 </div>
@@ -730,40 +742,40 @@ export default function DashboardProductosPage() {
         </div>
       </section>
 
-      <section className="bg-white border rounded-lg shadow-sm p-6" style={{ borderColor: "var(--color-brand-line)" }}>
-        <div className="flex items-center gap-2 text-sm font-semibold text-gray-600 mb-4">
-          <MdOutlineBarChart className="w-5 h-5 text-brand-red" /> Fondos por categoría
+      <section className="bg-white border rounded-lg shadow-sm p-4 md:p-6" style={{ borderColor: "var(--color-brand-line)" }}>
+        <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-gray-600 mb-4">
+          <MdOutlineBarChart className="w-4 h-4 md:w-5 md:h-5 text-brand-red flex-shrink-0" /> Fondos por categoría
         </div>
         <div className="space-y-3">
           {projectData.spendByCategory.map((item) => (
-            <div key={item.label} className="flex items-center gap-3 text-xs text-gray-500">
-              <span className="inline-block w-3 h-3 rounded-full" style={{ background: item.color }}></span>
-              <span className="w-28 font-semibold text-gray-700">{item.label}</span>
+            <div key={item.label} className="flex items-center gap-2 md:gap-3 text-xs text-gray-500">
+              <span className="inline-block w-2.5 h-2.5 md:w-3 md:h-3 rounded-full flex-shrink-0" style={{ background: item.color }}></span>
+              <span className="w-20 md:w-28 font-semibold text-gray-700">{item.label}</span>
               <div className="flex-1 bg-gray-200 rounded-full h-2">
                 <div className="h-2 rounded-full" style={{ width: `${item.value}%`, background: item.color }}></div>
               </div>
-              <span className="w-10 text-right font-semibold text-gray-700">{item.value}%</span>
+              <span className="w-8 md:w-10 text-right font-semibold text-gray-700">{item.value}%</span>
             </div>
           ))}
         </div>
       </section>
 
       {/* Reportes disponibles */}
-      <section className="bg-white border rounded-lg shadow-sm p-6" style={{ borderColor: "var(--color-brand-line)" }}>
-        <h2 className="text-xl md:text-2xl font-bold ink mb-6">Reportes disponibles</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <section className="bg-white border rounded-lg shadow-sm p-4 md:p-6" style={{ borderColor: "var(--color-brand-line)" }}>
+        <h2 className="text-lg md:text-xl lg:text-2xl font-bold ink mb-4 md:mb-6">Reportes disponibles</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
           {productosReports.map((report) => (
             <button
               key={report.title}
-              className="border rounded-lg p-4 flex flex-col gap-2 text-left hover:bg-gray-50 transition-colors"
+              className="border rounded-lg p-3 md:p-4 flex flex-col gap-2 text-left hover:bg-gray-50 transition-colors"
               style={{ borderColor: "var(--color-brand-line)" }}
             >
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <p className="text-sm font-semibold ink mb-1">{report.title}</p>
-                  <p className="text-xs text-gray-500">Equipo responsable: {report.owner}</p>
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs md:text-sm font-semibold ink mb-1">{report.title}</p>
+                  <p className="text-[10px] md:text-xs text-gray-500">Equipo responsable: {report.owner}</p>
                 </div>
-                <MdOutlineFileDownload className="w-5 h-5 text-brand-red flex-shrink-0" />
+                <MdOutlineFileDownload className="w-4 h-4 md:w-5 md:h-5 text-brand-red flex-shrink-0" />
               </div>
             </button>
           ))}
