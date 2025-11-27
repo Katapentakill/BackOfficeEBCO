@@ -446,7 +446,7 @@ export default function Home() {
   const avgProgress = Math.round(projects.reduce((sum, p) => sum + p.progress, 0) / projects.length);
 
   return (
-    <div className="min-h-screen p-8">
+    <div className="min-h-screen p-4 md:p-8">
 
       {/* Hero Section con gradiente y diseño mejorado */}
       <section className="relative mb-12 overflow-hidden rounded-2xl" style={{
@@ -456,41 +456,41 @@ export default function Home() {
           <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
         </div>
-        <div className="relative p-12 md:p-16">
+        <div className="relative p-6 md:p-12 lg:p-16">
           <div className="max-w-4xl">
-            <div className="flex items-center gap-4 mb-4">
+            <div className="flex items-center gap-3 md:gap-4 mb-4">
               <img
                 src="/Logo.png"
                 alt="EBCO Logo"
-                className="w-16 h-16 md:w-20 md:h-20 object-contain flex-shrink-0"
+                className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 object-contain flex-shrink-0"
                 style={{ imageRendering: "auto" as any }}
                 onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
               />
-              <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
                 Back Office
               </h1>
             </div>
-            <p className="text-xl text-white/95 mb-6 font-medium max-w-2xl">
+            <p className="text-base md:text-xl text-white/95 mb-4 md:mb-6 font-medium max-w-2xl">
               Monitoreo en tiempo real del desarrollo de proyectos de construcción
             </p>
-            <p className="text-base text-white/80 leading-relaxed max-w-3xl mb-8">
+            <p className="text-sm md:text-base text-white/80 leading-relaxed max-w-3xl mb-6 md:mb-8">
               Bienvenido al Manual de Soporte del Back Office, una herramienta diseñada para acompañar
               y facilitar el trabajo diario en nuestras obras.
             </p>
             
             {/* Estadísticas rápidas en hero */}
-            <div className="grid grid-cols-3 gap-4 mt-8">
-              <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mt-6 md:mt-8">
+              <div className="bg-white/10 backdrop-blur-md rounded-xl p-3 md:p-4 border border-white/20">
                 <p className="text-white/70 text-xs font-medium mb-1">Proyectos Activos</p>
-                <p className="text-3xl font-bold text-white">{totalProjects}</p>
+                <p className="text-2xl md:text-3xl font-bold text-white">{totalProjects}</p>
               </div>
-              <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+              <div className="bg-white/10 backdrop-blur-md rounded-xl p-3 md:p-4 border border-white/20">
                 <p className="text-white/70 text-xs font-medium mb-1">Venta Total</p>
-                <p className="text-3xl font-bold text-white">${totalBudget.toFixed(1)}M</p>
+                <p className="text-2xl md:text-3xl font-bold text-white">${totalBudget.toFixed(1)}M</p>
               </div>
-              <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+              <div className="bg-white/10 backdrop-blur-md rounded-xl p-3 md:p-4 border border-white/20">
                 <p className="text-white/70 text-xs font-medium mb-1">Metros Cuadrados Construidos</p>
-                <p className="text-3xl font-bold text-white">45,230 m²</p>
+                <p className="text-2xl md:text-3xl font-bold text-white">45,230 m²</p>
               </div>
             </div>
           </div>
@@ -505,68 +505,68 @@ export default function Home() {
             <p className="text-sm muted">Navega rápidamente a las secciones principales</p>
           </div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
           <Link href="/manual" className="group">
-            <div className="bg-white border-2 rounded-xl p-6 text-center transition-all hover:shadow-xl hover:-translate-y-1 hover:border-brand-red cursor-pointer" style={{ borderColor: "var(--color-brand-red)" }}>
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all group-hover:scale-110" style={{ background: "linear-gradient(135deg, #E30613 0%, #B00912 100%)" }}>
-                <MdBook className="w-8 h-8 text-white" />
+            <div className="bg-white border-2 rounded-xl p-4 md:p-6 text-center transition-all hover:shadow-xl hover:-translate-y-1 hover:border-brand-red cursor-pointer" style={{ borderColor: "var(--color-brand-red)" }}>
+              <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 rounded-full flex items-center justify-center transition-all group-hover:scale-110" style={{ background: "linear-gradient(135deg, #E30613 0%, #B00912 100%)" }}>
+                <MdBook className="w-6 h-6 md:w-8 md:h-8 text-white" />
               </div>
-              <p className="font-bold ink text-sm">Manual de Soporte</p>
+              <p className="font-bold ink text-xs md:text-sm">Manual de Soporte</p>
             </div>
           </Link>
           <Link href="/logistica" className="group">
-            <div className="bg-white border rounded-xl p-6 text-center transition-all hover:shadow-xl hover:-translate-y-1 hover:border-brand-red cursor-pointer" style={{ borderColor: "var(--color-brand-line)" }}>
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all group-hover:scale-110 bg-blue-50">
-                <MdSchedule className="w-8 h-8" style={{ color: "#3b82f6" }} />
+            <div className="bg-white border rounded-xl p-4 md:p-6 text-center transition-all hover:shadow-xl hover:-translate-y-1 hover:border-brand-red cursor-pointer" style={{ borderColor: "var(--color-brand-line)" }}>
+              <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 rounded-full flex items-center justify-center transition-all group-hover:scale-110 bg-blue-50">
+                <MdSchedule className="w-6 h-6 md:w-8 md:h-8" style={{ color: "#3b82f6" }} />
               </div>
-              <p className="font-bold ink text-sm">Área Logística</p>
+              <p className="font-bold ink text-xs md:text-sm">Área Logística</p>
             </div>
           </Link>
           <Link href="/productos" className="group">
-            <div className="bg-white border rounded-xl p-6 text-center transition-all hover:shadow-xl hover:-translate-y-1 hover:border-brand-red cursor-pointer" style={{ borderColor: "var(--color-brand-line)" }}>
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all group-hover:scale-110 bg-green-50">
-                <MdBuild className="w-8 h-8" style={{ color: "#16a34a" }} />
+            <div className="bg-white border rounded-xl p-4 md:p-6 text-center transition-all hover:shadow-xl hover:-translate-y-1 hover:border-brand-red cursor-pointer" style={{ borderColor: "var(--color-brand-line)" }}>
+              <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 rounded-full flex items-center justify-center transition-all group-hover:scale-110 bg-green-50">
+                <MdBuild className="w-6 h-6 md:w-8 md:h-8" style={{ color: "#16a34a" }} />
               </div>
-              <p className="font-bold ink text-sm">Productos y Soportes</p>
+              <p className="font-bold ink text-xs md:text-sm">Productos y Soportes</p>
             </div>
           </Link>
           <Link href="/analisis" className="group">
-            <div className="bg-white border rounded-xl p-6 text-center transition-all hover:shadow-xl hover:-translate-y-1 hover:border-brand-red cursor-pointer" style={{ borderColor: "var(--color-brand-line)" }}>
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all group-hover:scale-110 bg-purple-50">
-                <MdAssessment className="w-8 h-8" style={{ color: "#9333ea" }} />
+            <div className="bg-white border rounded-xl p-4 md:p-6 text-center transition-all hover:shadow-xl hover:-translate-y-1 hover:border-brand-red cursor-pointer" style={{ borderColor: "var(--color-brand-line)" }}>
+              <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 rounded-full flex items-center justify-center transition-all group-hover:scale-110 bg-purple-50">
+                <MdAssessment className="w-6 h-6 md:w-8 md:h-8" style={{ color: "#9333ea" }} />
               </div>
-              <p className="font-bold ink text-sm">Análisis de Datos</p>
+              <p className="font-bold ink text-xs md:text-sm">Análisis de Datos</p>
             </div>
           </Link>
           <Link href="/organigrama" className="group">
-            <div className="bg-white border rounded-xl p-6 text-center transition-all hover:shadow-xl hover:-translate-y-1 hover:border-brand-red cursor-pointer" style={{ borderColor: "var(--color-brand-line)" }}>
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all group-hover:scale-110 bg-orange-50">
-                <MdInfoOutline className="w-8 h-8" style={{ color: "#f59e0b" }} />
+            <div className="bg-white border rounded-xl p-4 md:p-6 text-center transition-all hover:shadow-xl hover:-translate-y-1 hover:border-brand-red cursor-pointer" style={{ borderColor: "var(--color-brand-line)" }}>
+              <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 rounded-full flex items-center justify-center transition-all group-hover:scale-110 bg-orange-50">
+                <MdInfoOutline className="w-6 h-6 md:w-8 md:h-8" style={{ color: "#f59e0b" }} />
               </div>
-              <p className="font-bold ink text-sm">Funciograma</p>
+              <p className="font-bold ink text-xs md:text-sm">Funciograma</p>
             </div>
           </Link>
         </div>
       </section>
 
       {/* Organizational Structure Section */}
-      <section className="mb-16 bg-white border-2 rounded-lg p-12 md:p-16 shadow-lg" style={{ borderColor: "var(--color-brand-red)" }}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+      <section className="mb-12 md:mb-16 bg-white border-2 rounded-lg p-6 md:p-12 lg:p-16 shadow-lg" style={{ borderColor: "var(--color-brand-red)" }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           {/* Left Column */}
           <div className="space-y-6">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-red mb-6 leading-tight">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-red mb-4 md:mb-6 leading-tight">
                 ESTRUCTURA<br />ORGANIZACIONAL
               </h2>
-              <div className="h-1 w-20 bg-brand-red mb-6"></div>
+              <div className="h-1 w-20 bg-brand-red mb-4 md:mb-6"></div>
             </div>
-            <p className="text-base md:text-lg leading-relaxed text-brand-text-dark italic font-bold">
+            <p className="text-sm md:text-base lg:text-lg leading-relaxed text-brand-text-dark italic font-bold mb-4 md:mb-0">
               "Somos el motor silencioso que organiza, conecta y potencia, para que cada proyecto
               avance con eficiencia, calidad y visión de futuro."
             </p>
             <div className="pt-4 flex justify-center md:justify-start">
               <Link href="/organigrama">
-                <button className="btn btn-primary px-8 py-3 text-base">
+                <button className="btn btn-primary px-6 md:px-8 py-2 md:py-3 text-sm md:text-base w-full md:w-auto">
                   Ver más
                 </button>
               </Link>
@@ -653,7 +653,7 @@ export default function Home() {
                 />
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold ink mb-2">Avance (%)</label>
                   <input
@@ -705,7 +705,7 @@ export default function Home() {
                 </select>
               </div>
               
-              <div className="flex gap-3 pt-4">
+              <div className="flex flex-col sm:flex-row gap-3 pt-4">
                 <button
                   onClick={() => {
                     setShowProjectModal(false);
@@ -776,7 +776,7 @@ export default function Home() {
                 />
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold ink mb-2">Valor <span className="text-red-500">*</span></label>
                   <input
@@ -815,7 +815,7 @@ export default function Home() {
                 />
               </div>
               
-              <div className="flex gap-3 pt-4">
+              <div className="flex flex-col sm:flex-row gap-3 pt-4">
                 <button
                   onClick={() => {
                     setShowKPIModal(false);

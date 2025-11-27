@@ -274,11 +274,11 @@ export default function AnalisisPage() {
   }).length;
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       {/* Header Banner */}
-      <div className="bg-brand-red text-brand-text-light py-8 px-8 rounded-lg mb-12">
-        <h1 className="text-4xl font-bold">ÁREA ANÁLISIS DE DATOS</h1>
-        <p className="text-lg mt-2 opacity-90">Control financiero y desempeño operacional</p>
+      <div className="bg-brand-red text-brand-text-light py-6 md:py-8 px-4 md:px-8 rounded-lg mb-8 md:mb-12">
+        <h1 className="text-2xl md:text-4xl font-bold">ÁREA ANÁLISIS DE DATOS</h1>
+        <p className="text-base md:text-lg mt-2 opacity-90">Control financiero y desempeño operacional</p>
       </div>
 
       {/* Sub-areas */}
@@ -314,22 +314,22 @@ export default function AnalisisPage() {
             </button>
           )}
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
           <button
             onClick={() => {
               setFilterStatus(null);
               setFilterDate(null);
             }}
-            className={`rounded-lg border p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
+            className={`rounded-lg border p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
               !filterStatus && !filterDate ? "ring-2 ring-blue-500" : ""
             }`}
           >
             <div className="flex items-center justify-center mb-2">
-              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                <MdSchedule className="w-6 h-6" style={{ color: "#3b82f6" }} />
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                <MdSchedule className="w-5 h-5 md:w-6 md:h-6" style={{ color: "#3b82f6" }} />
               </div>
             </div>
-            <p className="text-2xl font-extrabold ink">{totalDeliverables}</p>
+            <p className="text-xl md:text-2xl font-extrabold ink">{totalDeliverables}</p>
             <p className="text-xs muted">Total</p>
           </button>
           <button
@@ -337,16 +337,16 @@ export default function AnalisisPage() {
               setFilterStatus("Completado");
               setFilterDate(null);
             }}
-            className={`rounded-lg border p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
+            className={`rounded-lg border p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
               filterStatus === "Completado" ? "ring-2 ring-green-500" : ""
             }`}
           >
             <div className="flex items-center justify-center mb-2">
-              <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                <MdCheckCircle className="w-6 h-6" style={{ color: "#16a34a" }} />
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-green-100 flex items-center justify-center">
+                <MdCheckCircle className="w-5 h-5 md:w-6 md:h-6" style={{ color: "#16a34a" }} />
               </div>
             </div>
-            <p className="text-2xl font-extrabold" style={{ color: "#16a34a" }}>{completados}</p>
+            <p className="text-xl md:text-2xl font-extrabold" style={{ color: "#16a34a" }}>{completados}</p>
             <p className="text-xs muted">Completados</p>
           </button>
           <button
@@ -354,16 +354,16 @@ export default function AnalisisPage() {
               setFilterStatus("no-completado");
               setFilterDate(null);
             }}
-            className={`rounded-lg border p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
+            className={`rounded-lg border p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
               filterStatus === "no-completado" ? "ring-2 ring-orange-500" : ""
             }`}
           >
             <div className="flex items-center justify-center mb-2">
-              <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
-                <MdSchedule className="w-6 h-6" style={{ color: "#f59e0b" }} />
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-orange-100 flex items-center justify-center">
+                <MdSchedule className="w-5 h-5 md:w-6 md:h-6" style={{ color: "#f59e0b" }} />
               </div>
             </div>
-            <p className="text-2xl font-extrabold" style={{ color: "#f59e0b" }}>{noCompletados}</p>
+            <p className="text-xl md:text-2xl font-extrabold" style={{ color: "#f59e0b" }}>{noCompletados}</p>
             <p className="text-xs muted">No Completados</p>
           </button>
           <button
@@ -371,16 +371,16 @@ export default function AnalisisPage() {
               setFilterStatus("Pendiente");
               setFilterDate(null);
             }}
-            className={`rounded-lg border p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
+            className={`rounded-lg border p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
               filterStatus === "Pendiente" ? "ring-2 ring-yellow-500" : ""
             }`}
           >
             <div className="flex items-center justify-center mb-2">
-              <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center">
-                <MdSchedule className="w-6 h-6" style={{ color: "#f59e0b" }} />
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                <MdSchedule className="w-5 h-5 md:w-6 md:h-6" style={{ color: "#f59e0b" }} />
               </div>
             </div>
-            <p className="text-2xl font-extrabold" style={{ color: "#f59e0b" }}>{pendientes}</p>
+            <p className="text-xl md:text-2xl font-extrabold" style={{ color: "#f59e0b" }}>{pendientes}</p>
             <p className="text-xs muted">Pendientes</p>
           </button>
           <button
@@ -388,16 +388,16 @@ export default function AnalisisPage() {
               setFilterStatus("Urgente");
               setFilterDate(null);
             }}
-            className={`rounded-lg border p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
+            className={`rounded-lg border p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
               filterStatus === "Urgente" ? "ring-2 ring-red-500" : ""
             }`}
           >
             <div className="flex items-center justify-center mb-2">
-              <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
-                <MdWarning className="w-6 h-6" style={{ color: "#ef4444" }} />
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-red-100 flex items-center justify-center">
+                <MdWarning className="w-5 h-5 md:w-6 md:h-6" style={{ color: "#ef4444" }} />
               </div>
             </div>
-            <p className="text-2xl font-extrabold" style={{ color: "#ef4444" }}>{urgentes}</p>
+            <p className="text-xl md:text-2xl font-extrabold" style={{ color: "#ef4444" }}>{urgentes}</p>
             <p className="text-xs muted">Urgentes</p>
           </button>
           <button
@@ -405,16 +405,16 @@ export default function AnalisisPage() {
               setFilterStatus("Vencido");
               setFilterDate(null);
             }}
-            className={`rounded-lg border p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
+            className={`rounded-lg border p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
               filterStatus === "Vencido" ? "ring-2 ring-gray-500" : ""
             }`}
           >
             <div className="flex items-center justify-center mb-2">
-              <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-                <MdCancel className="w-6 h-6" style={{ color: "#6b7280" }} />
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                <MdCancel className="w-5 h-5 md:w-6 md:h-6" style={{ color: "#6b7280" }} />
               </div>
             </div>
-            <p className="text-2xl font-extrabold" style={{ color: "#6b7280" }}>{vencidos}</p>
+            <p className="text-xl md:text-2xl font-extrabold" style={{ color: "#6b7280" }}>{vencidos}</p>
             <p className="text-xs muted">Vencidos</p>
           </button>
           <button
@@ -423,16 +423,16 @@ export default function AnalisisPage() {
               const today = formatDateLocal(new Date());
               setFilterDate(today);
             }}
-            className={`rounded-lg border p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
+            className={`rounded-lg border p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
               filterDate === formatDateLocal(new Date()) ? "ring-2 ring-orange-500" : ""
             }`}
           >
             <div className="flex items-center justify-center mb-2">
-              <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
-                <MdWarning className="w-6 h-6" style={{ color: "#f59e0b" }} />
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-orange-100 flex items-center justify-center">
+                <MdWarning className="w-5 h-5 md:w-6 md:h-6" style={{ color: "#f59e0b" }} />
               </div>
             </div>
-            <p className="text-2xl font-extrabold" style={{ color: "#f59e0b" }}>{vencenHoy}</p>
+            <p className="text-xl md:text-2xl font-extrabold" style={{ color: "#f59e0b" }}>{vencenHoy}</p>
             <p className="text-xs muted">Vencen Hoy</p>
           </button>
         </div>
@@ -491,7 +491,7 @@ export default function AnalisisPage() {
                 className="text-gray-400 hover:text-gray-600 p-2 rounded hover:bg-gray-100 transition-colors"
                 title="Cerrar"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
@@ -500,7 +500,7 @@ export default function AnalisisPage() {
             {/* Content */}
             <div className="flex-1 overflow-auto p-6 space-y-6">
               {/* Información Básica */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <p className="text-sm font-semibold ink mb-1">Fecha de vencimiento:</p>
                   <p className="text-sm muted">{new Date(previewDeliverable.dueDate).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
@@ -612,7 +612,7 @@ export default function AnalisisPage() {
                 </div>
 
                 {/* Input para agregar nueva firma */}
-                <div className="flex gap-2 mb-4">
+                <div className="flex flex-col sm:flex-row gap-2 mb-4">
                   <input
                     type="text"
                     placeholder="Agregar nueva firma requerida..."
@@ -643,7 +643,7 @@ export default function AnalisisPage() {
                         }
                       }
                     }}
-                    className="btn btn-primary px-4 text-sm flex-shrink-0"
+                    className="btn btn-primary px-4 text-sm flex-shrink-0 w-full sm:w-auto"
                   >
                     Agregar
                   </button>
@@ -826,9 +826,9 @@ export default function AnalisisPage() {
                 {currentFormats.map((format, idx) => {
                   const getFileIcon = () => {
                     if (format.fileType === "excel") {
-                      return <MdOutlineTableChart className="w-6 h-6 text-green-600" />;
+                      return <MdOutlineTableChart className="w-5 h-5 md:w-6 md:h-6 text-green-600" />;
                     } else {
-                      return <MdPictureAsPdf className="w-6 h-6 text-red-600" />;
+                      return <MdPictureAsPdf className="w-5 h-5 md:w-6 md:h-6 text-red-600" />;
                     }
                   };
 

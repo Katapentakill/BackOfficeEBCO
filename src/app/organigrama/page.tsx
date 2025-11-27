@@ -390,11 +390,11 @@ export default function OrganigramaPage() {
   };
 
   return (
-    <div className="p-8 min-h-screen">
+    <div className="p-4 md:p-8 min-h-screen">
       {/* Header Banner */}
-      <div className="bg-brand-red text-brand-text-light py-8 px-8 rounded-lg mb-12">
-        <h1 className="text-4xl font-bold">ESTRUCTURA ORGANIZACIONAL</h1>
-        <p className="text-lg mt-2 opacity-90">Back Office - Funciograma</p>
+      <div className="bg-brand-red text-brand-text-light py-6 md:py-8 px-4 md:px-8 rounded-lg mb-8 md:mb-12">
+        <h1 className="text-2xl md:text-4xl font-bold">ESTRUCTURA ORGANIZACIONAL</h1>
+        <p className="text-base md:text-lg mt-2 opacity-90">Back Office - Funciograma</p>
       </div>
 
       {/* Introduction Section */}
@@ -596,7 +596,7 @@ export default function OrganigramaPage() {
                 </select>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold ink mb-2">
                     Nombre <span className="text-red-500">*</span>
@@ -639,7 +639,7 @@ export default function OrganigramaPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold ink mb-2">Anexo</label>
                   <input
@@ -711,7 +711,7 @@ export default function OrganigramaPage() {
                 </div>
               </div>
 
-              <div className="flex gap-3 pt-4">
+              <div className="flex flex-col sm:flex-row gap-3 pt-4">
                 <button
                   onClick={() => setShowCreateModal(false)}
                   className="btn btn-outline flex-1"

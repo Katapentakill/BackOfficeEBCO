@@ -38,7 +38,7 @@ const dashboardLinks: NavItem[] = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const { isCollapsed, setIsCollapsed } = useSidebar();
+  const { isCollapsed, setIsCollapsed, isMobileOpen, setIsMobileOpen } = useSidebar();
   const [isDashboardOpen, setIsDashboardOpen] = useState(pathname.startsWith("/dashboard"));
 
   useEffect(() => {
@@ -47,13 +47,29 @@ export default function Sidebar() {
     }
   }, [pathname]);
 
+  // Cerrar sidebar móvil al hacer clic en un link
+  const handleLinkClick = () => {
+    setIsMobileOpen(false);
+  };
+
   return (
-    <aside 
-      className={`fixed left-0 top-0 h-screen bg-brand-dark text-brand-text-light flex flex-col border-r transition-all duration-300 ${
-        isCollapsed ? 'w-20' : 'w-64'
-      }`}
-      style={{ borderColor: "var(--color-brand-line)" }}
-    >
+    <>
+      {/* Overlay para móvil */}
+      {isMobileOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          onClick={() => setIsMobileOpen(false)}
+        />
+      )}
+      
+      <aside 
+        className={`fixed left-0 top-0 h-screen bg-brand-dark text-brand-text-light flex flex-col border-r transition-all duration-300 z-50 ${
+          isCollapsed ? 'w-20' : 'w-64'
+        } ${
+          isMobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+        }`}
+        style={{ borderColor: "var(--color-brand-line)" }}
+      >
       {/* Logo & Toggle */}
       <div className={`border-b ${isCollapsed ? 'p-4' : 'p-6'}`} style={{ borderColor: "var(--color-brand-line)" }}>
         <div className={`flex items-center ${isCollapsed ? 'flex-col justify-center gap-3' : 'justify-between gap-3'}`}>
@@ -99,6 +115,7 @@ export default function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={handleLinkClick}
               className={`flex items-center ${isCollapsed ? 'justify-center' : 'space-x-3'} px-4 py-3 rounded-lg transition-colors ${
                 isActive
                   ? "bg-brand text-brand-text-light"
@@ -144,6 +161,7 @@ export default function Sidebar() {
                   <Link
                     key={link.href}
                     href={link.href}
+                    onClick={handleLinkClick}
                     className={`flex items-center ${isCollapsed ? "justify-center" : "gap-2"} px-4 py-2 rounded-lg text-sm transition-colors ${
                       isActive
                         ? "bg-[#1f2937] text-white"
@@ -166,6 +184,7 @@ export default function Sidebar() {
         {!isCollapsed && <p>© 2025 EBCO</p>}
         {isCollapsed && <p>© 2025</p>}
       </div>
-    </aside>
+      </aside>
+    </>
   );
 }

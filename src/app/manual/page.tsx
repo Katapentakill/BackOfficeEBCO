@@ -6,11 +6,11 @@ import ProcedureManager from "@/components/ui/ProcedureManager";
 
 export default function ManualPage() {
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       {/* Header Banner */}
-      <div className="bg-brand-red text-brand-text-light py-8 px-8 rounded-lg mb-12">
-        <h1 className="text-4xl font-bold">MANUAL DE SOPORTE</h1>
-        <p className="text-lg mt-2 opacity-90">Documentación completa del Back Office</p>
+      <div className="bg-brand-red text-brand-text-light py-6 md:py-8 px-4 md:px-8 rounded-lg mb-8 md:mb-12">
+        <h1 className="text-2xl md:text-4xl font-bold">MANUAL DE SOPORTE</h1>
+        <p className="text-base md:text-lg mt-2 opacity-90">Documentación completa del Back Office</p>
       </div>
 
       {/* Introduction */}
@@ -130,11 +130,11 @@ export default function ManualPage() {
         <p className="text-brand-text-dark mb-6">
           Obtén una versión PDF del manual para consulta offline
         </p>
-        <div className="flex items-center justify-center gap-3">
-          <button className="btn btn-primary">
-            <span className="flex items-center gap-2"><span>Descargar PDF</span><MdDownload size={20} /></span>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <button className="btn btn-primary w-full sm:w-auto">
+            <span className="flex items-center justify-center gap-2"><span>Descargar PDF</span><MdDownload size={20} /></span>
           </button>
-          <button className="btn btn-outline">Ver en línea</button>
+          <button className="btn btn-outline w-full sm:w-auto">Ver en línea</button>
         </div>
       </section>
     </div>

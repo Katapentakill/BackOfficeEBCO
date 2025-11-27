@@ -68,7 +68,7 @@ function getAreaColor(pathname: string): string {
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { isCollapsed } = useSidebar();
+  const { isCollapsed, isMobileOpen, setIsMobileOpen } = useSidebar();
   const isAuthPage = pathname === "/login" || pathname === "/register";
 
   if (isAuthPage) {
@@ -82,15 +82,25 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
     <div className="flex min-h-screen">
       <Sidebar />
       <div 
-        className="flex-1 flex flex-col transition-all duration-300"
-        style={{ marginLeft: isCollapsed ? "80px" : "256px" }}
+        className={`flex-1 flex flex-col transition-all duration-300 md:ml-64 ${
+          isCollapsed ? 'md:ml-20' : 'md:ml-64'
+        }`}
       >
         {/* Barra superior con título del área */}
-        <header className="bg-white border-b shadow-sm sticky top-0 z-40" style={{ borderColor: "var(--color-brand-line)" }}>
-          <div className="px-6 py-4 flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="h-8 w-1 rounded-full" style={{ background: areaColor }}></div>
-              <h1 className="text-2xl font-bold ink">{areaTitle}</h1>
+        <header className="bg-white border-b shadow-sm sticky top-0 z-30" style={{ borderColor: "var(--color-brand-line)" }}>
+          <div className="px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
+            <div className="flex items-center gap-3 md:gap-4">
+              <button
+                onClick={() => setIsMobileOpen(!isMobileOpen)}
+                className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                aria-label="Toggle menu"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+              <div className="h-6 md:h-8 w-1 rounded-full hidden md:block" style={{ background: areaColor }}></div>
+              <h1 className="text-lg md:text-2xl font-bold ink">{areaTitle}</h1>
             </div>
             <UserMenu />
           </div>
