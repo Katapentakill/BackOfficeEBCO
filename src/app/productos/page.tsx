@@ -273,16 +273,16 @@ export default function ProductosPage() {
   }).length;
 
   return (
-    <div className="p-4 md:p-8">
+    <div className="w-full max-w-full overflow-x-hidden px-2 sm:px-4 md:px-8 py-4 md:py-8">
       {/* Header Banner */}
-      <div className="bg-brand-red text-brand-text-light py-6 md:py-8 px-4 md:px-8 rounded-lg mb-8 md:mb-12">
+      <div className="bg-brand-red text-brand-text-light py-4 sm:py-6 md:py-8 px-3 sm:px-4 md:px-8 rounded-lg mb-6 sm:mb-8 md:mb-12">
         <h1 className="text-2xl md:text-4xl font-bold">PRODUCTOS Y SOPORTE</h1>
         <p className="text-base md:text-lg mt-2 opacity-90">Gestión de subcontratos y especificaciones técnicas</p>
       </div>
 
       {/* Sub-areas */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold text-brand-red mb-6">Subáreas</h2>
+      <section className="mb-8 sm:mb-12">
+        <h2 className="text-xl sm:text-2xl font-bold text-brand-red mb-4 sm:mb-6">Subáreas</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <InfoCard
             icon={<MdShoppingCart size={40} />}
@@ -298,8 +298,8 @@ export default function ProductosPage() {
       </section>
 
       {/* KPIs Dashboard */}
-      <section className="mb-12">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-3">
+      <section className="mb-8 sm:mb-12">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-3">
           <h2 className="text-xl sm:text-2xl font-bold ink">Indicadores de Entregables</h2>
           {(filterStatus || filterDate) && (
             <button
@@ -704,8 +704,8 @@ export default function ProductosPage() {
       )}
 
       {/* Formatos de Entregables */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold text-brand-red mb-6">Formatos de Entregables</h2>
+      <section className="mb-8 sm:mb-12">
+        <h2 className="text-xl sm:text-2xl font-bold text-brand-red mb-4 sm:mb-6">Formatos de Entregables</h2>
         
         {/* Formatos por periodicidad */}
         {(() => {
