@@ -300,122 +300,122 @@ export default function AnalisisPage() {
 
       {/* KPIs Dashboard */}
       <section className="mb-12">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold ink">Indicadores de Entregables</h2>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-3">
+          <h2 className="text-xl sm:text-2xl font-bold ink">Indicadores de Entregables</h2>
           {(filterStatus || filterDate) && (
             <button
               onClick={() => {
                 setFilterStatus(null);
                 setFilterDate(null);
               }}
-              className="btn btn-outline text-sm"
+              className="btn btn-outline text-xs sm:text-sm w-full sm:w-auto"
             >
               Limpiar filtros
             </button>
           )}
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 md:gap-4">
           <button
             onClick={() => {
               setFilterStatus(null);
               setFilterDate(null);
             }}
-            className={`rounded-lg border p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
+            className={`rounded-lg border p-2 sm:p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
               !filterStatus && !filterDate ? "ring-2 ring-blue-500" : ""
             }`}
           >
-            <div className="flex items-center justify-center mb-2">
-              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                <MdSchedule className="w-5 h-5 md:w-6 md:h-6" style={{ color: "#3b82f6" }} />
+            <div className="flex items-center justify-center mb-1 sm:mb-2">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                <MdSchedule className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" style={{ color: "#3b82f6" }} />
               </div>
             </div>
-            <p className="text-xl md:text-2xl font-extrabold ink">{totalDeliverables}</p>
-            <p className="text-xs muted">Total</p>
+            <p className="text-lg sm:text-xl md:text-2xl font-extrabold ink">{totalDeliverables}</p>
+            <p className="text-[10px] sm:text-xs muted">Total</p>
           </button>
           <button
             onClick={() => {
               setFilterStatus("Completado");
               setFilterDate(null);
             }}
-            className={`rounded-lg border p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
+            className={`rounded-lg border p-2 sm:p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
               filterStatus === "Completado" ? "ring-2 ring-green-500" : ""
             }`}
           >
-            <div className="flex items-center justify-center mb-2">
-              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-green-100 flex items-center justify-center">
-                <MdCheckCircle className="w-5 h-5 md:w-6 md:h-6" style={{ color: "#16a34a" }} />
+            <div className="flex items-center justify-center mb-1 sm:mb-2">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-green-100 flex items-center justify-center">
+                <MdCheckCircle className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" style={{ color: "#16a34a" }} />
               </div>
             </div>
-            <p className="text-xl md:text-2xl font-extrabold" style={{ color: "#16a34a" }}>{completados}</p>
-            <p className="text-xs muted">Completados</p>
+            <p className="text-lg sm:text-xl md:text-2xl font-extrabold" style={{ color: "#16a34a" }}>{completados}</p>
+            <p className="text-[10px] sm:text-xs muted">Completados</p>
           </button>
           <button
             onClick={() => {
               setFilterStatus("no-completado");
               setFilterDate(null);
             }}
-            className={`rounded-lg border p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
+            className={`rounded-lg border p-2 sm:p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
               filterStatus === "no-completado" ? "ring-2 ring-orange-500" : ""
             }`}
           >
-            <div className="flex items-center justify-center mb-2">
-              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-orange-100 flex items-center justify-center">
-                <MdSchedule className="w-5 h-5 md:w-6 md:h-6" style={{ color: "#f59e0b" }} />
+            <div className="flex items-center justify-center mb-1 sm:mb-2">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-orange-100 flex items-center justify-center">
+                <MdSchedule className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" style={{ color: "#f59e0b" }} />
               </div>
             </div>
-            <p className="text-xl md:text-2xl font-extrabold" style={{ color: "#f59e0b" }}>{noCompletados}</p>
-            <p className="text-xs muted">No Completados</p>
+            <p className="text-lg sm:text-xl md:text-2xl font-extrabold" style={{ color: "#f59e0b" }}>{noCompletados}</p>
+            <p className="text-[10px] sm:text-xs muted">No Completados</p>
           </button>
           <button
             onClick={() => {
               setFilterStatus("Pendiente");
               setFilterDate(null);
             }}
-            className={`rounded-lg border p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
+            className={`rounded-lg border p-2 sm:p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
               filterStatus === "Pendiente" ? "ring-2 ring-yellow-500" : ""
             }`}
           >
-            <div className="flex items-center justify-center mb-2">
-              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-yellow-100 flex items-center justify-center">
-                <MdSchedule className="w-5 h-5 md:w-6 md:h-6" style={{ color: "#f59e0b" }} />
+            <div className="flex items-center justify-center mb-1 sm:mb-2">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                <MdSchedule className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" style={{ color: "#f59e0b" }} />
               </div>
             </div>
-            <p className="text-xl md:text-2xl font-extrabold" style={{ color: "#f59e0b" }}>{pendientes}</p>
-            <p className="text-xs muted">Pendientes</p>
+            <p className="text-lg sm:text-xl md:text-2xl font-extrabold" style={{ color: "#f59e0b" }}>{pendientes}</p>
+            <p className="text-[10px] sm:text-xs muted">Pendientes</p>
           </button>
           <button
             onClick={() => {
               setFilterStatus("Urgente");
               setFilterDate(null);
             }}
-            className={`rounded-lg border p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
+            className={`rounded-lg border p-2 sm:p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
               filterStatus === "Urgente" ? "ring-2 ring-red-500" : ""
             }`}
           >
-            <div className="flex items-center justify-center mb-2">
-              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-red-100 flex items-center justify-center">
-                <MdWarning className="w-5 h-5 md:w-6 md:h-6" style={{ color: "#ef4444" }} />
+            <div className="flex items-center justify-center mb-1 sm:mb-2">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-red-100 flex items-center justify-center">
+                <MdWarning className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" style={{ color: "#ef4444" }} />
               </div>
             </div>
-            <p className="text-xl md:text-2xl font-extrabold" style={{ color: "#ef4444" }}>{urgentes}</p>
-            <p className="text-xs muted">Urgentes</p>
+            <p className="text-lg sm:text-xl md:text-2xl font-extrabold" style={{ color: "#ef4444" }}>{urgentes}</p>
+            <p className="text-[10px] sm:text-xs muted">Urgentes</p>
           </button>
           <button
             onClick={() => {
               setFilterStatus("Vencido");
               setFilterDate(null);
             }}
-            className={`rounded-lg border p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
+            className={`rounded-lg border p-2 sm:p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
               filterStatus === "Vencido" ? "ring-2 ring-gray-500" : ""
             }`}
           >
-            <div className="flex items-center justify-center mb-2">
-              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-100 flex items-center justify-center">
-                <MdCancel className="w-5 h-5 md:w-6 md:h-6" style={{ color: "#6b7280" }} />
+            <div className="flex items-center justify-center mb-1 sm:mb-2">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                <MdCancel className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" style={{ color: "#6b7280" }} />
               </div>
             </div>
-            <p className="text-xl md:text-2xl font-extrabold" style={{ color: "#6b7280" }}>{vencidos}</p>
-            <p className="text-xs muted">Vencidos</p>
+            <p className="text-lg sm:text-xl md:text-2xl font-extrabold" style={{ color: "#6b7280" }}>{vencidos}</p>
+            <p className="text-[10px] sm:text-xs muted">Vencidos</p>
           </button>
           <button
             onClick={() => {
@@ -423,17 +423,17 @@ export default function AnalisisPage() {
               const today = formatDateLocal(new Date());
               setFilterDate(today);
             }}
-            className={`rounded-lg border p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
+            className={`rounded-lg border p-2 sm:p-3 md:p-4 bg-white border-[var(--color-brand-line)] text-center transition-all hover:shadow-md hover:scale-[1.02] ${
               filterDate === formatDateLocal(new Date()) ? "ring-2 ring-orange-500" : ""
             }`}
           >
-            <div className="flex items-center justify-center mb-2">
-              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-orange-100 flex items-center justify-center">
-                <MdWarning className="w-5 h-5 md:w-6 md:h-6" style={{ color: "#f59e0b" }} />
+            <div className="flex items-center justify-center mb-1 sm:mb-2">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-orange-100 flex items-center justify-center">
+                <MdWarning className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" style={{ color: "#f59e0b" }} />
               </div>
             </div>
-            <p className="text-xl md:text-2xl font-extrabold" style={{ color: "#f59e0b" }}>{vencenHoy}</p>
-            <p className="text-xs muted">Vencen Hoy</p>
+            <p className="text-lg sm:text-xl md:text-2xl font-extrabold" style={{ color: "#f59e0b" }}>{vencenHoy}</p>
+            <p className="text-[10px] sm:text-xs muted">Vencen Hoy</p>
           </button>
         </div>
       </section>
@@ -458,12 +458,12 @@ export default function AnalisisPage() {
 
       {/* Modal de Vista Previa de Entregable */}
       {previewDeliverable && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden flex flex-col">
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b" style={{ borderColor: "var(--color-brand-line)" }}>
-              <div className="flex-1">
-                <h3 className="text-xl font-bold ink mb-2">{previewDeliverable.name}</h3>
+            <div className="flex items-start sm:items-center justify-between p-4 sm:p-6 border-b" style={{ borderColor: "var(--color-brand-line)" }}>
+              <div className="flex-1 pr-2">
+                <h3 className="text-base sm:text-xl font-bold ink mb-2">{previewDeliverable.name}</h3>
                 <div className="flex items-center gap-2 flex-wrap">
                   <span
                     className="chip text-xs"
@@ -807,12 +807,12 @@ export default function AnalisisPage() {
           return (
             <>
               {/* Tabs Navigation */}
-              <div className="flex flex-wrap gap-2 mb-6 border-b pb-4" style={{ borderColor: "var(--color-brand-line)" }}>
+              <div className="flex flex-wrap gap-2 mb-4 sm:mb-6 border-b pb-3 sm:pb-4 overflow-x-auto" style={{ borderColor: "var(--color-brand-line)" }}>
                 {tabs.map((tab, idx) => (
                   <button
                     key={tab}
                     onClick={() => setActiveFormatTab(idx)}
-                    className={`btn ${
+                    className={`btn text-xs sm:text-sm whitespace-nowrap ${
                       activeFormatTab === idx ? "btn-primary" : "btn-outline"
                     }`}
                   >
