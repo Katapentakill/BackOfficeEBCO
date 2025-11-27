@@ -282,9 +282,9 @@ export default function LogisticaPage() {
   }).length;
 
   return (
-    <div className="w-full max-w-full overflow-x-hidden px-2 sm:px-4 md:px-8 py-4 md:py-8">
+    <div className="w-full min-w-0 max-w-full overflow-x-hidden px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 md:py-6 lg:py-8">
       {/* Header Banner */}
-      <div className="bg-brand-red text-brand-text-light py-4 sm:py-6 md:py-8 px-3 sm:px-4 md:px-8 rounded-lg mb-6 sm:mb-8 md:mb-12">
+      <div className="bg-brand-red text-brand-text-light py-4 sm:py-5 md:py-6 lg:py-8 px-3 sm:px-4 md:px-6 lg:px-8 rounded-lg mb-4 sm:mb-6 md:mb-8 lg:mb-12 w-full">
         <h1 className="text-2xl md:text-4xl font-bold">ÁREA LOGÍSTICA</h1>
         <p className="text-base md:text-lg mt-2 opacity-90">Gestión de materiales y servicios de arriendo</p>
       </div>
@@ -292,7 +292,7 @@ export default function LogisticaPage() {
       {/* Sub-areas */}
       <section className="mb-8 sm:mb-12">
         <h2 className="text-xl sm:text-2xl font-bold text-brand-red mb-4 sm:mb-6">Subáreas</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 w-full">
           <InfoCard
             icon={<MdWarehouse size={40} />}
             title="Logística Materiales"
@@ -855,7 +855,7 @@ export default function LogisticaPage() {
               </div>
 
               {/* Format Cards Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 w-full">
                 {currentFormats.map((format, idx) => {
                   const getFileIcon = () => {
                     if (format.fileType === "excel") {

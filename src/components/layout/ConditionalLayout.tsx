@@ -105,7 +105,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
             <UserMenu />
           </div>
         </header>
-        <main className="flex-1 bg-brand-bg-light">
+        <main className="flex-1 bg-brand-bg-light w-full min-w-0 overflow-x-hidden">
           {children}
         </main>
         <Footer />
