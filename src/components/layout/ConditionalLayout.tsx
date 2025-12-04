@@ -18,7 +18,7 @@ function getAreaTitle(pathname: string): string {
     "/dashboard/general": "Dashboard General",
     "/dashboard/logistica": "Dashboard Logística",
     "/dashboard/productos": "Dashboard Productos y Soporte",
-    "/dashboard/analisis": "Dashboard Análisis",
+    "/dashboard/analisis": "Dashboard Análisis de Datos",
   };
 
   // Buscar coincidencia exacta primero
